@@ -1,5 +1,5 @@
 Package: qacOutliers
-Title: What the Package Does (One Line, Title Case)
+Title: Identification of Multivariate and Univariate Outliers
 Version: 0.0.0.9000
 Authors@R: 
    c(person("Caleb", "Henning", ,"chenning@wesleyan.edu", role = c("aut", "cre")),
@@ -10,12 +10,12 @@ Authors@R:
     person("Ral", "Reyes", ,"rreyes@wesleyan.edu", role="aut"),
     person("Tegh", "Singh", ,"tsingh@wesleyan.edu", role="aut"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports: 
     dplyr,
     ggplot2,
-    Routliers
+    Routliers,
+    stats
 RoxygenNote: 7.3.2
