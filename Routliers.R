@@ -1,15 +1,22 @@
 # Load the Routliers package
 library(Routliers)
 
-# Define a function to find and plot outliers using outliers_mad
-find_and_plot_outliers_mad <- function(data) {
-  # Check if the input data is numeric
-  if (!is.numeric(data)) {
-    stop("Input data must be numeric.")
+find_and_plot_outliers_mad <- function(data, column) {
+  # Check if the data is a data frame and column exists in the data
+  if (!is.data.frame(data)) {
+    stop("Input must be a data frame.")
+  }
+  if (!column %in% colnames(data)) {
+    stop("Specified column not found in the data frame.")
+  }
+
+  # Check if the specified column is numeric
+  if (!is.numeric(data[[column]])) {
+    stop("The specified column must be numeric.")
   }
 
   # Use the outliers_mad function to find outliers
-  res1 <- outliers_mad(data)
+  res1 <- outliers_mad(data[[column]])
 
   # Display the outliers
   if (length(res1) == 0) {
@@ -20,14 +27,17 @@ find_and_plot_outliers_mad <- function(data) {
   }
 
   # Plot the outliers using plot_outliers_mad
-  plot_outliers_mad(res1, data, pos_display = FALSE)
+  plot_outliers_mad(res1, data[[column]], pos_display = FALSE)
 }
 
-# Example usage
-data <- c(10, 12, 10, 11, 13, 100, 10, 9, 11) # Example data
-find_and_plot_outliers_mad(data)
+
+#Example usage
+data(mtcars)
+find_and_plot_outliers_mad(mtcars, "mpg")
+
 
 # Example usage
-data2 <- Attacks$age
-find_and_plot_outliers_mad(data2)
+find_and_plot_outliers_mad(Attacks, "age")
+
+
 
