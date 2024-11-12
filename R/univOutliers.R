@@ -9,34 +9,6 @@
 #' @import stats
 #' @export
 #' @examples
-#' # Example 1: Boxplot Method
-#' data(mtcars)
-#' univOutliers(mtcars, "mpg", method = "boxplot")
-#' univOutliers(mtcars, "hp", method = "boxplot")
-#'
-#' # Example 2: MAD Method
-#' data <- c(10, 12, 10, 11, 13, 100, 10, 9, 11)  # Example data
-#' univOutliers(data.frame(values = data), "values", method = "mad")
-#'
-#' # Example 3: Grubbs' Method
-#' data2 <- data.frame(values = c(10, 12, 10, 11, 13, 100, 10, 9, 11))
-#' univOutliers(data2, "values", method = "grubbs")
-#'
-#' # Example 4: Custom Test Dataset
-#' set.seed(42)
-#' normal_data <- rnorm(100, mean = 50, sd = 5)  # 100 normal points
-#' with_outlier <- c(rnorm(99, mean = 50, sd = 5), 70)  # 99 normal + 1 outlier
-#' multiple_outliers <- c(rnorm(95, mean = 50, sd = 5), 80, 85, 90)  # 95 normal + 3 outliers
-#' max_length <- max(length(normal_data), length(with_outlier), length(multiple_outliers))
-#' normal_data <- c(normal_data, rep(NA, max_length - length(normal_data)))
-#' with_outlier <- c(with_outlier, rep(NA, max_length - length(with_outlier)))
-#' multiple_outliers <- c(multiple_outliers, rep(NA, max_length - length(multiple_outliers)))
-#' data1 <- data.frame(
-#'   normal_data = normal_data,
-#'   with_outlier = with_outlier,
-#'   multiple_outliers = multiple_outliers
-#' )
-#'
 #' # Boxplot Method on test data
 #' univOutliers(data1, "normal_data", method = "boxplot")
 #' univOutliers(data1, "with_outlier", method = "boxplot")
@@ -51,8 +23,6 @@
 #' univOutliers(data1, "normal_data", method = "grubbs")
 #' univOutliers(data1, "with_outlier", method = "grubbs")
 #' univOutliers(data1, "multiple_outliers", method = "grubbs")
-
-
 univOutliers <- function(data, x = NULL, method = "boxplot") {
   # Identify numeric columns in the dataset
   numeric_columns <- sapply(data, is.numeric)
@@ -99,6 +69,11 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
         cat("No outliers detected for", column, ".\n")
       } else {
         cat("Outliers detected for", column, ":\n")
+        # Get the rows where the outliers occur
+        outlier_rows <- which(column_data %in% res1)
+        for (i in outlier_rows) {
+          cat("Row", i, ":", column_data[i], "\n")
+        }
         print(res1)
       }
     }
@@ -115,23 +90,6 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
         if (normality_test$p.value < 0.05) {
           warning("Data is not normally distributed. Grubbs' test may not be appropriate.")
         }
-
-        calculate_skewness <- function(x) {
-          n <- length(x)
-          mean_x <- mean(x)
-          sd_x <- sd(x)
-          return(sum((x - mean_x)^3) / (n * sd_x^3))
-        }
-
-        calculate_kurtosis <- function(x) {
-          n <- length(x)
-          mean_x <- mean(x)
-          sd_x <- sd(x)
-          return(sum((x - mean_x)^4) / (n * sd_x^4) - 3)
-        }
-
-        skewness <- calculate_skewness(data)
-        kurtosis <- calculate_kurtosis(data)
 
         outliers <- c()
         current_data <- data
@@ -154,25 +112,22 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
           if (length(current_data) < 3) break
         }
 
+        # Identify the rows of outliers
+        outlier_rows <- which(data %in% outliers)
+
         # Q-Q plot
         qqnorm(data, main = "Normal QQ Plot")
         qqline(data)
 
-        return(list(outliers = unique(outliers), skewness = skewness, kurtosis = kurtosis))
+        return(list(outliers = unique(outliers), outlier_rows = outlier_rows))
       }
 
       result <- grubbs_test(column_data)
       cat("Results for", column, ":\n")
-      cat("Skewness:", result$skewness, "\n")
-      cat("Kurtosis:", result$kurtosis, "\n")
-      if (length(result$outliers) > 0) {
-        cat("Outliers detected:", paste(result$outliers, collapse = ", "), "\n")
-      } else {
-        cat("No outliers detected.\n")
-      }
+      cat("Outliers detected:", paste(result$outliers, collapse = ", "), "\n")
+      cat("Rows of outliers:", paste(result$outlier_rows, collapse = ", "), "\n")
     } else {
       stop("Invalid method. Choose from 'boxplot', 'mad', or 'grubbs'.")
     }
   }
 }
-

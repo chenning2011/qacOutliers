@@ -22,7 +22,11 @@
 #'multiOutliers(mtcars, method="iForest")
 
 
-multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, threshold =0.95, alpha=0.1,na.rm=TRUE, ...){
+
+multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, threshold =0.95 ,alpha=0.1, na.rm=TRUE, ...){
+  #Get the dataset name
+  dataset_name <- deparse(substitute(data))
+
   #removing missing data
   if(na.rm) data <- na.omit(data[,varlist])
 
@@ -109,10 +113,11 @@ multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, thre
     # Prepare results in the specified format
     results <- list(
       Method = "kNN",
-      Variables = colnames(data),  # Get variable names from the data matrix
-      Row = outlier_indices,       # Row number of each outlier in the original dataframe
-      Score = avg_knn_distances[outlier_indices],  # Score of each outlier
-      k = k                         # The value of k
+      Data = dataset_name,
+      Variables = colnames(data),
+      Row = outlier_indices,
+      Score = avg_knn_distances[outlier_indices],
+      k = k
     )
 
     class(results) <- "multiOutliers"
