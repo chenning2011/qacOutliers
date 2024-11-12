@@ -14,8 +14,15 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports: 
+    cli,
+    dbscan,
     dplyr,
     ggplot2,
+    outForest,
     Routliers,
     stats
 RoxygenNote: 7.3.2
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

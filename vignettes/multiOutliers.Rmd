@@ -1,0 +1,37 @@
+---
+title: "multiOutliers"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{multiOutliers}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(qacOutliers)
+```
+
+## kNN
+
+information on the kNN method
+
+## LoF
+
+information on the LoF method
+
+## Mahalanobis 
+
+information on the mahalanobis method 
+
+## iForest 
+
+information on the iForest method
+
+information on MAD 

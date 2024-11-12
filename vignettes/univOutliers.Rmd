@@ -1,0 +1,31 @@
+---
+title: "univOutliers"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{univOutliers}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(qacOutliers)
+```
+
+## Boxplot Method 
+
+information on the boxplot method 
+
+## Grubb's Test 
+
+information on the grubb's test 
+
+## MAD 
+
+information on MAD 
