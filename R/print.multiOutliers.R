@@ -18,7 +18,21 @@ print.multiOutliers <- function(x, ...) {
   }
 
   require(cli)
+
   cli_h1(cat("Method Chosen:", method))
   cli_h2("Outliers \n")
+
+  cat("Method:", x$Method)
+  cat("\nVariables:", x$Variables)
+  cat("\nRow:", x$Row)
+  cat("\nScore:", x$Score)
+
+  if (length(x) >= 5) {
+    cat("\nOption 1:", names(x)[5], "-", x[[5]])
+  }
+  if (length(x) >= 6) {
+    cat("\nOption 2:", names(x)[6], "-", x[[6]])
+  }
+
   return(x)
 }
