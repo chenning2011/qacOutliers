@@ -20,11 +20,22 @@ library(qacOutliers)
 
 ## Boxplot Method 
 
-information on the boxplot method 
+The boxplot method for univariate outlier detection identifies extreme data points by examining the distribution of values using a boxplot. In this method, the "whiskers" of the boxplot represent the range of typical values within a dataset. In this function, outliers are defined as values that fall outside the whiskers, which are calculated as Q1−1.58×IQR for the lower bound and Q3+1.58×IQR for the upper bound, where Q1 and Q3 are the first and third quartiles, respectively, and IQR is the interquartile range (the difference between Q3 and Q1) to allow for a broader range and a different threshold for detecting extreme values. 1.58 is the length of the whiskers as multiple of IQR. 
+
+This method helps quickly identify potential outliers, which are plotted individually and can indicate unusual or problematic data points that may warrant further investigation. 
+
+The output will provide the identified outliers along with their corresponding row numbers, and a graphical representation will be generated with the outliers highlighted in red.
+
+```{r}
+data(mtcars)
+univOutliers(mtcars, "mpg", method="boxplot")
+univOutliers(mtcars, "hp", method="boxplot")
+univOutliers(mtcars, "qsec", method="boxplot")
+```
 
 ## Grubb's Test 
 
-information on the grubb's test 
+information on the grubb's test
 
 ## MAD 
 
