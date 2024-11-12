@@ -7,6 +7,7 @@
 #'@param minPts (optional) numeric, minimum points used for LoF outlier detection. Default value is 5
 #'@param k (optional) a k value used for the kNN method of outlier detection. Default value is 5
 #'@param threshold (optional) the threshold used for kNN outlier detection. Default value is 0.95
+#'@param alpha (optional) the alpha used for mahalanobis distance outlier detection. Default value is 0.1
 #'@returns indices of detected outliers, if any
 #'@import ggplot2
 #'@import Routliers
@@ -21,7 +22,7 @@
 #'multiOutliers(mtcars, method="iForest")
 
 
-multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, threshold =0.95, na.rm=TRUE, ...){
+multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, threshold =0.95, alpha=0.1,na.rm=TRUE, ...){
   #removing missing data
   if(na.rm) data <- na.omit(data[,varlist])
 
@@ -50,6 +51,7 @@ multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, thre
 
     subset <- data_with_lof[data_with_lof$LOF_Score > 1, ]
     # Return the data frame with IDs, original data, and LOF scores
+    class(subset) <- "multiOutliers"
     return(subset)
   }
 
@@ -64,17 +66,21 @@ multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, thre
     mat <- as.matrix(numeric_data)
 
     #run matrix on function and store results
-    results <- outliers_mahalanobis(x=mat)
+    results <- outliers_mahalanobis(x=mat, alpha=alpha)
     index <- results$outliers_pos
-    values <- results$outliers_val
 
-    #return results
-    results <- list(indices = index, values = values)
-    return(results)
+    #isolate just rows with outliers
+    if(!is.null(index) && length(index) > 0){
+      subset <- data[index,]
+      class(subset) <- "multiOutliers"
+    } else {
+      subset <- "No outliers dectected."
+      class(subset) <- "multiOutliers"
+    }
   }
 
   if (method == "kNN") {
-    if (!is.matrix(data)) {
+    if (length(index)!=0) {
       data <- as.matrix(data)
     }
 
@@ -91,13 +97,21 @@ multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, thre
 
     # Determine the outliers based on the threshold
     cutoff <- quantile(avg_knn_distances, threshold)
-    outliers <- which(avg_knn_distances > cutoff)
+    outlier_indices <- which(avg_knn_distances > cutoff)
 
-    # Return results
-    results <- list(outliers = outliers, scores = avg_knn_distances)
+    # Prepare results in the specified format
+    results <- list(
+      Method = "kNN",
+      Variables = colnames(data),  # Get variable names from the data matrix
+      Row = outlier_indices,       # Row number of each outlier in the original dataframe
+      Score = avg_knn_distances[outlier_indices],  # Score of each outlier
+      k = k                         # The value of k
+    )
+
     class(results) <- "multiOutliers"
     return(results)
   }
+
 
 
   if(method=="iForest"){
@@ -115,6 +129,7 @@ multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, thre
 
     #actual outliers
     results <- outliers(ch)
+    class(results) <- "multiOutliers"
     return(results)
   }
 }

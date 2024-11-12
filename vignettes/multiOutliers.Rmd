@@ -20,11 +20,16 @@ library(qacOutliers)
 
 ## kNN
 
-information on the kNN method
+kNN calculates the distances between a data point and its k-nearest neighbors,
+snd assigns an outlier score based on that distance. If the outlier score is 
+above 0.95, then kNN considers the data point as an outlier.
 
 ## LoF
 
-information on the LoF method
+Local Outlier Factor for a point is the average density around the k-nearest 
+neighbors of the point divided by the density around the point itself. If the 
+LoF score is above 1, it ts more likely to be anomalous, if it is below 1, it 
+is less likely to be anomalous.
 
 ## Mahalanobis 
 
@@ -32,6 +37,10 @@ information on the mahalanobis method
 
 ## iForest 
 
-information on the iForest method
+iForest stands for isolation forest. First, it randomly selects a variable, then randomly selects a value of that variable. This will work for both quantitaive and categorical; if the variable is quantitative, it will randomly pick a number in the range of the variable, and if the variable is categorical it will randomly pick a level. Then it will split the data using the value randomly selected eariler. 
 
-information on MAD 
+The iForest method repeats the above steps until all points are separatly in their own node. Then, for each data point, it counts how many splits were needed to isolate it. 
+
+Because the selection of variables and values is random, this process will return different results each time. Therefore, isolation trees are repeated many times and the results are averaged over all trials. More isolated points will have lower average path lengths. They are more isolated from the rest of the data's distribution, therefore they are called outliers. 
+
+
