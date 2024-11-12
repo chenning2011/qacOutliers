@@ -22,14 +22,11 @@
 #'multiOutliers(mtcars, method="iForest")
 
 
-<<<<<<< HEAD
-multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, threshold =0.95, na.rm=TRUE, ...){
+
+multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, threshold =0.95 ,alpha=0.1, na.rm=TRUE, ...){
   #Get the dataset name
   dataset_name <- deparse(substitute(data))
 
-=======
-multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, threshold =0.95, alpha=0.1,na.rm=TRUE, ...){
->>>>>>> upstream/main
   #removing missing data
   if(na.rm) data <- na.omit(data[,varlist])
 
