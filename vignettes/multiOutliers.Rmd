@@ -34,4 +34,3 @@ information on the mahalanobis method
 
 information on the iForest method
 
-information on MAD 
