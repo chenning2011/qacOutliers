@@ -94,18 +94,9 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     results <- outliers_mahalanobis(x = mat, alpha = alpha)
 
     #run matrix on function and store results
-    #results <- outliers_mahalanobis(x=mat, alpha=alpha)
-    # index <- results$outliers_pos
-    #
-    # #isolate just rows with outliers
-    # if(!is.null(index) && length(index) > 0){
-    #   subset <- data[index,]
-    #   class(subset) <- "multiOutliers"
-    # } else {
-    #   subset <- "No outliers dectected."
-    #   class(subset) <- "multiOutliers"
-    # }
-
+    results <- outliers_mahalanobis(x=mat, alpha=alpha)
+    index <- results$outliers_pos
+    
     # Extract the outlier indices and their Mahalanobis scores
     outlier_indices <- which(results$outliers == 1)  # Indices of detected outliers
     outlier_scores <- results$scores[outlier_indices]  # Mahalanobis scores for outliers

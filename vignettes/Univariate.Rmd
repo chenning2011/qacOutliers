@@ -1,5 +1,5 @@
 ---
-title: "univOutliers"
+title: "Univariate"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{univOutliers}

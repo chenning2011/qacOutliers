@@ -20,11 +20,18 @@ A list containing the ggplot object and boxplot statistics.
 Provides three methods for detecting univariate outliers in a dataset.
 }
 \examples{
-data(mtcars)
-univOutliers(mtcars, "mpg", method="boxplot")
-univOutliers(mtcars, "hp", method="boxplot")
-data <- c(10, 12, 10, 11, 13, 100, 10, 9, 11) # Example data
-univOutliers(data, method="mad")
-data2 <- Attacks$age
-univOutliers(data2, method="mad")
+# Boxplot Method on test data
+univOutliers(data1, "normal_data", method = "boxplot")
+univOutliers(data1, "with_outlier", method = "boxplot")
+univOutliers(data1, "multiple_outliers", method = "boxplot")
+
+# MAD Method on test data
+univOutliers(data1, "normal_data", method = "mad")
+univOutliers(data1, "with_outlier", method = "mad")
+univOutliers(data1, "multiple_outliers", method = "mad")
+
+# Grubbs' Method on test data
+univOutliers(data1, "normal_data", method = "grubbs")
+univOutliers(data1, "with_outlier", method = "grubbs")
+univOutliers(data1, "multiple_outliers", method = "grubbs")
 }

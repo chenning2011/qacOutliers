@@ -2,6 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  multiOutliers: multiOutliers.html
-  univOutliers: univOutliers.html
-last_built: 2024-11-08T21:36Z
+  Multivariate: Multivariate.html
+  qacOutliers: qacOutliers.html
+  Univariate: Univariate.html
+last_built: 2024-11-12T22:28Z

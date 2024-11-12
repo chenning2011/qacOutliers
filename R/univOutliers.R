@@ -63,20 +63,41 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
     # MAD Method
     else if (method == "mad") {
       library(Routliers)
-      if (!is.numeric(column_data)) stop("Input data must be numeric.")
-      res1 <- outliers_mad(column_data)
-      if (length(res1) == 0) {
-        cat("No outliers detected for", column, ".\n")
-      } else {
-        cat("Outliers detected for", column, ":\n")
-        # Get the rows where the outliers occur
-        outlier_rows <- which(column_data %in% res1)
-        for (i in outlier_rows) {
-          cat("Row", i, ":", column_data[i], "\n")
-        }
-        print(res1)
+      # Check if the data is a data frame and column exists in the data
+      if (!is.data.frame(data)) {
+        stop("Input must be a data frame.")
       }
+      if (!column %in% colnames(data)) {
+        stop("Specified column not found in the data frame.")
+      }
+
+      # Check if the specified column is numeric
+      if (!is.numeric(data[[column]])) {
+        stop("The specified column must be numeric.")
+      }
+
+      # Use the outliers_mad function to find outliers
+      res1 <- outliers_mad(data[[column]])
+
+      # Display the outliers information
+      if (length(res1) == 0) {
+        cat("No outliers detected in the data.\n")
+      } else {
+        cat("Outliers detected for column:", column, "\n")
+
+        # Identify the row numbers and corresponding column values for outliers
+        outlier_rows <- which(data[[column]] < res1$LL_CI_MAD | data[[column]] > res1$UL_CI_MAD)
+        outlier_values <- data[outlier_rows, column, drop = FALSE]
+
+        # Display the row numbers and corresponding values once
+        cat("\nOutlier rows and values in column", column, ":\n")
+        print(data.frame(Row = outlier_rows, Value = outlier_values[[column]]))
+      }
+
+      # Plot the outliers using plot_outliers_mad
+      plot_outliers_mad(res1, data[[column]], pos_display = FALSE)
     }
+
 
     # Grubbs' Test Method
     else if (method == "grubbs") {

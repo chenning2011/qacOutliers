@@ -16,6 +16,7 @@ print.multiOutliers <- function(x, ...) {
   if(!inherits(x, "multiOutliers")){
     stop("This functon requires an object created by multiOutliers")
   }
+
   require(cli)
   cat("\nMethod:", x$Method)
   cat("\nDataset:", x$Data)

@@ -19,6 +19,7 @@ Imports:
     dplyr,
     ggplot2,
     outForest,
+    outliers,
     Routliers,
     stats
 RoxygenNote: 7.3.2

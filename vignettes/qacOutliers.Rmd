@@ -1,0 +1,21 @@
+---
+title: "qacOutliers"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{univOutliers}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(qacOutliers)
+```
+
+this portion of the site should have a "getting" started style tutorial/introduction - explain some common uses for some of the functions
