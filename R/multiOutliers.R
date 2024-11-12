@@ -97,13 +97,21 @@ multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, thre
 
     # Determine the outliers based on the threshold
     cutoff <- quantile(avg_knn_distances, threshold)
-    outliers <- which(avg_knn_distances > cutoff)
+    outlier_indices <- which(avg_knn_distances > cutoff)
 
-    # Return results
-    results <- list(outliers = outliers, scores = avg_knn_distances)
+    # Prepare results in the specified format
+    results <- list(
+      Method = "kNN",
+      Variables = colnames(data),  # Get variable names from the data matrix
+      Row = outlier_indices,       # Row number of each outlier in the original dataframe
+      Score = avg_knn_distances[outlier_indices],  # Score of each outlier
+      k = k                         # The value of k
+    )
+
     class(results) <- "multiOutliers"
     return(results)
   }
+
 
 
   if(method=="iForest"){
