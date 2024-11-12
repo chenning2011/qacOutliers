@@ -23,6 +23,9 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
+  <a href="../articles/qacOutliers.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -32,10 +35,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/multiOutliers.html">multiOutliers</a>
+      <a href="../articles/Multivariate.html">Multivariate</a>
     </li>
     <li>
-      <a href="../articles/univOutliers.html">univOutliers</a>
+      <a href="../articles/Univariate.html">Univariate</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
@@ -64,6 +67,7 @@
 <span>  minPts <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>  k <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>  threshold <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -96,6 +100,10 @@
 <dt id="arg-threshold">threshold<a class="anchor" aria-label="anchor" href="#arg-threshold"></a></dt>
 <dd><p>(optional) the threshold used for kNN outlier detection. Default value is 0.95</p></dd>
 
+
+<dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>
+<dd><p>(optional) the alpha used for mahalanobis distance outlier detection. Default value is 0.1</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -114,67 +122,9 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from 'package:base':</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     intersect, setdiff, setequal, union</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> named integer(0)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $values</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] X1  X2  X3  X4  X5  X6  X7  X8  X9  X10 X11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;0 rows&gt; (or 0-length row.names)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcars</span>, method<span class="op">=</span><span class="st">"LoF"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     ID  mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4            1 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag        2 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710           3 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive       4 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout    5 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Valiant              6 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D            8 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280            10 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280C           11 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Cadillac Fleetwood  15 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Lincoln Continental 16 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chrysler Imperial   17 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Fiat 128            18 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Honda Civic         19 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Toyota Corolla      20 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Toyota Corona       21 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dodge Challenger    22 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AMC Javelin         23 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pontiac Firebird    25 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Fiat X1-9           26 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Lotus Europa        28 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ford Pantera L      29 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ferrari Dino        30 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora       31 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     LOF_Score</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4            1.097199</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag        1.097199</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710           1.012611</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive       1.251758</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout    1.037223</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Valiant              1.734751</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D            1.720491</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280             1.097199</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280C            1.097199</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Cadillac Fleetwood   1.104841</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Lincoln Continental  1.046855</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chrysler Imperial    1.046855</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Fiat 128             1.195787</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Honda Civic          1.195787</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Toyota Corolla       1.195787</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Toyota Corona        1.012057</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dodge Challenger     1.003272</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AMC Javelin          1.031211</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pontiac Firebird     1.075088</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Fiat X1-9            1.195787</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Lotus Europa         1.214449</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ford Pantera L       1.238213</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Ferrari Dino         1.909731</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora        1.555531</span>
 <span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcars</span>, method<span class="op">=</span><span class="st">"kNN"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: cli</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in print.multiOutliers(x):</span> object 'method' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in multiOutliers(mtcars, method = "kNN"):</span> object 'index' not found</span>
 <span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcars</span>, method<span class="op">=</span><span class="st">"iForest"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Due to small sample size, reduced 'min.node.size' to 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -184,14 +134,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Variables used to check:	mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Checking: mpg  cyl  disp  hp  drat  wt  qsec  vs  am  gear  carb  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 row  col observed  predicted      rmse    score threshold</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati.Bora    31   hp    335.0 207.542014 32.950648 3.868148         3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Merc.230          9 qsec     22.9  18.913611  1.119986 3.559320         3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati.Bora.1  31 carb      8.0   4.007091  1.149726 3.472923         3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 replacement</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati.Bora         335.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Merc.230               22.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati.Bora.1         8.0</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in multiOutliers(mtcars, method = "iForest"):</span> object 'outlier_indices' not found</span>
 </code></pre></div>
     </div>
   </div>

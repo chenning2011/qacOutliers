@@ -141,6 +141,20 @@ multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, thre
 
     #actual outliers
     results <- outliers(ch)
+
+    # Prepare results in the specified format
+    results <- list(
+      Method = "kNN",
+      Data = dataset_name,
+      Variables = colnames(data),
+      Row = outlier_indices,
+      Score = avg_knn_distances[outlier_indices],
+      k = k
+    )
+
+    class(results) <- "multiOutliers"
+    return(results)
+
     class(results) <- "multiOutliers"
     return(results)
   }

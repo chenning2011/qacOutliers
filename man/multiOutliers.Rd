@@ -11,6 +11,7 @@ multiOutliers(
   minPts = 5,
   k = 5,
   threshold = 0.95,
+  alpha = 0.1,
   na.rm = TRUE,
   ...
 )
@@ -27,6 +28,8 @@ multiOutliers(
 \item{k}{(optional) a k value used for the kNN method of outlier detection. Default value is 5}
 
 \item{threshold}{(optional) the threshold used for kNN outlier detection. Default value is 0.95}
+
+\item{alpha}{(optional) the alpha used for mahalanobis distance outlier detection. Default value is 0.1}
 }
 \value{
 indices of detected outliers, if any
