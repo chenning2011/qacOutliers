@@ -18,11 +18,7 @@ print.multiOutliers <- function(x, ...) {
   }
 
   require(cli)
-
-  cli_h1(cat("Method Chosen:", method))
-  cli_h2("Outliers \n")
-
-  cat("Method:", x$Method)
+  cat("\nMethod:", x$Method)
   cat("\nDataset:", x$Data)
   cat("\nVariables:", x$Variables)
   cat("\nRow:", x$Row)
