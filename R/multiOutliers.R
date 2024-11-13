@@ -27,6 +27,9 @@ multiOutliers <- function(data, varlist=names(data), method, minPts=5, k=5, thre
   #Get the dataset name
   dataset_name <- deparse(substitute(data))
 
+  #surpressing warnings
+  options(warn = -1)
+
   #removing missing data
   if(na.rm) data <- na.omit(data[,varlist])
 

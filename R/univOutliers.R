@@ -27,6 +27,9 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
   # Identify numeric columns in the dataset
   numeric_columns <- sapply(data, is.numeric)
 
+  #surpressing warnings
+  options(warn = -1)
+
   # If 'x' is not specified, use all numeric columns in the dataset
   if (is.null(x)) {
     x <- names(data)[numeric_columns]
@@ -53,7 +56,7 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
       }
       # Create the ggplot boxplot (optional, only for visualization)
       library(ggplot2)
-      p <- ggplot(data, aes_string(y = column)) +
+      p <- ggplot(data, aes(y = .data[[column]])) +
         geom_boxplot(outlier.colour = "red", coef = 1.58) +
         ggtitle(paste("Univariate Boxplot of", column)) +
         theme_minimal()

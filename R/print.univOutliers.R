@@ -1,23 +1,23 @@
 #'@title Printing Univariate Outlier Detection
 #'@description Prints identified univariate outliers using boxplot, Grubbs test, or MAD method
-#'@export
 #'@param x the results from a univariate outlier detection function (e.g., `boxplot`, `grubbsTest`, or MAD)
 #'@returns A formatted print of the results of the univariate outlier detection
 #'@import ggplot2
 #'@import dplyr
 #'@import cli
+#'@export
 #'@examples
 #'data(mtcars)
 #'outliers_boxplot <- univOutliers(mtcars, "mpg", method="boxplot")
-#'print.univariateOutliers(outliers_boxplot)
+#'outliers_boxplot
 #'outliers_mad <- univOutliers(mtcars$mpg, method="mad")
-#'print.univariateOutliers(outliers_mad)
-#'outliers_grubbs <- grubbs.test(mtcars$mpg)
-#'print.univariateOutliers(outliers_grubbs)
+#'outliers_mad
+#'outliers_grubbs <- univOutliers(mtcars, "mpg", method="grubbs")
+#'outliers_grubbs
 #'
 
 
-print.multiOutliers <- function(x, ...) {
+print.univOutliers <- function(x, ...) {
   if(!inherits(x, "multiOutliers")){
     stop("This functon requires an object created by multiOutliers")
   }
@@ -27,7 +27,7 @@ print.multiOutliers <- function(x, ...) {
   print(x)
 }
 
-print.univariateOutliers <- function(x, ...) {
+print.univOutliers <- function(x, ...) {
   # Check that x is from an appropriate outlier detection method
   if(!inherits(x, "boxplot") && !inherits(x, "grubbsTest") && !inherits(x, "mad")) {
     stop("This function requires an object created by a univariate outlier detection method (e.g., boxplot, grubbsTest, or MAD).")
