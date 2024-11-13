@@ -11,7 +11,6 @@
 #'multiOutliers(mtcars, method="mahalanobis")
 #'
 
-
 print.multiOutliers <- function(x, ...) {
   if(!inherits(x, "multiOutliers")){
     stop("This functon requires an object created by multiOutliers")
@@ -31,5 +30,5 @@ print.multiOutliers <- function(x, ...) {
     cat("\nOption 2:", names(x)[7], "=", x[[7]])
   }
 
-  return(x)
+  return(invisible(x))
 }

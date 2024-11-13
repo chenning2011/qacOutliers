@@ -8,7 +8,7 @@ multiOutliers(
   data,
   varlist = names(data),
   method,
-  minPts = 5,
+  minPts = 10,
   k = 5,
   threshold = 0.95,
   alpha = 0.1,
