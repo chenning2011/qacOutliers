@@ -15,7 +15,7 @@
 #' data1 <- data.frame(
 #'   var1 = rnorm(100, mean = 50, sd = 10),
 #'   var2 = c(rnorm(97, mean = 50, sd = 10), 150, 160, 170),
-#'    var3 = rexp(100, rate = 0.1))
+#'   var3 = sample(1:100, 100, replace = TRUE, prob = (1:100)^2))
 #'
 #'
 #' # Boxplot Method on test data
