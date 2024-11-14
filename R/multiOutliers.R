@@ -8,7 +8,7 @@
 #'@param k (optional) a k value used for the kNN method of outlier detection. Default value is 5
 #'@param threshold (optional) the threshold used for kNN outlier detection. Default value is 0.95
 #'@param alpha (optional) the alpha used for mahalanobis distance outlier detection. Default value is 0.1
-#'@returns indices of detected outliers, if any
+#'@returns method used, dataset used, variables used for outliers detected, indices of any detected outliers, scores for the outliers, and values for optional parameters
 #'@import ggplot2
 #'@import Routliers
 #'@import dplyr
