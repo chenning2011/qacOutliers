@@ -24,8 +24,10 @@ print.multiOutliers <- function(x) {
   cat("\nOutlier Score:", x$Score)
   cat("\nMessage: ", x$Message)
 
-  for (i in 7:length(x)) {
-    cat("\nOption", i - 6, ":", names(x)[i], "=", x[[i]])
+  if (length(x)> 6){
+    for (i in 7:length(x)) {
+      cat("\nOption", i - 6, ":", names(x)[i], "=", x[[i]])
+   }
   }
 
   return(invisible(x))
