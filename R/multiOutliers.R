@@ -14,6 +14,7 @@
 #'@import dplyr
 #'@import outForest
 #'@import dbscan
+#'@import FNN
 #'@examples
 #'data(mtcars)
 #'multiOutliers(mtcars, method="mahalanobis")
@@ -62,6 +63,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
 
     # Identify outliers based on a threshold (LoF score > 1.5 for stronger outliers)
     outlier_indices <- which(lof_scores > 1.5)
+    outlier_scores <- lof_scores[outlier_indices]
 
     # Prepare results
     results <- list(
@@ -69,9 +71,11 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       Data = dataset_name,
       Variables = colnames(data),
       Row = outlier_indices,
-      Score = if (length(outlier_indices) > 0) lof_scores[outlier_indices] else NULL,
-      minPts = minPts,
-      Message = if (length(outlier_indices) == 0) "No outliers detected" else NULL
+      Score = outlier_scores,
+      Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected",
+      minPts = minPts
+
+
     )
 
     # Set class for consistency with other outlier detection methods
@@ -120,26 +124,36 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
 
   # kNN method
   if (method == "kNN") {
-    data <- as.matrix(data)
-    dist_matrix <- as.matrix(dist(data))
+    if (!is.data.frame(data) && !is.matrix(data)) {
+      stop("Data must be a data frame or matrix.")
+    }
 
-    # Get k-nearest neighbors for each point (excluding self-distance of 0)
-    knn_scores <- apply(dist_matrix, 1, function(row) {
-      sort(row, partial = k + 1)[2:(k + 1)]
-    })
+    require(FNN)
 
-    avg_knn_distances <- rowMeans(knn_scores)
-    cutoff <- quantile(avg_knn_distances, threshold)
-    outlier_indices <- which(avg_knn_distances > cutoff)
+    # Calculate kNN distances
+    knn_distances <- knn.dist(data, k = k)
 
+    # Calculate the average kNN distance for each row
+    avg_knn_distances <- rowMeans(knn_distances)
+
+    # Define a threshold for detecting outliers
+    # Outliers are rows with distances greater than a certain threshold
+    threshold <- mean(avg_knn_distances) + 2 * sd(avg_knn_distances)  # Example: mean + 2 SD
+
+    # Identify outliers based on the threshold
+    outlier_indices <- which(avg_knn_distances > threshold)
+    outlier_scores <- avg_knn_distances[outlier_indices]
+
+    # Create the result list
     results <- list(
       Method = "kNN",
       Data = dataset_name,
       Variables = colnames(data),
       Row = outlier_indices,
-      Score = if (length(outlier_indices) > 0) avg_knn_distances[outlier_indices] else NULL,
-      k = k,
-      Message = if (length(outlier_indices) == 0) "No outliers detected" else NULL
+      Score = outlier_scores,
+      Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected",
+      k = k
+
     )
     class(results) <- "multiOutliers"
     return(results)
@@ -166,8 +180,8 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       Data = dataset_name,
       Variables = colnames(numeric_data),
       Row = outlier_indices,
-      Score = if (length(outlier_indices) > 0) outlier_scores else NULL,
-      Message = if (length(outlier_indices) == 0) "No outliers detected" else NULL
+      Score = outlier_scores,
+      Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected"
     )
     class(output) <- "multiOutliers"
     return(output)
