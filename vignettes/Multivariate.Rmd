@@ -18,22 +18,36 @@ knitr::opts_chunk$set(
 library(qacOutliers)
 ```
 
+## What are multivariate outliers? How do you detect them? 
+
+- short description of what they are 
+- we will go into how the four methods work in the rest of the vignette
+
 ## kNN
 
-kNN calculates the distances between a data point and its k-nearest neighbors,
-snd assigns an outlier score based on that distance. If the outlier score is 
-above 0.95, then kNN considers the data point as an outlier.
+kNN calculates the distances between a data point and its k-nearest neighbors, and assigns an outlier score based on that distance. If the outlier score isabove 0.95, then kNN considers the data point as an outlier.
 
-## LoF
+## Local outlier factor (LoF)
 
-Local Outlier Factor for a point is the average density around the k-nearest 
-neighbors of the point divided by the density around the point itself. If the 
-LoF score is above 1, it ts more likely to be anomalous, if it is below 1, it 
-is less likely to be anomalous.
+LoF for a point is the average density around the k-nearest neighbors of the point divided by the density around the point itself. If the  LoF score is above 1, it ts more likely to be anomalous, if it is below 1, it is less likely to be anomalous. 
+
+-describe how this works within our function
+
+```{r}
+multiOutliers(mtcars, method="LoF")
+```
+
+-how to customize results (change threshold and stuff)
+-how to intrepret results
 
 ## Mahalanobis 
 
 information on the mahalanobis method 
+
+```{r}
+multiOutliers(mtcars, method="mahalanobis")
+```
+
 
 ## iForest 
 
