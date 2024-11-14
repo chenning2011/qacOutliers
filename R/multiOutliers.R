@@ -16,25 +16,18 @@
 #'@import dbscan
 #'@import FNN
 #'@examples
-#'data(mtcars)
-#'multiOutliers(mtcars, method="mahalanobis")
-#'multiOutliers(mtcars, method="LoF")
-#'multiOutliers(mtcars, method="kNN")
-#'multiOutliers(mtcars, method="iForest")
+#'multiOutliers(mtcarsOutliers, method="mahalanobis")
+#'multiOutliers(mtcarsOutliers, method="LoF")
+#'multiOutliers(mtcarsOutliers, method="kNN")
+#'multiOutliers(mtcarsOutliers, method="iForest")
 
 
 multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 5, threshold = 0.95, alpha = 0.1, na.rm = TRUE, ...) {
   # Get the dataset name
   dataset_name <- deparse(substitute(data))
 
-  #surpressing warnings
-  options(warn = -1)
-
   #removing missing data
   if(na.rm) data <- na.omit(data[,varlist])
-
-  # Ensure only numeric variables
-  data <- data[sapply(data, is.numeric)]
 
   # Standardize method argument
   method <- match.arg(method, c("kNN", "LoF", "mahalanobis", "iForest"))
@@ -47,8 +40,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     }
 
     # Remove any non numeric data
-    data <- data[sapply(data, is.numeric)]
-
+    data <- data[sapply(data[,varlist], is.numeric)]
 
     # Ensure the number of points is greater than minPts
     if (nrow(data) <= minPts) {
@@ -87,23 +79,20 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     library(dplyr)
     library(Routliers)
 
-    # Take only numeric data
-    numeric_data <- select_if(data[varlist,], is.numeric)
+    #take only numeric data
+    numeric_data <- select_if(data[,varlist], is.numeric)
 
-    # Convert to matrix
+    #convert to matrix
     mat <- as.matrix(numeric_data)
-
-    # Run Mahalanobis outlier detection and store results
-    results <- outliers_mahalanobis(x = mat, alpha = alpha)
 
     #run matrix on function and store results
     results <- outliers_mahalanobis(x=mat, alpha=alpha)
     index <- results$outliers_pos
 
-    # Extract the outlier indices and their Mahalanobis scores
+    #extract the outlier indices and their Mahalanobis scores
     outlier_scores <- results$dist_from_center[index]  # Mahalanobis scores for outliers
 
-    # Prepare the result list
+    #prepare the result list
     output <- list(
       Method = "mahalanobis",
       Data = dataset_name,          # Store the dataset name
@@ -111,10 +100,10 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       Row = index,        # Row numbers of detected outliers
       Score = outlier_scores,       # Mahalanobis scores of the detected outliers
       alpha = alpha,                # Alpha value used for the detection
-      Message = if (length(index) == 0) "No outliers detected" else NULL
+      Message = if (length(index) == 0) "No outliers detected" else "Outliers detected"
     )
 
-    # Assign class and return the result
+    #assign class and return the result
     class(output) <- "multiOutliers"
     return(output)
   }
@@ -125,11 +114,10 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     if (!is.data.frame(data) && !is.matrix(data)) {
       stop("Data must be a data frame or matrix.")
     }
-
     require(FNN)
 
     # Calculate kNN distances
-    knn_distances <- knn.dist(data[varlist,], k = k)
+    knn_distances <- knn.dist(data[,varlist], k = k)
 
     # Calculate the average kNN distance for each row
     avg_knn_distances <- rowMeans(knn_distances)
@@ -151,8 +139,8 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       Score = outlier_scores,
       Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected",
       k = k
-
     )
+
     class(results) <- "multiOutliers"
     return(results)
   }
@@ -164,7 +152,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     }
 
     #changing to numeric data
-    numeric_data <- data[sapply(data[varlist,], is.numeric)]
+    numeric_data <- data[sapply(data[,varlist], is.numeric)]
 
     #running iForest model
     isolation_forest_model <- outForest(numeric_data, replace = "no", verbose = 0)

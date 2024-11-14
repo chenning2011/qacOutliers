@@ -15,7 +15,7 @@ reference:
   - title: Datasets
     desc: ~
     contents:
-      - '`multiOutliers`'
+      - '`mtcarsOutliers`'
 navbar:
   left:
     - text: Getting Started

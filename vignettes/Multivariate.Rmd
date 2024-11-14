@@ -28,7 +28,7 @@ library(qacOutliers)
 kNN calculates the distances between a data point and its k-nearest neighbors, and assigns an outlier score based on that distance. If the outlier score isabove 0.95, then kNN considers the data point as an outlier.
 
 ```{r}
-multiOutliers(mtcarsOutliers, method="kNN")
+multiOutliers(mtcars, method="kNN")
 ```
 
 
