@@ -27,6 +27,11 @@ library(qacOutliers)
 
 kNN calculates the distances between a data point and its k-nearest neighbors, and assigns an outlier score based on that distance. If the outlier score isabove 0.95, then kNN considers the data point as an outlier.
 
+```{r}
+multiOutliers(mtcarsOutliers, method="kNN")
+```
+
+
 ## Local outlier factor (LoF)
 
 LoF for a point is the average density around the k-nearest neighbors of the point divided by the density around the point itself. If the  LoF score is above 1, it ts more likely to be anomalous, if it is below 1, it is less likely to be anomalous. 
@@ -34,7 +39,7 @@ LoF for a point is the average density around the k-nearest neighbors of the poi
 -describe how this works within our function
 
 ```{r}
-multiOutliers(mtcars, method="LoF")
+multiOutliers(mtcarsOutliers, method="LoF")
 ```
 
 -how to customize results (change threshold and stuff)
@@ -45,7 +50,7 @@ multiOutliers(mtcars, method="LoF")
 information on the mahalanobis method 
 
 ```{r}
-multiOutliers(mtcars, method="mahalanobis")
+multiOutliers(mtcarsOutliers, method="mahalanobis")
 ```
 
 
@@ -56,5 +61,9 @@ iForest stands for isolation forest. First, it randomly selects a variable, then
 The iForest method repeats the above steps until all points are separatly in their own node. Then, for each data point, it counts how many splits were needed to isolate it. 
 
 Because the selection of variables and values is random, this process will return different results each time. Therefore, isolation trees are repeated many times and the results are averaged over all trials. More isolated points will have lower average path lengths. They are more isolated from the rest of the data's distribution, therefore they are called outliers. 
+
+```{r}
+multiOutliers(mtcarsOutliers, method="iForest")
+```
 
 
