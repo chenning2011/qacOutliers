@@ -110,10 +110,10 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: mahalanobis</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcars</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Row: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Message:  No outliers detected</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : alpha = 0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row: 9 27 29 31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 22.59312 18.35616 21.573 19.19238</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Message: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : Message =</span>
 <span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcars</span>, method<span class="op">=</span><span class="st">"LoF"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: LoF</span>
@@ -136,19 +136,12 @@
 <span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcars</span>, method<span class="op">=</span><span class="st">"iForest"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Due to small sample size, reduced 'min.node.size' to 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier identification by random forests</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Variables to check:		mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Variables used to check:	mpg, cyl, disp, hp, drat, wt, qsec, vs, am, gear, carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Checking: mpg  cyl  disp  hp  drat  wt  qsec  vs  am  gear  carb  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: iForest</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcars</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Row: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Message:  No outliers detected</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row: 31 9 31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 3.868148 3.55932 3.472923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Message:  Outliers detected</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in x[[i]]:</span> subscript out of bounds</span>
 </code></pre></div>
     </div>
