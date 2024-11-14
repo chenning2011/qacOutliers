@@ -166,13 +166,13 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     }
 
     #changing to numeric data
-    numeric_data <- data[sapply(data, is.numeric)]
+    numeric_data <- data[sapply(data[varlist,], is.numeric)]
 
     #running iForest model
     isolation_forest_model <- outForest(numeric_data, replace = "no", verbose = 0)
 
     #extract row numbers and scores
-    outlier_indices <- as.numeric(rownames(isolation_forest_model$outliers))
+    outlier_indices <- isolation_forest_model$outliers$row
     outlier_scores <- isolation_forest_model$outliers$score
 
     output <- list(
