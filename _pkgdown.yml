@@ -1,6 +1,39 @@
+title: qacOutliers
 url: https://chenning2011.github.io/qacOutliers/
 template:
+  params:
   bootstrap: 5
-  bootswatch: darkly
+  bootswatch: cerulean
+reference:
+  - title: Main Functions
+    desc: ~
+    contents:
+      - '`multiOutliers`'
+      - '`univOutliers`'
+      - '`print.multiOutliers`'
+      - '`print.univOutliers`'
+  - title: Datasets
+    desc: ~
+    contents:
+      - '`mtcarsOutliers`'
+      - '`irisOutliers`'
+navbar:
+  left:
+    - text: Getting Started
+      icon: fas fa-chalkboard-teacher
+      href: articles/qacOutliers.html
+    - text: "Vignettes"
+      icon: fas fa-book
+      menu:
+      -  text: Multivariate Outliers
+         href: articles/Multivariate.html
+      -  text: Univariate Outliers
+         href: articles/Univariate.html
+    - icon: fa-file-code-o
+      text: "Documentation"
+      href: reference/index.html
+  right:
+    - icon: fa-home
+      href: index.html
 
 

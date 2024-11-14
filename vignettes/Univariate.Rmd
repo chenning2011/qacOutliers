@@ -38,5 +38,7 @@ univOutliers(mtcars, "qsec", method="boxplot")
 information on the grubb's test
 
 ## MAD 
+The MAD (Median Absolute Deviation) method for univariate outlier detection identifies outliers based on a robust measure of variability, the median absolute deviation. In this method, a red line represents the median of the values in the target vector. The upper CI limit is the median + 3MAD and the lower CI limit is median - 3MAD. The points outside of the confidence interval are the outliers detected by the MAD method.  
 
-information on MAD 
+The output will provide the identified outliers along with their corresponding row numbers, and a graphical representation will be generated with the outliers highlighted in red.
+ 

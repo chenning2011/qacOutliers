@@ -38,9 +38,8 @@ indices of detected outliers, if any
 Identifies multivariate outliers using four different methods.
 }
 \examples{
-data(mtcars)
-multiOutliers(mtcars, method="mahalanobis")
-multiOutliers(mtcars, method="LoF")
-multiOutliers(mtcars, method="kNN")
-multiOutliers(mtcars, method="iForest")
+multiOutliers(mtcarsOutliers, method="mahalanobis")
+multiOutliers(mtcarsOutliers, method="LoF")
+multiOutliers(mtcarsOutliers, method="kNN")
+multiOutliers(mtcarsOutliers, method="iForest")
 }
