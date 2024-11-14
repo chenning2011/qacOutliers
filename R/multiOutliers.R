@@ -173,7 +173,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
 
     #extract row numbers and scores
     outlier_indices <- isolation_forest_model$outliers$row
-    outlier_scores <- isolation_forest_model$outliers$score
+    outlier_scores <- isolation_forest_model$outliers$score[]
 
     output <- list(
       Method = "iForest",

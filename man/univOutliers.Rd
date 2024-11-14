@@ -20,18 +20,27 @@ A list containing the ggplot object and boxplot statistics.
 Provides three methods for detecting univariate outliers in a dataset.
 }
 \examples{
+# Generate example data
+set.seed(42)
+library(EnvStats)
+data1 <- data.frame(
+  var1 = rnorm(100, mean = 50, sd = 10),
+  var2 = c(rnorm(97, mean = 50, sd = 10), 150, 160, 170),
+  var3 = sample(1:100, 100, replace = TRUE, prob = (1:100)^2))
+
+
 # Boxplot Method on test data
-univOutliers(data1, "normal_data", method = "boxplot")
-univOutliers(data1, "with_outlier", method = "boxplot")
-univOutliers(data1, "multiple_outliers", method = "boxplot")
+univOutliers(data1, "var1", method = "boxplot")
+univOutliers(data1, "var2", method = "boxplot")
+univOutliers(data1, method = "boxplot")
 
 # MAD Method on test data
-univOutliers(data1, "normal_data", method = "mad")
-univOutliers(data1, "with_outlier", method = "mad")
-univOutliers(data1, "multiple_outliers", method = "mad")
+univOutliers(data1, "var1", method = "mad")
+univOutliers(data1, "var2", method = "mad")
+univOutliers(data1, method = "mad")
 
 # Grubbs' Method on test data
-univOutliers(data1, "normal_data", method = "grubbs")
-univOutliers(data1, "with_outlier", method = "grubbs")
-univOutliers(data1, "multiple_outliers", method = "grubbs")
+univOutliers(data1, "var1", method = "grubbs")
+univOutliers(data1, "var2", method = "grubbs")
+univOutliers(data1, "var3", method = "grubbs")
 }
