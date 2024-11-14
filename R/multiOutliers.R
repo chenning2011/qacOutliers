@@ -16,9 +16,9 @@
 #'@import dbscan
 #'@import FNN
 #'@examples
-#'multiOutliers(mtcarsOutliers, method="mahalanobis")
-#'multiOutliers(mtcarsOutliers, method="LoF")
-#'multiOutliers(mtcarsOutliers, method="kNN")
+#'multiOutliers(mtcarsOutliers, method="mahalanobis", alpha=0.1)
+#'multiOutliers(mtcarsOutliers, method="LoF", minPts=5)
+#'multiOutliers(mtcarsOutliers, method="kNN", k=5, threshold=.95)
 #'multiOutliers(mtcarsOutliers, method="iForest")
 
 

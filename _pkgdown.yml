@@ -16,6 +16,7 @@ reference:
     desc: ~
     contents:
       - '`mtcarsOutliers`'
+      - '`irisOutliers`'
 navbar:
   left:
     - text: Getting Started
