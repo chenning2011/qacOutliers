@@ -17,6 +17,7 @@ Imports:
     cli,
     dbscan,
     dplyr,
+    FNN,
     ggplot2,
     outForest,
     outliers,

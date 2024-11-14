@@ -74,8 +74,6 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       Score = outlier_scores,
       Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected",
       minPts = minPts
-
-
     )
 
     # Set class for consistency with other outlier detection methods
@@ -90,7 +88,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     library(Routliers)
 
     # Take only numeric data
-    numeric_data <- select_if(data, is.numeric)
+    numeric_data <- select_if(data[varlist,], is.numeric)
 
     # Convert to matrix
     mat <- as.matrix(numeric_data)
@@ -131,7 +129,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     require(FNN)
 
     # Calculate kNN distances
-    knn_distances <- knn.dist(data, k = k)
+    knn_distances <- knn.dist(data[varlist,], k = k)
 
     # Calculate the average kNN distance for each row
     avg_knn_distances <- rowMeans(knn_distances)
