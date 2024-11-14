@@ -15,6 +15,7 @@
 #'@import outForest
 #'@import dbscan
 #'@import FNN
+#'
 #'@examples
 #'multiOutliers(mtcarsOutliers, method="mahalanobis", alpha=0.1)
 #'multiOutliers(mtcarsOutliers, method="LoF", minPts=5)
@@ -22,12 +23,16 @@
 #'multiOutliers(mtcarsOutliers, method="iForest")
 
 
+#add in see also and link to other functions that we build our functions off of
 multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 5, threshold = 0.95, alpha = 0.1, na.rm = TRUE, ...) {
   # Get the dataset name
   dataset_name <- deparse(substitute(data))
 
   #removing missing data
   if(na.rm) data <- na.omit(data[,varlist])
+
+  # Remove any non numeric data
+  data <- data[sapply(data[,varlist], is.numeric)]
 
   # Standardize method argument
   method <- match.arg(method, c("kNN", "LoF", "mahalanobis", "iForest"))
@@ -38,9 +43,6 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     if (!is.matrix(data) && !is.data.frame(data)) {
       stop("Data should be a matrix or data frame.")
     }
-
-    # Remove any non numeric data
-    data <- data[sapply(data[,varlist], is.numeric)]
 
     # Ensure the number of points is greater than minPts
     if (nrow(data) <= minPts) {
@@ -79,11 +81,8 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     library(dplyr)
     library(Routliers)
 
-    #take only numeric data
-    numeric_data <- select_if(data[,varlist], is.numeric)
-
     #convert to matrix
-    mat <- as.matrix(numeric_data)
+    mat <- as.matrix(data)
 
     #run matrix on function and store results
     results <- outliers_mahalanobis(x=mat, alpha=alpha)
@@ -117,7 +116,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     require(FNN)
 
     # Calculate kNN distances
-    knn_distances <- knn.dist(data[,varlist], k = k)
+    knn_distances <- knn.dist(data, k = k)
 
     # Calculate the average kNN distance for each row
     avg_knn_distances <- rowMeans(knn_distances)
@@ -150,9 +149,6 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     if (!is.matrix(data) && !is.data.frame(data)) {
       stop("Data should be a matrix or data frame.")
     }
-
-    #changing to numeric data
-    numeric_data <- data[sapply(data[,varlist], is.numeric)]
 
     #running iForest model
     isolation_forest_model <- outForest(numeric_data, replace = "no", verbose = 0)

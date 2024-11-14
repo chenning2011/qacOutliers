@@ -89,12 +89,12 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>indices of detected outliers, if any</p>
+    <p>method used, dataset used, variables used for outliers detected, indices of any detected outliers, scores for the outliers, and values for optional parameters</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"mahalanobis"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"mahalanobis"</span>, alpha<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: 'dplyr'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from 'package:stats':</span>
@@ -112,16 +112,16 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 25.11784 29.58581 27.30969 19.22256 26.99406 21.46034 27.95683 25.39721</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Message:  Outliers detected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : alpha = 0.1</span>
-<span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"LoF"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"LoF"</span>, minPts<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: LoF</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcarsOutliers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Row: 5 7 9 10 11 12 20 31 32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 2.28365 2.719583 2.560179 1.530304 1.563598 1.804971 1.567824 2.950466 1.574599</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row: 5 7 9 10 11 12 19 20 29 31 32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 3.146901 4.646142 3.401508 1.759811 2.00213 2.543073 1.915247 1.761172 2.28657 4.403093 1.772691</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Message:  Outliers detected</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : minPts = 10</span>
-<span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"kNN"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : minPts = 5</span>
+<span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"kNN"</span>, k<span class="op">=</span><span class="fl">5</span>, threshold<span class="op">=</span><span class="fl">.95</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: FNN</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: kNN</span>
