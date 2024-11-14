@@ -99,18 +99,17 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     index <- results$outliers_pos
 
     # Extract the outlier indices and their Mahalanobis scores
-    outlier_indices <- which(results$outliers == 1)  # Indices of detected outliers
-    outlier_scores <- results$scores[outlier_indices]  # Mahalanobis scores for outliers
+    outlier_scores <- results$dist_from_center[index]  # Mahalanobis scores for outliers
 
     # Prepare the result list
     output <- list(
       Method = "mahalanobis",
       Data = dataset_name,          # Store the dataset name
       Variables = colnames(numeric_data),  # Store column names of numeric data
-      Row = outlier_indices,        # Row numbers of detected outliers
+      Row = index,        # Row numbers of detected outliers
       Score = outlier_scores,       # Mahalanobis scores of the detected outliers
       alpha = alpha,                # Alpha value used for the detection
-      Message = if (length(outlier_indices) == 0) "No outliers detected" else NULL
+      Message = if (length(index) == 0) "No outliers detected" else NULL
     )
 
     # Assign class and return the result
@@ -152,10 +151,15 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       stop("Data should be a matrix or data frame.")
     }
 
+    #changing to numeric data
     numeric_data <- data[sapply(data, is.numeric)]
-    isolation_forest_model <- outForest::outForest(numeric_data, replace = "no")
-    outlier_indices <- which(outliers(isolation_forest_model) == 1)
-    outlier_scores <- isolation_forest_model$outliers_scores[outlier_indices]
+
+    #running iForest model
+    isolation_forest_model <- outForest(numeric_data, replace = "no", verbose = 0)
+
+    #extract row numbers and scores
+    outlier_indices <- as.numeric(rownames(isolation_forest_model$outliers))
+    outlier_scores <- isolation_forest_model$outliers$score
 
     output <- list(
       Method = "iForest",
@@ -169,3 +173,4 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     return(output)
   }
 }
+
