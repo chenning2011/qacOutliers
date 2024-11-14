@@ -3,7 +3,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-dark" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">qacOutliers</a>
 
@@ -69,29 +69,80 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Boxplot Method on test data</span></span></span>
-<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"normal_data"</span>, method <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'data1' not found</span>
-<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"with_outlier"</span>, method <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'data1' not found</span>
-<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"multiple_outliers"</span>, method <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'data1' not found</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Generate example data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexkowa/EnvStats" class="external-link">EnvStats</a></span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in library(EnvStats):</span> there is no package called ‘EnvStats’</span>
+<span class="r-in"><span><span class="va">data1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  var1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">50</span>, sd <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  var2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">97</span>, mean <span class="op">=</span> <span class="fl">50</span>, sd <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, <span class="fl">150</span>, <span class="fl">160</span>, <span class="fl">170</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  var3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">TRUE</span>, prob <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Boxplot Method on test data</span></span></span>
+<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"var1"</span>, method <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var1 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 18 : 23.43545 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 59 : 20.0691 </span>
+<span class="r-plt img"><img src="univOutliers-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"var2"</span>, method <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var2 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 18 : 77.01891 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 98 : 150 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 99 : 160 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 100 : 170 </span>
+<span class="r-plt img"><img src="univOutliers-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, method <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var1 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 18 : 23.43545 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 59 : 20.0691 </span>
+<span class="r-plt img"><img src="univOutliers-3.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var2 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 18 : 77.01891 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 98 : 150 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 99 : 160 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 100 : 170 </span>
+<span class="r-plt img"><img src="univOutliers-4.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No outliers detected for var3 </span>
+<span class="r-plt img"><img src="univOutliers-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># MAD Method on test data</span></span></span>
-<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"normal_data"</span>, method <span class="op">=</span> <span class="st">"mad"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'data1' not found</span>
-<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"with_outlier"</span>, method <span class="op">=</span> <span class="st">"mad"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'data1' not found</span>
-<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"multiple_outliers"</span>, method <span class="op">=</span> <span class="st">"mad"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'data1' not found</span>
+<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"var1"</span>, method <span class="op">=</span> <span class="st">"mad"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var1 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 59 : 20.0691 </span>
+<span class="r-plt img"><img src="univOutliers-6.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"var2"</span>, method <span class="op">=</span> <span class="st">"mad"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var2 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 18 : 77.01891 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 98 : 150 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 99 : 160 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 100 : 170 </span>
+<span class="r-plt img"><img src="univOutliers-7.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, method <span class="op">=</span> <span class="st">"mad"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var1 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 59 : 20.0691 </span>
+<span class="r-plt img"><img src="univOutliers-8.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var2 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 18 : 77.01891 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 98 : 150 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 99 : 160 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 100 : 170 </span>
+<span class="r-plt img"><img src="univOutliers-9.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var3 :</span>
+<span class="r-plt img"><img src="univOutliers-10.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Grubbs' Method on test data</span></span></span>
-<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"normal_data"</span>, method <span class="op">=</span> <span class="st">"grubbs"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'data1' not found</span>
-<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"with_outlier"</span>, method <span class="op">=</span> <span class="st">"grubbs"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'data1' not found</span>
-<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"multiple_outliers"</span>, method <span class="op">=</span> <span class="st">"grubbs"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'data1' not found</span>
+<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"var1"</span>, method <span class="op">=</span> <span class="st">"grubbs"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var1 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No outliers detected for var1 </span>
+<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"var2"</span>, method <span class="op">=</span> <span class="st">"grubbs"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var2 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 98 : 150 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 99 : 160 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row 100 : 170 </span>
+<span class="r-in"><span><span class="fu">univOutliers</span><span class="op">(</span><span class="va">data1</span>, <span class="st">"var3"</span>, method <span class="op">=</span> <span class="st">"grubbs"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for var3 :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> No outliers detected for var3 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
