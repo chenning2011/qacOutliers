@@ -55,6 +55,9 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
   for (column in x) {
     column_data <- na.omit(data[[column]])  # Remove NA values from the column
 
+    # Print the method being used
+    cat("\nUsing", method, "method for", column, "\n")
+
     # Boxplot Method
     if (method == "boxplot") {
       stats <- boxplot.stats(column_data)
@@ -101,6 +104,11 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
 
     # Grubbs' Test Method
     else if (method == "grubbs") {
+      # Q-Q plot before running Grubbs' test
+      qqnorm(column_data, main = paste("Q-Q Plot for", column))
+      qqline(column_data, col = "red")
+
+      # Grubbs' test function
       grubbs_test <- function(data, alpha = 0.05) {
         data <- na.omit(data)  # Remove NA values
         if (!is.numeric(data)) stop("Input data must be numeric.")
