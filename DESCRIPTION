@@ -15,12 +15,10 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports: 
     cli,
-    cluster,
     dbscan,
     dplyr,
     FNN,
     ggplot2,
-    isotree,
     outForest,
     outliers,
     Routliers,
