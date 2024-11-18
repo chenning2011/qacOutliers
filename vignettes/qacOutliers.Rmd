@@ -18,4 +18,4 @@ knitr::opts_chunk$set(
 library(qacOutliers)
 ```
 
-this portion of the site should have a "getting" started style tutorial/introduction - explain some common uses for some of the functions
+this portion of the site should have a style tutorial/introduction - explain some common uses for some of the functions and explain what outliers are

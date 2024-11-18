@@ -7,7 +7,7 @@
 #' @returns A plot object specific to the method.
 #' @export
 
-plotOutliers <- function(data, x, method, results) {
+plot.univOutliers <- function(data, x, method, results) {
   if (!x %in% names(data)) {
     stop("The specified column does not exist in the data frame.")
   }
@@ -65,92 +65,92 @@ plotOutliers <- function(data, x, method, results) {
 }
 
 
-# Example Test Cases
-
-# Load necessary libraries
-library(ggplot2)
-library(Routliers)
-
-# Create synthetic data
-set.seed(123)
-data <- data.frame(
-  value = c(rnorm(95, mean = 50, sd = 10), 150, 160, 170, 180, 190) # Outliers added
-)
-
-# Example 1: Boxplot method
-# Assuming no additional `results` are needed for boxplot
-plotOutliers(data = data, x = "value", method = "boxplot", results = NULL)
-
-# Example 2: MAD method
-library(Routliers)
-plotOutliers(data = data, x = "value", method = "mad", results=NULL)
-
-# Example 3: Grubbs method
-# Assuming you have a Grubbs' test results list
-library(outliers)
-grubbs_result <- grubbs.test(data$value)
-grubbs_outliers <- data$value[data$value %in% grubbs_result$data]
-results <- list(outliers = grubbs_outliers)
-
-plotOutliers(data = data, x = "value", method = "grubbs", results = results)
-
-# Load necessary libraries
-library(outliers)
-
-# Example Dataset 1: Small numeric dataset with obvious outliers
-data1 <- data.frame(
-  value = c(10, 12, 15, 14, 13, 120) # 120 is an obvious outlier
-)
-grubbs_result1 <- grubbs.test(data1$value)
-grubbs_outliers1 <- data1$value[data1$value %in% grubbs_result1$data]
-results1 <- list(outliers = grubbs_outliers1)
-
-plotOutliers(data = data1, x = "value", method = "grubbs", results = results1)
-
-#MAD test on small numeric dataset with obvious outliers, did different data frame cause
-#labels were smooshed when I did mad test for data1
-data5 <- data.frame(
-  value = c(10,15,30,45,70,300) # 300 is an obvious outlier
-)
-plotOutliers(data = data5, x = "value", method = "mad", results = NULL)
-
-
-# Example Dataset 2: Larger dataset with extreme outliers
-set.seed(42)
-data2 <- data.frame(
-  value = c(rnorm(98, mean = 100, sd = 10), 200, 300) # 200 and 300 are extreme outliers
-)
-grubbs_result2 <- grubbs.test(data2$value)
-grubbs_outliers2 <- data2$value[data2$value %in% grubbs_result2$data]
-results2 <- list(outliers = grubbs_outliers2)
-
-plotOutliers(data = data2, x = "value", method = "grubbs", results = results2)
-
-# using mad method on dataset with extreme outliers
-plotOutliers(data = data2, x = "value", method = "mad", results = NULL)
-
-# Example Dataset 3: Dataset with no outliers
-data3 <- data.frame(
-  value = rnorm(100, mean = 50, sd = 5) # No outliers
-)
-grubbs_result3 <- grubbs.test(data3$value)
-grubbs_outliers3 <- data3$value[data3$value %in% grubbs_result3$data]
-results3 <- list(outliers = grubbs_outliers3)
-
-plotOutliers(data = data3, x = "value", method = "grubbs", results = results3)
-
-#using mad method on dataset with "no outliers"
-plotOutliers(data = data3, x = "value", method = "mad")
-
-# Example Dataset 4: Highly skewed dataset
-data4 <- data.frame(
-  value = c(rexp(95, rate = 0.1), 150, 200) # Exponential distribution with outliers
-)
-grubbs_result4 <- grubbs.test(data4$value)
-grubbs_outliers4 <- data4$value[data4$value %in% grubbs_result4$data]
-results4 <- list(outliers = grubbs_outliers4)
-
-plotOutliers(data = data4, x = "value", method = "grubbs", results = results4)
-
-#using mad method on highly skewed dataset
-plotOutliers(data = data4, x="value", method = "mad", results = NULL)
+# # Example Test Cases
+#
+# # Load necessary libraries
+# library(ggplot2)
+# library(Routliers)
+#
+# # Create synthetic data
+# set.seed(123)
+# data <- data.frame(
+#   value = c(rnorm(95, mean = 50, sd = 10), 150, 160, 170, 180, 190) # Outliers added
+# )
+#
+# # Example 1: Boxplot method
+# # Assuming no additional `results` are needed for boxplot
+# plotOutliers(data = data, x = "value", method = "boxplot", results = NULL)
+#
+# # Example 2: MAD method
+# library(Routliers)
+# plotOutliers(data = data, x = "value", method = "mad", results=NULL)
+#
+# # Example 3: Grubbs method
+# # Assuming you have a Grubbs' test results list
+# library(outliers)
+# grubbs_result <- grubbs.test(data$value)
+# grubbs_outliers <- data$value[data$value %in% grubbs_result$data]
+# results <- list(outliers = grubbs_outliers)
+#
+# plotOutliers(data = data, x = "value", method = "grubbs", results = results)
+#
+# # Load necessary libraries
+# library(outliers)
+#
+# # Example Dataset 1: Small numeric dataset with obvious outliers
+# data1 <- data.frame(
+#   value = c(10, 12, 15, 14, 13, 120) # 120 is an obvious outlier
+# )
+# grubbs_result1 <- grubbs.test(data1$value)
+# grubbs_outliers1 <- data1$value[data1$value %in% grubbs_result1$data]
+# results1 <- list(outliers = grubbs_outliers1)
+#
+# plotOutliers(data = data1, x = "value", method = "grubbs", results = results1)
+#
+# #MAD test on small numeric dataset with obvious outliers, did different data frame cause
+# #labels were smooshed when I did mad test for data1
+# data5 <- data.frame(
+#   value = c(10,15,30,45,70,300) # 300 is an obvious outlier
+# )
+# plotOutliers(data = data5, x = "value", method = "mad", results = NULL)
+#
+#
+# # Example Dataset 2: Larger dataset with extreme outliers
+# set.seed(42)
+# data2 <- data.frame(
+#   value = c(rnorm(98, mean = 100, sd = 10), 200, 300) # 200 and 300 are extreme outliers
+# )
+# grubbs_result2 <- grubbs.test(data2$value)
+# grubbs_outliers2 <- data2$value[data2$value %in% grubbs_result2$data]
+# results2 <- list(outliers = grubbs_outliers2)
+#
+# plotOutliers(data = data2, x = "value", method = "grubbs", results = results2)
+#
+# # using mad method on dataset with extreme outliers
+# plotOutliers(data = data2, x = "value", method = "mad", results = NULL)
+#
+# # Example Dataset 3: Dataset with no outliers
+# data3 <- data.frame(
+#   value = rnorm(100, mean = 50, sd = 5) # No outliers
+# )
+# grubbs_result3 <- grubbs.test(data3$value)
+# grubbs_outliers3 <- data3$value[data3$value %in% grubbs_result3$data]
+# results3 <- list(outliers = grubbs_outliers3)
+#
+# plotOutliers(data = data3, x = "value", method = "grubbs", results = results3)
+#
+# #using mad method on dataset with "no outliers"
+# plotOutliers(data = data3, x = "value", method = "mad")
+#
+# # Example Dataset 4: Highly skewed dataset
+# data4 <- data.frame(
+#   value = c(rexp(95, rate = 0.1), 150, 200) # Exponential distribution with outliers
+# )
+# grubbs_result4 <- grubbs.test(data4$value)
+# grubbs_outliers4 <- data4$value[data4$value %in% grubbs_result4$data]
+# results4 <- list(outliers = grubbs_outliers4)
+#
+# plotOutliers(data = data4, x = "value", method = "grubbs", results = results4)
+#
+# #using mad method on highly skewed dataset
+# plotOutliers(data = data4, x="value", method = "mad", results = NULL)

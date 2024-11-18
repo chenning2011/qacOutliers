@@ -138,8 +138,11 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     # Remove any non numeric data
     data <- data[sapply(data[,varlist], is.numeric)]
 
+    #standardize the data
+    data_st <- scale(data[-1])
+
     # Calculate kNN distances
-    knn_distances <- knn.dist(data, k = k)
+    knn_distances <- knn.dist(data_st, k = k)
 
     # Calculate the average kNN distance for each row
     avg_knn_distances <- rowMeans(knn_distances)
