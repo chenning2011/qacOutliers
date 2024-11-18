@@ -15,6 +15,7 @@
 #'@import outForest
 #'@import dbscan
 #'@import FNN
+#'@import cluster
 #'
 #'@examples
 #'multiOutliers(mtcarsOutliers, method="mahalanobis", alpha=0.1)
