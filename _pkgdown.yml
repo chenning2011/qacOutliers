@@ -12,6 +12,8 @@ reference:
       - '`univOutliers`'
       - '`print.multiOutliers`'
       - '`print.univOutliers`'
+      - '`plot.univOutliers`'
+      - '`plot.multiOutliers`'
   - title: Datasets
     desc: ~
     contents:
