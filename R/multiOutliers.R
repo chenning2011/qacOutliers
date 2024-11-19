@@ -103,7 +103,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     mat <- as.matrix(data)
 
     #run matrix on function and store results
-    results <- outliers_mahalanobis(x=mat, alpha=alpha)
+    results <- Routliers::outliers_mahalanobis(x=mat, alpha=alpha)
     index <- results$outliers_pos
 
     #extract the outlier indices and their Mahalanobis scores
@@ -137,7 +137,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     data <- data[sapply(data[,varlist], is.numeric)]
 
     # Calculate kNN distances
-    knn_distances <- knn.dist(data, k = k)
+    knn_distances <- FNN::knn.dist(data, k = k)
 
     # Calculate the average kNN distance for each row
     avg_knn_distances <- rowMeans(knn_distances)
