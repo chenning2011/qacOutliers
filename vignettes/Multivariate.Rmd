@@ -20,15 +20,77 @@ library(qacOutliers)
 
 ## What are multivariate outliers? How do you detect them? 
 
-- short description of what they are 
-- we will go into how the four methods work in the rest of the vignette
+A multivariate outlier is an outlier that can only be detected by looking at two variables in combination. The graph below shows examples of multivariate outliers. The dataset for this graph is taken from the Salaries dataset from the carData package.
+
+```{r, echo = F, message = F, warning = F}
+data(Salaries, package="carData")
+#getting the outliers
+results <- multiOutliers(Salaries, method = "LoF")
+row <- as.numeric(results$Row)
+
+library(tidyverse)
+#getting just a subset for red points
+subset <- Salaries %>% 
+  slice(row)
+
+#getting the one point for labelling
+point <- Salaries %>% 
+  filter(yrs.since.phd > 20 & yrs.since.phd < 30 & salary < 70000)
+
+#graphing
+ggplot()+
+  geom_point(data = Salaries, aes(x=yrs.since.phd, y=salary))+
+  geom_point(data = subset, aes(x=yrs.since.phd, y = salary), color = "red")+
+  geom_label(data = point, aes(x=yrs.since.phd, y=salary), label = rownames(point))+
+  labs(title = "Years since PhD and salary (USD)", x = "Years since PhD", y = "Salary (USD)")+
+  scale_y_continuous(labels = scales::dollar)+
+  theme_minimal()
+```
+
+All of the red dots are multivariate outliers. The point labelled 1 on the graph is a clear example of a multivariate outlier. This person has had 22 years since their PhD, a normal value for that variable, and makes 62,884 dollars, which is also a normal value for salary. However, when combining these two features, a person who has had 22 years since their PhD and makes only 62,884 dollars is making much less than other professors within their experience range. 
+
+The outliers in this graph were detected using the LoF method, and more detail about that method can be provided below. This package specifically focuses on four different methods for finding multivariate outliers: kNN, LoF, mahalanobis distance, and iForest. 
 
 ## kNN
 
-kNN calculates the distances between a data point and its k-nearest neighbors, and assigns an outlier score based on that distance. If the outlier score isabove 0.95, then kNN considers the data point as an outlier.
+kNN calculates the distances between a data point and its k-nearest neighbors and assigns an outlier score based on that distance. The principle that guides kNN is that outliers lay far away from their neighbours, so each of the distances is interpreted within that context. Because some variables in the data may have much larger ranges that others (ex. a variable has a range from 1-10 and another has a range of -10000 to 10000), the data is standardized before calculating the distances. 
+
+Here is an example of the distances for the first 5 rows in mtcarsOutliers, a dataset included with this package. 
+
+```{r, echo = F, message = F, warning = F}
+mtcarsOutliers_st <- scale(mtcarsOutliers[-1])
+knn_distances <- FNN::knn.dist(mtcarsOutliers_st, k=5)
+head(knn_distances, 5)
+```
+After each of these distances are calculated, the average for each row is calculated. Here are the average scores for the 5 rows shown above. This step is why it's important to standardize the data before finding the distances. 
+
+```{r, echo = F, message = F, warning = F}
+avg_knn_distances <- rowMeans(knn_distances)
+head(avg_knn_distances, 5)
+```
+In this function, the next step involves creating a threshold for declaring a point an outlier. To calculate this threshold, the function takes the average of each row (after that row's average has been calculated), and adds 2 times the standard deviation of each row to that number. In this case, the threshold is the number below. 
+
+```{r, echo = F, message = F, warning = F}
+threshold <- mean(avg_knn_distances) + 2 * sd(avg_knn_distances)
+threshold
+```
+
+Outliers are considered any points with a score above the calculated threshold. In this case, the outliers are shown below. 
+
+```{r, echo = F, message = F, warning = F}
+multiOutliers(mtcarsOutliers, method="kNN")
+```
+
+The value k tells the function how many points to consider as neighbors when identifying distances between each of the points. The default value, 5, finds the distance between each point the 5 points that are closest to that point. You can supply your own value of k, which may change the results of the function.
 
 ```{r}
-multiOutliers(mtcars, method="kNN")
+multiOutliers(mtcarsOutliers, method = "kNN", k = 10)
+```
+
+Here is a graphical representation of the outliers shown above. 
+
+```{r}
+#add plot function when it's done
 ```
 
 

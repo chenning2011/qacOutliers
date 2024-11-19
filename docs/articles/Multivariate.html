@@ -74,31 +74,81 @@
 <div class="section level2">
 <h2 id="what-are-multivariate-outliers-how-do-you-detect-them">What are multivariate outliers? How do you detect them?<a class="anchor" aria-label="anchor" href="#what-are-multivariate-outliers-how-do-you-detect-them"></a>
 </h2>
-<ul>
-<li>short description of what they are</li>
-<li>we will go into how the four methods work in the rest of the
-vignette</li>
-</ul>
+<p>A multivariate outlier is an outlier that can only be detected by
+looking at two variables in combination. The graph below shows examples
+of multivariate outliers. The dataset for this graph is taken from the
+Salaries dataset from the carData package.</p>
+<p><img src="Multivariate_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p>All of the red dots are multivariate outliers. The point labelled 1
+on the graph is a clear example of a multivariate outlier. This person
+has had 22 years since their PhD, a normal value for that variable, and
+makes 62,884 dollars, which is also a normal value for salary. However,
+when combining these two features, a person who has had 22 years since
+their PhD and makes only 62,884 dollars is making much less than other
+professors within their experience range.</p>
+<p>The outliers in this graph were detected using the LoF method, and
+more detail about that method can be provided below. This package
+specifically focuses on four different methods for finding multivariate
+outliers: kNN, LoF, mahalanobis distance, and iForest.</p>
 </div>
 <div class="section level2">
 <h2 id="knn">kNN<a class="anchor" aria-label="anchor" href="#knn"></a>
 </h2>
 <p>kNN calculates the distances between a data point and its k-nearest
-neighbors, and assigns an outlier score based on that distance. If the
-outlier score isabove 0.95, then kNN considers the data point as an
-outlier.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, method<span class="op">=</span><span class="st">"kNN"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required package: FNN</span></span>
-<span><span class="co">#&gt; Loading required package: cli</span></span>
+neighbors and assigns an outlier score based on that distance. The
+principle that guides kNN is that outliers lay far away from their
+neighbours, so each of the distances is interpreted within that context.
+Because some variables in the data may have much larger ranges that
+others (ex. a variable has a range from 1-10 and another has a range of
+-10000 to 10000), the data is standardized before calculating the
+distances.</p>
+<p>Here is an example of the distances for the first 5 rows in
+mtcarsOutliers, a dataset included with this package.</p>
+<pre><code><span><span class="co">#&gt;           [,1]     [,2]     [,3]     [,4]     [,5]</span></span>
+<span><span class="co">#&gt; [1,] 1.5229770 2.102410 2.265502 2.651939 2.664224</span></span>
+<span><span class="co">#&gt; [2,] 1.5031299 1.509144 1.522977 1.568453 1.608401</span></span>
+<span><span class="co">#&gt; [3,] 1.2561178 1.503130 1.728826 1.817606 1.983652</span></span>
+<span><span class="co">#&gt; [4,] 0.3490918 1.045627 1.163944 1.331333 1.351668</span></span>
+<span><span class="co">#&gt; [5,] 4.7397611 5.019562 5.024754 5.026238 5.106755</span></span></code></pre>
+<p>After each of these distances are calculated, the average for each
+row is calculated. Here are the average scores for the 5 rows shown
+above. This step is why it’s important to standardize the data before
+finding the distances.</p>
+<pre><code><span><span class="co">#&gt; [1] 2.241410 1.542421 1.657866 1.048333 4.983414</span></span></code></pre>
+<p>In this function, the next step involves creating a threshold for
+declaring a point an outlier. To calculate this threshold, the function
+takes the average of each row (after that row’s average has been
+calculated), and adds 2 times the standard deviation of each row to that
+number. In this case, the threshold is the number below.</p>
+<pre><code><span><span class="co">#&gt; [1] 5.657686</span></span></code></pre>
+<p>Outliers are considered any points with a score above the calculated
+threshold. In this case, the outliers are shown below.</p>
+<pre><code><span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Method: kNN</span></span>
+<span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
+<span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Row: 7 9 31</span></span>
+<span><span class="co">#&gt; Outlier Score: 5.756745 6.515733 6.061507</span></span>
+<span><span class="co">#&gt; Message:  Outliers detected</span></span>
+<span><span class="co">#&gt; Option 1 : k = 5</span></span></code></pre>
+<p>The value k tells the function how many points to consider as
+neighbors when identifying distances between each of the points. The
+default value, 5, finds the distance between each point the 5 points
+that are closest to that point. You can supply your own value of k,
+which may change the results of the function.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"kNN"</span>, k <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: kNN</span></span>
-<span><span class="co">#&gt; Dataset: mtcars</span></span>
+<span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
 <span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span></span>
-<span><span class="co">#&gt; Row: 31</span></span>
-<span><span class="co">#&gt; Outlier Score: 122.3174</span></span>
+<span><span class="co">#&gt; Row: 7 9 31</span></span>
+<span><span class="co">#&gt; Outlier Score: 5.837028 6.638873 6.126103</span></span>
 <span><span class="co">#&gt; Message:  Outliers detected</span></span>
-<span><span class="co">#&gt; Option 1 : k = 5</span></span></code></pre></div>
+<span><span class="co">#&gt; Option 1 : k = 10</span></span></code></pre></div>
+<p>Here is a graphical representation of the outliers shown above.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#add plot function when it's done</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="local-outlier-factor-lof">Local outlier factor (LoF)<a class="anchor" aria-label="anchor" href="#local-outlier-factor-lof"></a>
@@ -108,7 +158,7 @@ of the point divided by the density around the point itself. If the LoF
 score is above 1, it ts more likely to be anomalous, if it is below 1,
 it is less likely to be anomalous.</p>
 <p>-describe how this works within our function</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"LoF"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: LoF</span></span>
@@ -125,16 +175,8 @@ intrepret results</p>
 <h2 id="mahalanobis">Mahalanobis<a class="anchor" aria-label="anchor" href="#mahalanobis"></a>
 </h2>
 <p>information on the mahalanobis method</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"mahalanobis"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     filter, lag</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: mahalanobis</span></span>
 <span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
@@ -162,7 +204,7 @@ repeated many times and the results are averaged over all trials. More
 isolated points will have lower average path lengths. They are more
 isolated from the rest of the data’s distribution, therefore they are
 called outliers.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"iForest"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Due to small sample size, reduced 'min.node.size' to 11</span></span>
 <span><span class="co">#&gt; </span></span>
