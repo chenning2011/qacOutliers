@@ -45,8 +45,6 @@ The output will provide the identified outliers along with their corresponding r
 
 The Grubbs' Test is a simple technique that iteratively identifies outliers by testing the hypothesis that the largest or smallest value is an outlier. The Grubbs’ test requires the data to be normally distributed because it relies on mean and standard deviation. 
 
-The skewness and kurtosis are used as diagnostic tools to determine how reliable the output is. The skewness measures the asymmetry of the data distribution around its mean. A skewness near zero implies a symmetric distribution, a positive skew implies that the data is right-skewed, and a negative skew value implies a left skew. The kurtosis is a measure of the "tailedness" of a distribution. The closer the skewness and kurtosis to 0, the more accurate the output of the Grubbs' test. If the skewness and kurtosis are far from 0, the results of the Grubbs' test are likely to be inaccurate.
-
 ```{r}
 data(mtcars)
 univOutliers(mtcars, "mpg", method="grubbs")
@@ -56,6 +54,7 @@ univOutliers(mtcars, "qsec", method="grubbs")
 
 The output of Grubbs' test will provide the identified outliers and the corresponding row numbers. This method uses a Shapiro-Wilk test (shapiro.test) for normality. If the p-value of the normality test is less than 0.05, it issues a warning about normality because a high p-value could affect the accuracy of the Grubbs' Test.
 
+The output of Grubbs' test will provide the identified outliers, the corresponding row numbers. This method uses a Shapiro-Wilk test (shapiro.test) for normality. If the p-value of the normality test is less than 0.05, it issues a warning about normality because a high p-value could affect the accuracy of the Grubbs' Test.
 
 ## MAD 
 
