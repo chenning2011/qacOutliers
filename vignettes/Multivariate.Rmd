@@ -109,12 +109,68 @@ multiOutliers(mtcarsOutliers, method="LoF")
 
 ## Mahalanobis 
 
-information on the mahalanobis method 
+The Mahalanobis distance measures the distance of a point from the center of a multivariate distribution while accounting for the correlation between variables. This method identifies outliers by calculating how far each point is from the data's multivariate mean, considering the covariance matrix of the data. This approach is particularly useful when variables are highly correlated or have different scales.
+
+Before using the Mahalanobis distance, the function automatically selects numeric columns from the dataset. Non-numeric variables are excluded, ensuring compatibility with the method. The distances are then calculated using the `outliers_mahalanobis` function from the `Routliers` package.
+
+Here is an example of calculating Mahalanobis distances for the `mtcarsOutliers` dataset included with this package:
 
 ```{r}
-multiOutliers(mtcarsOutliers, method="mahalanobis")
+library(Routliers)
+mtcarsOutliers_numeric <- mtcarsOutliers[-1]  # Remove non-numeric column
+results <- outliers_mahalanobis(as.matrix(mtcarsOutliers_numeric), alpha = 0.05)
+
+# Display Mahalanobis distances for the first 5 rows
+head(results$dist_from_center, 5)
+```
+The outliers are identified by the function and their indices are returned:
+```{r}
+results$outliers_pos
 ```
 
+Outliers are identified by comparing the Mahalanobis distance of each point to a threshold derived from the chi-squared distribution. Points with distances greater than the critical value at a specified significance level (`alpha`) are flagged as outliers. The default `alpha` is 0.05, which corresponds to a 95% confidence level. You can customize this value to adjust the sensitivity of the detection.
+
+Here is the threshold for the dataset using the default `alpha = 0.05`:
+```{r}
+alpha <- 0.05
+threshold <- qchisq(1 - alpha, df = ncol(mtcarsOutliers_st))
+threshold
+```
+
+The outliers identified are shown below:
+```{r}
+multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = alpha)
+```
+
+### Customizing the Alpha Parameter
+The `alpha` parameter in outliers_mahalanobis determines the significance level for outlier detection. Lower values (e.g., alpha = 0.01) result in stricter thresholds, identifying fewer points as outliers. You can modify `alpha` as follows:
+```{r}
+multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = 0.01)
+```
+
+### Example Output
+When using the Mahalanobis method with the default alpha = 0.05, the function returns:
+
+- Method: "mahalanobis", indicating the method used.
+- Data: The dataset name.
+- Variables: The numeric columns considered.
+- Row: Indices of rows identified as outliers.
+- Score: Mahalanobis distance scores of detected outliers.
+- Message: A summary message indicating whether outliers were detected.
+- Alpha: The significance level used.
+
+```{r}
+result <- multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = 0.05)
+print(result)
+```
+
+### Notes and Considerations
+
+1. Numeric Data Only: The Mahalanobis method requires numeric variables. Non-numeric columns are automatically excluded.
+
+2. Multivariate Normality: This method assumes the data follows a multivariate normal distribution. Deviations from normality or the presence of extreme outliers may affect the results.
+
+3. Dependencies: The function uses the `Routliers` package, so ensure it is installed before running this method.
 
 ## iForest 
 
