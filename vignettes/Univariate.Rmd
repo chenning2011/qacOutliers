@@ -18,13 +18,19 @@ knitr::opts_chunk$set(
 library(qacOutliers)
 ```
 
+## What are univariate outliers? How do you detect them?
+
+Univariate outliers are data points consisting of an extreme value for one variable. These values lie far from the dataset's central tendency. This package detects univariate outliers using three methods: Box Plot Method, Grubbs' Test Method, and Median Absolute Deviation (MAD) Method.
+
+The function detects outliers in the specified column(s) and provides the following output: 
+(1) The value of the detected outliers and the corresponding row numbers.
+(2) A graphical visualization showing the distribution of the data with the outliers highlighted according to the selected method.
+
 ## Boxplot Method 
 
 The boxplot method for univariate outlier detection identifies extreme data points by examining the distribution of values using a boxplot. In this method, the "whiskers" of the boxplot represent the range of typical values within a dataset. In this function, outliers are defined as values that fall outside the whiskers, which are calculated as Q1−1.58×IQR for the lower bound and Q3+1.58×IQR for the upper bound, where Q1 and Q3 are the first and third quartiles, respectively, and IQR is the interquartile range (the difference between Q3 and Q1) to allow for a broader range and a different threshold for detecting extreme values. 1.58 is the length of the whiskers as multiple of IQR. 
 
 This method helps quickly identify potential outliers, which are plotted individually and can indicate unusual or problematic data points that may warrant further investigation. 
-
-The output will provide the identified outliers along with their corresponding row numbers, and a graphical representation will be generated with the outliers highlighted in red.
 
 ```{r}
 data(mtcars)
@@ -33,16 +39,34 @@ univOutliers(mtcars, "hp", method="boxplot")
 univOutliers(mtcars, "qsec", method="boxplot")
 ```
 
+The output will provide the identified outliers along with their corresponding row numbers, and a graphical representation will be generated with the outliers highlighted in red.
+
 ## Grubb's Test 
 
 The Grubbs' Test is a simple technique that iteratively identifies outliers by testing the hypothesis that the largest or smallest value is an outlier. The Grubbs’ test requires the data to be normally distributed because it relies on mean and standard deviation. 
 
 The skewness and kurtosis are used as diagnostic tools to determine how reliable the output is. The skewness measures the asymmetry of the data distribution around its mean. A skewness near zero implies a symmetric distribution, a positive skew implies that the data is right-skewed, and a negative skew value implies a left skew. The kurtosis is a measure of the "tailedness" of a distribution. The closer the skewness and kurtosis to 0, the more accurate the output of the Grubbs' test. If the skewness and kurtosis are far from 0, the results of the Grubbs' test are likely to be inaccurate.
 
+```{r}
+data(mtcars)
+univOutliers(mtcars, "mpg", method="grubbs")
+univOutliers(mtcars, "hp", method="grubbs")
+univOutliers(mtcars, "qsec", method="grubbs")
+```
+
+The output of Grubbs' test will provide the identified outliers and the corresponding row numbers. This method uses a Shapiro-Wilk test (shapiro.test) for normality. If the p-value of the normality test is less than 0.05, it issues a warning about normality because a high p-value could affect the accuracy of the Grubbs' Test.
+
 
 ## MAD 
 
 The MAD (Median Absolute Deviation) method for univariate outlier detection identifies outliers based on a robust measure of variability, the median absolute deviation. In this method, a red line represents the median of the values in the target vector. The upper CI limit is the median + 3MAD and the lower CI limit is median - 3MAD. The points outside of the confidence interval are the outliers detected by the MAD method.  
+
+```{r}
+data(mtcars)
+univOutliers(mtcars, "mpg", method="mad")
+univOutliers(mtcars, "hp", method="mad")
+univOutliers(mtcars, "qsec", method="mad")
+```
 
 The output will provide the identified outliers along with their corresponding row numbers, and a graphical representation will be generated with the outliers highlighted in red.
  
