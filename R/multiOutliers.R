@@ -8,23 +8,28 @@
 #'@param k (optional) a k value used for the kNN method of outlier detection. Default value is 5
 #'@param threshold (optional) the threshold used for kNN outlier detection. Default value is 0.95
 #'@param alpha (optional) the alpha used for mahalanobis distance outlier detection. Default value is 0.1
+#'@param ntrees (optional) the number of trees used in iForest outlier detection. Default value is 100
+#'@param n (optional) the number of points to take as outliers in iForest outlier detection. Default value is 5
+#'@param na.rm (optional) logical, specifies whether to remove NA values. Defaults to TRUE
 #'@returns method used, dataset used, variables used for outliers detected, indices of any detected outliers, scores for the outliers, and values for optional parameters
 #'@import ggplot2
 #'@import Routliers
+#'@import outliers
 #'@import dplyr
 #'@import outForest
 #'@import dbscan
+#'@import isotree
 #'@import FNN
 #'
 #'@examples
 #'multiOutliers(mtcarsOutliers, method="mahalanobis", alpha=0.1)
 #'multiOutliers(mtcarsOutliers, method="LoF", minPts=5)
 #'multiOutliers(mtcarsOutliers, method="kNN", k=5, threshold=.95)
-#'multiOutliers(mtcarsOutliers, method="iForest")
+#'multiOutliers(mtcarsOutliers, method="iForest", ntrees = 50)
 
 
 #add in see also and link to other functions that we build our functions off of
-multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 5, threshold = 0.95, alpha = 0.1, na.rm = TRUE, ...) {
+multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 5, threshold = 0.95, alpha = 0.1, ntrees = 100, n=5,na.rm = TRUE, ...) {
   # Get the dataset name
   dataset_name <- deparse(substitute(data))
 
@@ -171,15 +176,28 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       stop("Data should be a matrix or data frame.")
     }
 
-    # Remove any non numeric data
-    data <- data[sapply(data[,varlist], is.numeric)]
+    #running iforest model
+    isolation_forest_model <- isotree::isolation.forest(data, ntrees = ntrees)
 
-    #running iForest model
-    isolation_forest_model <- outForest::outForest(data, replace = "no", verbose = 0)
+    #getting isoscores
+    data$iso_score <- predict(isolation_forest_model, data)
 
-    #extract row numbers and scores
-    outlier_indices <- isolation_forest_model$outliers$row
-    outlier_scores <- isolation_forest_model$outliers$score
+    #taking the top n points as outliers
+    subset <- head(data[order(-data$iso_score),],n)
+
+    #getting row numbers and scores for the outliers
+    outlier_indices <- rownames(subset)
+    outlier_scores <- subset$iso_score
+
+    # # Remove any non numeric data
+    # data <- data[sapply(data[,varlist], is.numeric)]
+    #
+    # #running iForest model
+    # isolation_forest_model <- outForest::outForest(data, replace = "no", verbose = 0)
+    #
+    # #extract row numbers and scores
+    # outlier_indices <- isolation_forest_model$outliers$row
+    # outlier_scores <- isolation_forest_model$outliers$score
 
     output <- list(
       Method = "iForest",
