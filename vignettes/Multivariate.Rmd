@@ -20,7 +20,7 @@ library(qacOutliers)
 
 ## What are multivariate outliers? How do you detect them? 
 
-A multivariate outlier is an outlier that can only be detected by looking at two variables in combination. The graph below shows examples of multivariate outliers. The dataset for this graph is taken from the Salaries dataset from the carData package.
+A multivariate outlier is an outlier that can only be detected by looking at two variables in combination. The graph below shows examples of multivariate outliers. The data for this graph is taken from the `Salaries` dataset from the `carData` package.
 
 ```{r, echo = F, message = F, warning = F}
 data(Salaries, package="carData")
@@ -47,7 +47,7 @@ ggplot()+
   theme_minimal()
 ```
 
-All of the red dots are multivariate outliers. The point labelled 1 on the graph is a clear example of a multivariate outlier. This person has had 22 years since their PhD, a normal value for that variable, and makes 62,884 dollars, which is also a normal value for salary. However, when combining these two features, a person who has had 22 years since their PhD and makes only 62,884 dollars is making much less than other professors within their experience range. 
+All of the red dots are multivariate outliers. The point labelled 1 on the graph is a clear example of a multivariate outlier. This person has had 22 years since their PhD, a normal value for that variable, and makes `$62,884` dollars, which is also a normal value for salary. However, when combining these two features, a person who has had 22 years since their PhD and makes only `$62,884` is making much less than other professors within their experience range. 
 
 The outliers in this graph were detected using the LoF method, and more detail about that method can be provided below. This package specifically focuses on four different methods for finding multivariate outliers: kNN, LoF, mahalanobis distance, and iForest. 
 
@@ -55,19 +55,21 @@ The outliers in this graph were detected using the LoF method, and more detail a
 
 kNN calculates the distances between a data point and its k-nearest neighbors and assigns an outlier score based on that distance. The principle that guides kNN is that outliers lay far away from their neighbours, so each of the distances is interpreted within that context. Because some variables in the data may have much larger ranges that others (ex. a variable has a range from 1-10 and another has a range of -10000 to 10000), the data is standardized before calculating the distances. 
 
-Here is an example of the distances for the first 5 rows in mtcarsOutliers, a dataset included with this package. 
+Here is an example of the distances for the first 5 rows in `mtcarsOutliers`, a dataset included with this package. 
 
 ```{r, echo = F, message = F, warning = F}
 mtcarsOutliers_st <- scale(mtcarsOutliers[-1])
 knn_distances <- FNN::knn.dist(mtcarsOutliers_st, k=5)
 head(knn_distances, 5)
 ```
+
 After each of these distances are calculated, the average for each row is calculated. Here are the average scores for the 5 rows shown above. This step is why it's important to standardize the data before finding the distances. 
 
 ```{r, echo = F, message = F, warning = F}
 avg_knn_distances <- rowMeans(knn_distances)
 head(avg_knn_distances, 5)
 ```
+
 In this function, the next step involves creating a threshold for declaring a point an outlier. To calculate this threshold, the function takes the average of each row (after that row's average has been calculated), and adds 2 times the standard deviation of each row to that number. In this case, the threshold is the number below. 
 
 ```{r, echo = F, message = F, warning = F}
@@ -81,11 +83,42 @@ Outliers are considered any points with a score above the calculated threshold. 
 multiOutliers(mtcarsOutliers, method="kNN")
 ```
 
-The value k tells the function how many points to consider as neighbors when identifying distances between each of the points. The default value, 5, finds the distance between each point the 5 points that are closest to that point. You can supply your own value of k, which may change the results of the function.
+### Customizing the k parameter
+
+The value `k` tells the function how many points to consider as neighbors when identifying distances between each of the points. The default value, 5, finds the distance between each point the 5 points that are closest to that point. The choice of `k` significantly impacts the results, and smaller values are generally more sensitive to outliers. You can supply your own value of `k`, which may change the results of the function.
 
 ```{r}
 multiOutliers(mtcarsOutliers, method = "kNN", k = 10)
 ```
+
+### Example Output
+When using the kNN method with the default `k=5`, the function returns:
+
+- Method: "kNN", indicating the method used.
+- Data: The dataset name.
+- Variables: The numeric columns considered for outlier detection.
+- Row: Indices of rows identified as outliers.
+- Score: Average kNN distance scores of detected outliers.
+- Message: A summary message indicating whether outliers were detected.
+- k: The number of nearest neighbors considered.
+
+```{r, echo = F, message = F}
+result <- multiOutliers(mtcarsOutliers, method = "kNN")
+print(result)
+```
+
+### Notes and Considerations
+
+1. Numeric Data Only: The kNN method requires numeric variables. Non-numeric columns are automatically excluded.
+
+2. Robustness: kNN does not assume a specific distribution of data, so it is robust to non-normality, making it a better tool to handle non-normal data than other outlier detection methods. 
+
+To learn more about kNN and how it's used in multivariate outlier detection, visit these resources: 
+[GeeksforGeeks.com]: https://www.geeksforgeeks.org/k-nearest-neighbours/#
+[Dualitytech.com]: https://dualitytech.com/blog/anomaly-detection-k-nearest-neighbors/
+[StatQuest]: https://www.youtube.com/watch?v=HVXime0nQeI
+
+### Graphical output
 
 Here is a graphical representation of the outliers shown above. 
 
@@ -115,7 +148,7 @@ Before using the Mahalanobis distance, the function automatically selects numeri
 
 Here is an example of calculating Mahalanobis distances for the `mtcarsOutliers` dataset included with this package:
 
-```{r}
+```{r, echo = F, message = F}
 library(Routliers)
 mtcarsOutliers_numeric <- mtcarsOutliers[-1]  # Remove non-numeric column
 results <- outliers_mahalanobis(as.matrix(mtcarsOutliers_numeric), alpha = 0.05)
@@ -123,15 +156,16 @@ results <- outliers_mahalanobis(as.matrix(mtcarsOutliers_numeric), alpha = 0.05)
 # Display Mahalanobis distances for the first 5 rows
 head(results$dist_from_center, 5)
 ```
+
 The outliers are identified by the function and their indices are returned:
-```{r}
+```{r, echo = F, message = F}
 results$outliers_pos
 ```
 
 Outliers are identified by comparing the Mahalanobis distance of each point to a threshold derived from the chi-squared distribution. Points with distances greater than the critical value at a specified significance level (`alpha`) are flagged as outliers. The default `alpha` is 0.05, which corresponds to a 95% confidence level. You can customize this value to adjust the sensitivity of the detection.
 
 Here is the threshold for the dataset using the default `alpha = 0.05`:
-```{r}
+```{r, echo = F, message = F}
 alpha <- 0.05
 threshold <- qchisq(1 - alpha, df = ncol(mtcarsOutliers_st))
 threshold
@@ -139,17 +173,18 @@ threshold
 
 The outliers identified are shown below:
 ```{r}
-multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = alpha)
+multiOutliers(mtcarsOutliers, method = "mahalanobis")
 ```
 
-### Customizing the Alpha Parameter
-The `alpha` parameter in outliers_mahalanobis determines the significance level for outlier detection. Lower values (e.g., alpha = 0.01) result in stricter thresholds, identifying fewer points as outliers. You can modify `alpha` as follows:
+### Customizing the alpha parameter
+
+The `alpha` parameter in outliers_mahalanobis determines the significance level for outlier detection. Lower values (e.g., `alpha = 0.01`) result in stricter thresholds, identifying fewer points as outliers. You can modify `alpha` as follows:
 ```{r}
 multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = 0.01)
 ```
 
 ### Example Output
-When using the Mahalanobis method with the default alpha = 0.05, the function returns:
+When using the Mahalanobis method with the default `alpha = 0.05`, the function returns:
 
 - Method: "mahalanobis", indicating the method used.
 - Data: The dataset name.
@@ -159,7 +194,7 @@ When using the Mahalanobis method with the default alpha = 0.05, the function re
 - Message: A summary message indicating whether outliers were detected.
 - Alpha: The significance level used.
 
-```{r}
+```{r, echo = F, message = F}
 result <- multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = 0.05)
 print(result)
 ```
@@ -170,7 +205,9 @@ print(result)
 
 2. Multivariate Normality: This method assumes the data follows a multivariate normal distribution. Deviations from normality or the presence of extreme outliers may affect the results.
 
-3. Dependencies: The function uses the `Routliers` package, so ensure it is installed before running this method.
+To learn more about Mahalanobis distance and how it's used in multivariate outlier detection, visit these resources: 
+[Statisticshowto.com]: https://www.statisticshowto.com/mahalanobis-distance/
+[Builtin.com]: https://builtin.com/data-science/mahalanobis-distance
 
 ## iForest 
 

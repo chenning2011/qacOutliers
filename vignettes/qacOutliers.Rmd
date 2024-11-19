@@ -18,4 +18,16 @@ knitr::opts_chunk$set(
 library(qacOutliers)
 ```
 
-this portion of the site should have a "getting" started style tutorial/introduction - explain some common uses for some of the functions
+### What are outliers? 
+- describe what they are, provide other common names for them (anamolies, etc.)
+
+### Why should we detect outliers?
+- some basic reasons to get rid of them 
+
+### How can you detect outliers? 
+
+- provide links to each of the seven methods, explain that it differs for univariate and multivariate outliers
+
+### What should you do with outliers once you detect them? 
+
+- up to you, decide if you want to remove them or continue analysis with them 
