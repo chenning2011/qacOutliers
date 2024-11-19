@@ -15,6 +15,7 @@
 #'@import outForest
 #'@import dbscan
 #'@import FNN
+#'
 #'@examples
 #'multiOutliers(mtcarsOutliers, method="mahalanobis", alpha=0.1)
 #'multiOutliers(mtcarsOutliers, method="LoF", minPts=5)
@@ -22,6 +23,7 @@
 #'multiOutliers(mtcarsOutliers, method="iForest")
 
 
+#add in see also and link to other functions that we build our functions off of
 multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 5, threshold = 0.95, alpha = 0.1, na.rm = TRUE, ...) {
   # Get the dataset name
   dataset_name <- deparse(substitute(data))
@@ -39,25 +41,41 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       stop("Data should be a matrix or data frame.")
     }
 
-    # Remove any non numeric data
-    data <- data[sapply(data[,varlist], is.numeric)]
-
     # Ensure the number of points is greater than minPts
     if (nrow(data) <= minPts) {
       stop("Number of data points must be greater than minPts.")
     }
 
-    # Normalize the data if not already scaled
-    data_scaled <- scale(data)
+    #check if data is categorical or numeric, if any variables are categorical then need to use gower distance instead of normalizing
+    is_categorical <- any(sapply(data, function(x) is.factor(x) || is.character(x)))
 
-    # Apply the LoF method from the dbscan package
-    lof_scores <- dbscan::lof(as.matrix(data_scaled), minPts = minPts)
+    #if there are any categorical variables, do gower distance
+    if(is_categorical){
+      #taking gower distances
+      data_dist <- cluster::daisy(data, metric="gower")
 
-    # Identify outliers based on a threshold (LoF score > 1.5 for stronger outliers)
-    outlier_indices <- which(lof_scores > 1.5)
-    outlier_scores <- lof_scores[outlier_indices]
+      #taking LoF scores
+      lof_scores <- dbscan::lof(data_dist, minPts = minPts)
 
-    # Prepare results
+      #identify outliers based on the threshold
+      outlier_indices <- which(lof_scores > 1.5)
+      outlier_scores <- lof_scores[outlier_indices]
+    }
+
+    #otherwise, use normalization of the data
+    else{
+      # Normalize the data if not already scaled
+      data_scaled <- scale(data)
+
+      # Apply the LoF method from the dbscan package
+      lof_scores <- dbscan::lof(as.matrix(data_scaled), minPts = minPts)
+
+      # Identify outliers based on a threshold (LoF score > 1.5 for stronger outliers)
+      outlier_indices <- which(lof_scores > 1.5)
+      outlier_scores <- lof_scores[outlier_indices]
+    }
+
+    #list of results
     results <- list(
       Method = "LoF",
       Data = dataset_name,
@@ -73,17 +91,16 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     return(results)
   }
 
-
   # Mahalanobis method
   if (method == "mahalanobis") {
     library(dplyr)
     library(Routliers)
 
-    #take only numeric data
-    numeric_data <- select_if(data[,varlist], is.numeric)
+    # Remove any non numeric data
+    data <- data[sapply(data[,varlist], is.numeric)]
 
     #convert to matrix
-    mat <- as.matrix(numeric_data)
+    mat <- as.matrix(data)
 
     #run matrix on function and store results
     results <- outliers_mahalanobis(x=mat, alpha=alpha)
@@ -96,7 +113,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     output <- list(
       Method = "mahalanobis",
       Data = dataset_name,          # Store the dataset name
-      Variables = colnames(numeric_data),  # Store column names of numeric data
+      Variables = colnames(data),  # Store column names of numeric data
       Row = index,        # Row numbers of detected outliers
       Score = outlier_scores,       # Mahalanobis scores of the detected outliers
       Message = if (length(index) == 0) "No outliers detected" else "Outliers detected",
@@ -116,8 +133,11 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     }
     require(FNN)
 
+    # Remove any non numeric data
+    data <- data[sapply(data[,varlist], is.numeric)]
+
     # Calculate kNN distances
-    knn_distances <- knn.dist(data[,varlist], k = k)
+    knn_distances <- knn.dist(data, k = k)
 
     # Calculate the average kNN distance for each row
     avg_knn_distances <- rowMeans(knn_distances)
@@ -151,11 +171,11 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       stop("Data should be a matrix or data frame.")
     }
 
-    #changing to numeric data
-    numeric_data <- data[sapply(data[,varlist], is.numeric)]
+    # Remove any non numeric data
+    data <- data[sapply(data[,varlist], is.numeric)]
 
     #running iForest model
-    isolation_forest_model <- outForest(numeric_data, replace = "no", verbose = 0)
+    isolation_forest_model <- outForest::outForest(data, replace = "no", verbose = 0)
 
     #extract row numbers and scores
     outlier_indices <- isolation_forest_model$outliers$row
@@ -164,7 +184,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     output <- list(
       Method = "iForest",
       Data = dataset_name,
-      Variables = colnames(numeric_data),
+      Variables = colnames(data),
       Row = outlier_indices,
       Score = outlier_scores,
       Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected"

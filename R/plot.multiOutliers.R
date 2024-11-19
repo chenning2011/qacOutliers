@@ -10,7 +10,8 @@
 #'@import ggrepel
 #'@examples
 #'data(iris)
-#'multi_plot(iris, methods = "iForest")
+#'results <- multiOutliers(iris, method="iForest")
+#'plot(results)
 
 plot.multiOutliers <- function(data, varlist = names(data), methods = c("kNN", "LoF", "mahalanobis", "iForest"),
                                minPts = 10, k = 5, threshold = 0.95, alpha = 0.1, na.rm = TRUE, ...) {

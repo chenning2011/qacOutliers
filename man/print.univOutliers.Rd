@@ -4,10 +4,10 @@
 \alias{print.univOutliers}
 \title{Printing Univariate Outlier Detection}
 \usage{
-\method{print}{univOutliers}(results, method)
+\method{print}{univOutliers}(x, ...)
 }
 \arguments{
-\item{x}{The results from a univariate outlier detection function (e.g., \code{univOutliers})}
+\item{x}{the results from a univariate outlier detection function (e.g., \code{boxplot}, \code{grubbsTest}, or MAD)}
 }
 \value{
 A formatted print of the results of the univariate outlier detection
@@ -16,16 +16,12 @@ A formatted print of the results of the univariate outlier detection
 Prints identified univariate outliers using boxplot, Grubbs test, or MAD method
 }
 \examples{
-set.seed(42)
-data1 <- data.frame(
-  var1 = rnorm(100, mean = 50, sd = 10),
-  var2 = c(rnorm(97, mean = 50, sd = 10), 150, 160, 170),
-  var3 = sample(1:100, 100, replace = TRUE, prob = (1:100)^2))
+data(mtcars)
+outliers_boxplot <- univOutliers(mtcars, "mpg", method="boxplot")
+outliers_boxplot
+outliers_mad <- univOutliers(mtcars$mpg, method="mad")
+outliers_mad
+outliers_grubbs <- univOutliers(mtcars, "mpg", method="grubbs")
+outliers_grubbs
 
-results <- univOutliers(data1, method = "boxplot")
-results <- univOutliers(data1, "var1", method = "boxplot")
-results <- univOutliers(data1, method = "grubbs")
-results <- univOutliers(data1, "var1", method = "grubbs")
-results <- univOutliers(data1, method = "mad")
-results <- univOutliers(data1, "var1", method = "mad")
 }
