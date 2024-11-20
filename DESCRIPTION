@@ -19,7 +19,7 @@ Imports:
     dplyr,
     FNN,
     ggplot2,
-    outForest,
+    isotree,
     outliers,
     Routliers,
     stats
@@ -31,3 +31,5 @@ VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
 LazyData: true
+URL: https://github.com/chenning2011/qacOutliers
+BugReports: https://github.com/chenning2011/qacOutliers/issues
