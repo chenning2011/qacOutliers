@@ -20,7 +20,27 @@ library(qacOutliers)
 
 ## What are univariate outliers? How do you detect them?
 
-Univariate outliers are data points consisting of an extreme value for one variable. These values lie far from the dataset's central tendency. This package detects univariate outliers using three methods: Box Plot Method, Grubbs' Test Method, and Median Absolute Deviation (MAD) Method.
+Univariate outliers are data points consisting of an extreme value for one variable. These values lie far from the dataset's central tendency. Here is a graphical example of a univariate outlier from the `Salaries` dataset in the `carData` package. The outlier is shown in red. 
+
+```{r, echo = F, message = F}
+library(ggplot2)
+library(dplyr)
+data(Salaries, package="carData")
+
+#taking a subset of data with just the outlier so it can be red 
+subset <- Salaries %>% 
+  filter(salary > 220000)
+
+#graph 
+ggplot()+
+  geom_histogram(data = Salaries, aes(x=salary), bins = 30)+
+  geom_histogram(data = subset, aes(x=salary), fill = "red", bins = 30)+
+  theme_minimal()+
+  labs(title = "Distribution of Professor Salaries", x = "Salary (USD)", y = "Count")
+```
+
+
+While there are many different methods that can be used to detect univariate outliers, this package detects univariate outliers using three methods: creating a boxplot, using the Grubbs' test, and with the median absolute deviation test. 
 
 The function detects outliers in the specified column(s) and provides the following output: 
 (1) The value of the detected outliers and the corresponding row numbers.
