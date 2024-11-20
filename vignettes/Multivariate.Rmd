@@ -114,9 +114,9 @@ print(result)
 2. Robustness: kNN does not assume a specific distribution of data, so it is robust to non-normality, making it a better tool to handle non-normal data than other outlier detection methods. 
 
 To learn more about kNN and how it's used in multivariate outlier detection, visit these resources: 
-[GeeksforGeeks.com]: https://www.geeksforgeeks.org/k-nearest-neighbours/#
-[Dualitytech.com]: https://dualitytech.com/blog/anomaly-detection-k-nearest-neighbors/
-[StatQuest]: https://www.youtube.com/watch?v=HVXime0nQeI
+- [GeeksforGeeks.com](https://www.geeksforgeeks.org/k-nearest-neighbours/#)
+- [Dualitytech.com](https://dualitytech.com/blog/anomaly-detection-k-nearest-neighbors/)
+- [StatQuest](https://www.youtube.com/watch?v=HVXime0nQeI)
 
 ### Graphical output
 
@@ -206,8 +206,8 @@ print(result)
 2. Multivariate Normality: This method assumes the data follows a multivariate normal distribution. Deviations from normality or the presence of extreme outliers may affect the results.
 
 To learn more about Mahalanobis distance and how it's used in multivariate outlier detection, visit these resources: 
-[Statisticshowto.com]: https://www.statisticshowto.com/mahalanobis-distance/
-[Builtin.com]: https://builtin.com/data-science/mahalanobis-distance
+*  [Statisticshowto.com](https://www.statisticshowto.com/mahalanobis-distance/)
+*  [Builtin.com](https://builtin.com/data-science/mahalanobis-distance)
 
 ## iForest 
 

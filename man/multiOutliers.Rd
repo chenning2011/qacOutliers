@@ -12,6 +12,8 @@ multiOutliers(
   k = 5,
   threshold = 0.95,
   alpha = 0.1,
+  ntrees = 100,
+  n = 5,
   na.rm = TRUE,
   ...
 )
@@ -30,6 +32,12 @@ multiOutliers(
 \item{threshold}{(optional) the threshold used for kNN outlier detection. Default value is 0.95}
 
 \item{alpha}{(optional) the alpha used for mahalanobis distance outlier detection. Default value is 0.1}
+
+\item{ntrees}{(optional) the number of trees used in iForest outlier detection. Default value is 100}
+
+\item{n}{(optional) the number of points to take as outliers in iForest outlier detection. Default value is 5}
+
+\item{na.rm}{(optional) logical, specifies whether to remove NA values. Defaults to TRUE}
 }
 \value{
 method used, dataset used, variables used for outliers detected, indices of any detected outliers, scores for the outliers, and values for optional parameters
@@ -41,5 +49,5 @@ Identifies multivariate outliers using four different methods.
 multiOutliers(mtcarsOutliers, method="mahalanobis", alpha=0.1)
 multiOutliers(mtcarsOutliers, method="LoF", minPts=5)
 multiOutliers(mtcarsOutliers, method="kNN", k=5, threshold=.95)
-multiOutliers(mtcarsOutliers, method="iForest")
+multiOutliers(mtcarsOutliers, method="iForest", ntrees = 50)
 }
