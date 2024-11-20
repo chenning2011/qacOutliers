@@ -5,7 +5,7 @@ articles:
   Multivariate: Multivariate.html
   qacOutliers: qacOutliers.html
   Univariate: Univariate.html
-last_built: 2024-11-20T15:54Z
+last_built: 2024-11-20T20:57Z
 urls:
-  reference: https://chenning2011.github.io/qacOutliers/reference
-  article: https://chenning2011.github.io/qacOutliers/articles
+  reference: https://github.com/chenning2011/qacOutliers/reference
+  article: https://github.com/chenning2011/qacOutliers/articles

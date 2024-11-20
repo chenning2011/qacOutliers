@@ -7,6 +7,7 @@
 #' @import ggplot2
 #' @import Routliers
 #' @import stats
+#' @import grDevices
 #' @export
 #' @examples
 #' # Generate example data
@@ -57,7 +58,7 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
 
     # Boxplot Method
     if (method == "boxplot") {
-      stats <- boxplot.stats(column_data)
+      stats <- grDevices::boxplot.stats(column_data)
       if (length(stats$out) == 0) {
         cat("No outliers detected for", column, "\n")
       } else {
@@ -68,19 +69,17 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
         }
       }
       # Create the ggplot boxplot (optional, only for visualization)
-      library(ggplot2)
-      p <- ggplot(data, aes(y = .data[[column]])) +
-        geom_boxplot(outlier.colour = "red", coef = 1.58) +
-        ggtitle(paste("Univariate Boxplot of", column)) +
-        theme_minimal()
+      p <- ggplot2::ggplot(data, aes(y = .data[[column]])) +
+        ggplot2::geom_boxplot(outlier.colour = "red", coef = 1.58) +
+        ggplot2::ggtitle(paste("Univariate Boxplot of", column)) +
+        ggplot2::theme_minimal()
       print(p)
     }
 
     # MAD Method
     else if (method == "mad") {
-      library(Routliers)
       # Use the outliers_mad function to find outliers
-      res1 <- outliers_mad(data[[column]])
+      res1 <- Routliers::outliers_mad(data[[column]])
 
       # Display the outliers information
       if (length(res1) == 0) {
@@ -96,7 +95,7 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
       }
 
       # Plot the outliers using plot_outliers_mad
-      plot_outliers_mad(res1, data[[column]], pos_display = FALSE)
+      Routliers::plot_outliers_mad(res1, data[[column]], pos_display = FALSE)
     }
 
     # Grubbs' Test Method

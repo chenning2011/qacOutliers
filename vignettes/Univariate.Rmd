@@ -2,7 +2,7 @@
 title: "Univariate"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{univOutliers}
+  %\VignetteIndexEntry{Univariate}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

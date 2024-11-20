@@ -16,7 +16,6 @@
 #'@import Routliers
 #'@import outliers
 #'@import dplyr
-#'@import outForest
 #'@import dbscan
 #'@import isotree
 #'@import FNN
@@ -98,9 +97,6 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
 
   # Mahalanobis method
   if (method == "mahalanobis") {
-    library(dplyr)
-    library(Routliers)
-
     # Remove any non numeric data
     data <- data[sapply(data[,varlist], is.numeric)]
 
@@ -136,8 +132,6 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     if (!is.data.frame(data) && !is.matrix(data)) {
       stop("Data must be a data frame or matrix.")
     }
-    require(FNN)
-
     # Remove any non numeric data
     data <- data[sapply(data[,varlist], is.numeric)]
 

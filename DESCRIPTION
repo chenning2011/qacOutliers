@@ -14,11 +14,16 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports: 
+    carData,
     cli,
+    cluster,
     dbscan,
     dplyr,
     FNN,
     ggplot2,
+    ggrepel,
+    grDevices,
+    gridExtra,
     isotree,
     outliers,
     Routliers,
