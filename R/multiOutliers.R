@@ -195,7 +195,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     subset <- head(data[order(-data$scores),],n)
 
     #getting row numbers and scores for the outliers
-    outlier_indices <- rownames(subset)
+    outlier_indices <- which(rownames(data) %in% rownames(subset))
     outlier_scores <- subset$scores
 
     #results
