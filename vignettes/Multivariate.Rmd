@@ -2,7 +2,7 @@
 title: "Multivariate"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{multiOutliers}
+  %\VignetteIndexEntry{Multivariate}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(qacOutliers)
-library(carData)
 ```
 
 ## What are multivariate outliers? How do you detect them? 
@@ -24,12 +23,13 @@ library(carData)
 A multivariate outlier is an outlier that can only be detected by looking at two variables in combination. The graph below shows examples of multivariate outliers. The data for this graph is taken from the `Salaries` dataset from the `carData` package.
 
 ```{r, echo = F, message = F, warning = F}
+library(carData)
 data(Salaries, package="carData")
 #getting the outliers
 results <- multiOutliers(Salaries, method = "LoF")
 row <- as.numeric(results$Row)
 
-library(tidyverse)
+library(dplyr)
 #getting just a subset for red points
 subset <- Salaries %>% 
   slice(row)
@@ -39,6 +39,7 @@ point <- Salaries %>%
   filter(yrs.since.phd > 20 & yrs.since.phd < 30 & salary < 70000)
 
 #graphing
+library(ggplot2)
 ggplot()+
   geom_point(data = Salaries, aes(x=yrs.since.phd, y=salary))+
   geom_point(data = subset, aes(x=yrs.since.phd, y = salary), color = "red")+

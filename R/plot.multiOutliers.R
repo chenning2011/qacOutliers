@@ -11,7 +11,6 @@
 #'@examples
 #'data(iris)
 #'results <- multiOutliers(iris, method="iForest")
-#'plot(results)
 
 plot.multiOutliers <- function(data, varlist = names(data), methods = c("kNN", "LoF", "mahalanobis", "iForest"),
                                minPts = 10, k = 5, threshold = 0.95, alpha = 0.1, na.rm = TRUE, ...) {
@@ -33,7 +32,7 @@ plot.multiOutliers <- function(data, varlist = names(data), methods = c("kNN", "
 
     plot_data <- data.frame(
       Row = 1:nrow(data),
-      Value = data[, varlist[2]], # Using the first variable for plotting
+      Value = data[,varlist[2]], # Using the first variable for plotting
       Outlier = ifelse(1:nrow(data) %in% outlier_indices, "Outlier", "Normal")
     )
 

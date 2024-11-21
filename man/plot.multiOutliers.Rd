@@ -28,5 +28,4 @@ Plots identified multivariate outliers using either kNN, iForest, mahalanobis, L
 \examples{
 data(iris)
 results <- multiOutliers(iris, method="iForest")
-plot(results)
 }

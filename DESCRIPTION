@@ -19,6 +19,7 @@ Imports:
     cluster,
     dbscan,
     dplyr,
+    EnvStats,
     FNN,
     ggplot2,
     ggrepel,

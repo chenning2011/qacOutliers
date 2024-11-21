@@ -41,7 +41,7 @@ Additionally, as outliers can be generated through measurement errors, they prov
 
 This depends on a lot of factors, including the cause of the outlier (if known), the magnitude of the outlier, and whether you believe the detected outliers are truly outliers. Because there are so many reasons that outliers exist, and because some detected outliers may not really be outliers, this package allows you to decide how you want to proceed. 
 
-Once you run one of these functions, you can extract the row numbers of detected outliers and carefully inspect your data to decide what you want to do with the detected outliers. Here is an example of multivariate outliers detected with the [LoF](Multivariate.html#local-outlier-factor-lof) method, using [mtcarsOutliers](), a dataset included in this package. 
+Once you run one of these functions, you can extract the row numbers of detected outliers and carefully inspect your data to decide what you want to do with the detected outliers. Here is an example of multivariate outliers detected with the [LoF](Multivariate.html#local-outlier-factor-lof) method, using mtcarsOutliers, a dataset included in this package. 
 
 ```{r}
 results <- multiOutliers(mtcarsOutliers, method = "LoF")
