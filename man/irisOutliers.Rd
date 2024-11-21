@@ -15,7 +15,7 @@ A data frame with 150 rows and 5 variables:
 }
 }
 \source{
-iris dataset from base R with generated outliers
+iris dataset from base R with generated outliers. Outliers are generated using the \href{https://www.rdocumentation.org/packages/outForest/versions/1.0.1/topics/generateOutliers}{generateOutliers} function from the outForest package.
 }
 \usage{
 irisOutliers

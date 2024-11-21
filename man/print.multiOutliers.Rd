@@ -16,6 +16,20 @@ A formatted print of the results of the "multiOutliers" function
 Prints identified multivariate outliers
 }
 \examples{
-multiOutliers(mtcars, method="mahalanobis")
+#iForest
+results <- multiOutliers(irisOutliers, method = "iForest")
+results
+
+#LoF
+results <- multiOutliers(irisOutliers, method = "LoF")
+results
+
+#kNN
+results <- multiOutliers(irisOutliers, method = "kNN")
+results
+
+#Mahalanobis
+results <- multiOutliers(irisOutliers, method = "mahalanobis")
+results
 
 }

@@ -11,5 +11,5 @@
 #'   \item{\code{Species}}{integer. DESCRIPTION.}
 #' }
 #'
-#' @source iris dataset from base R with generated outliers
+#' @source iris dataset from base R with generated outliers. Outliers are generated using the [generateOutliers](https://www.rdocumentation.org/packages/outForest/versions/1.0.1/topics/generateOutliers) function from the outForest package.
 "irisOutliers"

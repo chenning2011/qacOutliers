@@ -8,15 +8,27 @@
 #'@import dplyr
 #'@import cli
 #'@examples
-#'multiOutliers(mtcars, method="mahalanobis")
+#'#iForest
+#'results <- multiOutliers(irisOutliers, method = "iForest")
+#'results
+#'
+#'#LoF
+#'results <- multiOutliers(irisOutliers, method = "LoF")
+#'results
+#'
+#'#kNN
+#'results <- multiOutliers(irisOutliers, method = "kNN")
+#'results
+#'
+#'#Mahalanobis
+#'results <- multiOutliers(irisOutliers, method = "mahalanobis")
+#'results
 #'
 
 print.multiOutliers <- function(x) {
   if(!inherits(x, "multiOutliers")){
     stop("This functon requires an object created by multiOutliers")
   }
-
-  require(cli)
   cat("\nMethod:", x$Method)
   cat("\nDataset:", x$Data)
   cat("\nVariables:", x$Variables)

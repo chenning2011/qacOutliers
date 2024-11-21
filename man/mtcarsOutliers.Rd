@@ -21,7 +21,7 @@ A data frame with 32 rows and 11 variables:
 }
 }
 \source{
-mtcars dataset comes from base R, and the outliers were generated using the \code{generateOutliers} function in the outForest package.
+mtcars dataset comes from base R. Outliers are generated using the \href{https://www.rdocumentation.org/packages/outForest/versions/1.0.1/topics/generateOutliers}{generateOutliers} function from the outForest package.
 }
 \usage{
 mtcarsOutliers

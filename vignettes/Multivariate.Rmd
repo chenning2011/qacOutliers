@@ -20,7 +20,7 @@ library(qacOutliers)
 
 ## What are multivariate outliers? How do you detect them? 
 
-A multivariate outlier is an outlier that can only be detected by looking at two variables in combination. The graph below shows examples of multivariate outliers. The data for this graph is taken from the `Salaries` dataset from the `carData` package.
+A multivariate outlier is an outlier that can only be detected by looking at two variables in combination. The graph below shows examples of multivariate outliers. The data for this graph is taken from the [Salaries](https://rdrr.io/cran/carData/man/Salaries.html) dataset from the [carData](https://cran.r-project.org/web/packages/carData/index.html) package.
 
 ```{r, echo = F, message = F, warning = F}
 library(carData)
@@ -49,7 +49,7 @@ ggplot()+
   theme_minimal()
 ```
 
-All of the red dots are multivariate outliers. The point labelled 1 on the graph is a clear example of a multivariate outlier. This person has had 22 years since their PhD, a normal value for that variable, and makes `$62,884` dollars, which is also a normal value for salary. However, when combining these two features, a person who has had 22 years since their PhD and makes only `$62,884` is making much less than other professors within their experience range. 
+All of the red dots are multivariate outliers. The point labelled 1 on the graph is a clear example of a multivariate outlier. This person has their PhD for 22 years, a normal value for that variable, and makes `$62,884`, which is also a normal value for salary. However, when combining these two features, a person who has had 22 years since their PhD and makes only `$62,884` is making much less than other professors within their experience range. 
 
 The outliers in this graph were detected using the LoF method, and more detail about that method can be provided below. This package specifically focuses on four different methods for finding multivariate outliers: kNN, LoF, mahalanobis distance, and iForest. 
 
@@ -57,7 +57,7 @@ The outliers in this graph were detected using the LoF method, and more detail a
 
 kNN calculates the distances between a data point and its k-nearest neighbors and assigns an outlier score based on that distance. The principle that guides kNN is that outliers lay far away from their neighbours, so each of the distances is interpreted within that context. Because some variables in the data may have much larger ranges that others (ex. a variable has a range from 1-10 and another has a range of -10000 to 10000), the data is standardized before calculating the distances. 
 
-Here is an example of the distances for the first 5 rows in `mtcarsOutliers`, a dataset included with this package. 
+Here is an example of the distances for the first 5 rows in [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html), a dataset included with this package. 
 
 ```{r, echo = F, message = F, warning = F}
 mtcarsOutliers_st <- scale(mtcarsOutliers[-1])
@@ -146,9 +146,9 @@ multiOutliers(mtcarsOutliers, method="LoF")
 
 The Mahalanobis distance measures the distance of a point from the center of a multivariate distribution while accounting for the correlation between variables. This method identifies outliers by calculating how far each point is from the data's multivariate mean, considering the covariance matrix of the data. This approach is particularly useful when variables are highly correlated or have different scales.
 
-Before using the Mahalanobis distance, the function automatically selects numeric columns from the dataset. Non-numeric variables are excluded, ensuring compatibility with the method. The distances are then calculated using the `outliers_mahalanobis` function from the `Routliers` package.
+Before using the Mahalanobis distance, the function automatically selects numeric columns from the dataset. Non-numeric variables are excluded, ensuring compatibility with the method. The distances are then calculated using the [outliers_mahalanobis](https://www.rdocumentation.org/packages/Routliers/versions/0.0.0.3/topics/outliers_mahalanobis) function from the [Routliers](https://cran.r-project.org/web/packages/Routliers/index.html) package.
 
-Here is an example of calculating Mahalanobis distances for the `mtcarsOutliers` dataset included with this package:
+Here is an example of calculating Mahalanobis distances for the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package:
 
 ```{r, echo = F, message = F}
 library(Routliers)

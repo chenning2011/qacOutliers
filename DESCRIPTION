@@ -9,7 +9,7 @@ Authors@R:
     person("Braeden", "Falzarano", ,"bfalzarano@wesleyan.edu", role="aut"),
     person("Ral", "Reyes", ,"rreyes@wesleyan.edu", role="aut"),
     person("Tegh", "Singh", ,"tsingh@wesleyan.edu", role="aut"))
-Description: What the package does (one paragraph).
+Description: The goal of qacOutliers is to detect multivariate and univariate outliers using seven different methods. This package consolidates methods from multiple different R packages and makes them more easily accessible. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

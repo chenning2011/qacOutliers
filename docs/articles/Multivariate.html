@@ -78,16 +78,17 @@
 </h2>
 <p>A multivariate outlier is an outlier that can only be detected by
 looking at two variables in combination. The graph below shows examples
-of multivariate outliers. The data for this graph is taken from the
-<code>Salaries</code> dataset from the <code>carData</code> package.</p>
+of multivariate outliers. The data for this graph is taken from the <a href="https://rdrr.io/cran/carData/man/Salaries.html" class="external-link">Salaries</a>
+dataset from the <a href="https://cran.r-project.org/web/packages/carData/index.html" class="external-link">carData</a>
+package.</p>
 <p><img src="Multivariate_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>All of the red dots are multivariate outliers. The point labelled 1
 on the graph is a clear example of a multivariate outlier. This person
-has had 22 years since their PhD, a normal value for that variable, and
-makes <code>$62,884</code> dollars, which is also a normal value for
-salary. However, when combining these two features, a person who has had
-22 years since their PhD and makes only <code>$62,884</code> is making
-much less than other professors within their experience range.</p>
+has their PhD for 22 years, a normal value for that variable, and makes
+<code>$62,884</code>, which is also a normal value for salary. However,
+when combining these two features, a person who has had 22 years since
+their PhD and makes only <code>$62,884</code> is making much less than
+other professors within their experience range.</p>
 <p>The outliers in this graph were detected using the LoF method, and
 more detail about that method can be provided below. This package
 specifically focuses on four different methods for finding multivariate
@@ -104,8 +105,8 @@ Because some variables in the data may have much larger ranges that
 others (ex. a variable has a range from 1-10 and another has a range of
 -10000 to 10000), the data is standardized before calculating the
 distances.</p>
-<p>Here is an example of the distances for the first 5 rows in
-<code>mtcarsOutliers</code>, a dataset included with this package.</p>
+<p>Here is an example of the distances for the first 5 rows in <a href="https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html" class="external-link">mtcarsOutliers</a>,
+a dataset included with this package.</p>
 <pre><code><span><span class="co">#&gt;           [,1]     [,2]     [,3]     [,4]     [,5]</span></span>
 <span><span class="co">#&gt; [1,] 1.5229770 2.102410 2.265502 2.651939 2.664224</span></span>
 <span><span class="co">#&gt; [2,] 1.5031299 1.509144 1.522977 1.568453 1.608401</span></span>
@@ -236,10 +237,11 @@ different scales.</p>
 <p>Before using the Mahalanobis distance, the function automatically
 selects numeric columns from the dataset. Non-numeric variables are
 excluded, ensuring compatibility with the method. The distances are then
-calculated using the <code>outliers_mahalanobis</code> function from the
-<code>Routliers</code> package.</p>
-<p>Here is an example of calculating Mahalanobis distances for the
-<code>mtcarsOutliers</code> dataset included with this package:</p>
+calculated using the <a href="https://www.rdocumentation.org/packages/Routliers/versions/0.0.0.3/topics/outliers_mahalanobis" class="external-link">outliers_mahalanobis</a>
+function from the <a href="https://cran.r-project.org/web/packages/Routliers/index.html" class="external-link">Routliers</a>
+package.</p>
+<p>Here is an example of calculating Mahalanobis distances for the <a href="https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html" class="external-link">mtcarsOutliers</a>
+dataset included with this package:</p>
 <pre><code><span><span class="co">#&gt;         Mazda RX4     Mazda RX4 Wag        Datsun 710    Hornet 4 Drive </span></span>
 <span><span class="co">#&gt;          7.217210          3.682371          5.829785          1.981340 </span></span>
 <span><span class="co">#&gt; Hornet Sportabout </span></span>
