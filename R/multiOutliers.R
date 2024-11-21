@@ -56,37 +56,44 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     #if there are any categorical variables, do gower distance
     if(is_categorical){
       #taking gower distances
-      data_dist <- cluster::daisy(data, metric="gower")
+      data_stand <- cluster::daisy(data, metric="gower")
 
       #taking LoF scores
-      lof_scores <- dbscan::lof(data_dist, minPts = minPts)
+      lof_scores <- dbscan::lof(data_stand, minPts = minPts)
 
       #identify outliers based on the threshold
       outlier_indices <- which(lof_scores > 1.5)
       outlier_scores <- lof_scores[outlier_indices]
+
+      #adding score column into the dataset
+      data$scores <- lof_scores
     }
 
     #otherwise, use normalization of the data
     else{
       # Normalize the data if not already scaled
-      data_scaled <- scale(data)
+      data_stand <- scale(data)
 
       # Apply the LoF method from the dbscan package
-      lof_scores <- dbscan::lof(as.matrix(data_scaled), minPts = minPts)
+      lof_scores <- dbscan::lof(as.matrix(data_stand), minPts = minPts)
 
       # Identify outliers based on a threshold (LoF score > 1.5 for stronger outliers)
       outlier_indices <- which(lof_scores > 1.5)
       outlier_scores <- lof_scores[outlier_indices]
+
+      #adding score column into the dataset
+      data$scores <- lof_scores
     }
 
     #list of results
     results <- list(
       Method = "LoF",
-      Data = dataset_name,
+      Dataset = dataset_name,
       Variables = colnames(data),
       Row = outlier_indices,
       Score = outlier_scores,
       Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected",
+      Data = data,
       minPts = minPts
     )
 
@@ -108,17 +115,21 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     index <- results$outliers_pos
 
     #extract the outlier indices and their Mahalanobis scores
-    outlier_scores <- results$dist_from_center[index]  # Mahalanobis scores for outliers
+    outlier_scores <- results$dist_from_center[index]
+
+    #adding scores back into dataset
+    data$scores <- results$dist_from_center
 
     #prepare the result list
     output <- list(
       Method = "mahalanobis",
-      Data = dataset_name,          # Store the dataset name
+      Dataset = dataset_name,          # Store the dataset name
       Variables = colnames(data),  # Store column names of numeric data
       Row = index,        # Row numbers of detected outliers
       Score = outlier_scores,       # Mahalanobis scores of the detected outliers
       Message = if (length(index) == 0) "No outliers detected" else "Outliers detected",
-      alpha = alpha
+      alpha = alpha,
+      Data = data
     )
 
     #assign class and return the result
@@ -149,6 +160,9 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     outlier_indices <- which(avg_knn_distances > threshold)
     outlier_scores <- avg_knn_distances[outlier_indices]
 
+    #adding the scores back into the dataset
+    data$scores <- avg_knn_distances
+
     # Create the result list
     results <- list(
       Method = "kNN",
@@ -157,7 +171,8 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       Row = outlier_indices,
       Score = outlier_scores,
       Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected",
-      k = k
+      k = k,
+      Data = data
     )
 
     class(results) <- "multiOutliers"
@@ -174,23 +189,26 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     isolation_forest_model <- isotree::isolation.forest(data, ntrees = ntrees)
 
     #getting isoscores
-    data$iso_score <- predict(isolation_forest_model, data)
+    data$scores <- predict(isolation_forest_model, data)
 
     #taking the top n points as outliers
-    subset <- head(data[order(-data$iso_score),],n)
+    subset <- head(data[order(-data$scores),],n)
 
     #getting row numbers and scores for the outliers
     outlier_indices <- rownames(subset)
-    outlier_scores <- subset$iso_score
+    outlier_scores <- subset$scores
 
     #results
     output <- list(
       Method = "iForest",
-      Data = dataset_name,
+      Dataset = dataset_name,
       Variables = colnames(data),
       Row = outlier_indices,
       Score = outlier_scores,
-      Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected"
+      Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected",
+      ntrees = ntrees,
+      n = n,
+      Data = data
     )
     class(output) <- "multiOutliers"
     return(output)

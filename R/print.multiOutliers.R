@@ -29,18 +29,27 @@ print.multiOutliers <- function(x,...) {
   if(!inherits(x, "multiOutliers")){
     stop("This functon requires an object created by multiOutliers")
   }
+  cli::cli_h1("Summary Information")
   cat("\nMethod:", x$Method)
-  cat("\nDataset:", x$Data)
+  cat("\nDataset:", x$Dataset)
   cat("\nVariables:", x$Variables)
   cat("\nRow:", x$Row)
   cat("\nOutlier Score:", x$Score)
   cat("\nMessage: ", x$Message)
 
   if (length(x)> 6){
+    option_count <- 1
     for (i in 7:length(x)) {
-      cat("\nOption", i - 6, ":", names(x)[i], "=", x[[i]])
-   }
+      if(names(x)[i]!="Data"){
+        cat("\nOption", option_count, ":", names(x)[i], "=", x[[i]])
+        option_count <- option_count+1
+      }
+    }
   }
+
+  cli::cli_h1("Dataset Information")
+  cat("\nFirst Five Rows of Data Used:\n")
+  print(head(x$Data, n=5))
 
   return(invisible(x))
 }
