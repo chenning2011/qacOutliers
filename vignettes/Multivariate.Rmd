@@ -223,7 +223,6 @@ isolation_forest_model <- isolation.forest(data, ntrees = 100)
 data$iso_score <- predict(isolation_forest_model, data)
 
 head(data$iso_score, 5)
-
 ```
 
 ### Customizing Parameters
@@ -243,13 +242,14 @@ multiOutliers(mtcarsOutliers, method = "iForest", ntrees = 200, n = 10)
 When using the iForest method with the default `ntrees = 100` and `n = 5` the function returns:
 
 - Method: "iForest", indicating the method used.
-- Data: The dataset name.
+- Dataset: The dataset name.
 - Variables: The numeric columns considered.
 - Row: Indices of rows identified as outliers.
 - Score: Isolation scores for each detected outlier.
 - Message: A summary message indicating whether outliers were detected.
 - ntrees: The number of trees in the isolation forest
 - n: The number of points to return as outliers
+- Data: The first five rows of the dataset used. 
 
 ```{r}
 result <- multiOutliers(mtcarsOutliers, method = "iForest")
