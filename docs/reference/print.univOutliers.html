@@ -61,21 +61,242 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">outliers_boxplot</span> <span class="op">&lt;-</span> <span class="fu"><a href="univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mpg"</span>, method<span class="op">=</span><span class="st">"boxplot"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> No outliers detected for mpg </span>
-<span class="r-plt img"><img src="print.univOutliers-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="va">outliers_boxplot</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
-<span class="r-in"><span><span class="va">outliers_mad</span> <span class="op">&lt;-</span> <span class="fu"><a href="univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, method<span class="op">=</span><span class="st">"mad"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">outliers_mad</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
-<span class="r-in"><span><span class="va">outliers_grubbs</span> <span class="op">&lt;-</span> <span class="fu"><a href="univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mpg"</span>, method<span class="op">=</span><span class="st">"grubbs"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers detected for mpg :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> No outliers detected for mpg </span>
-<span class="r-in"><span><span class="va">outliers_grubbs</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example usage:</span></span></span>
+<span class="r-in"><span><span class="va">object</span> <span class="op">&lt;-</span> <span class="fu"><a href="univOutliers.html">univOutliers</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, method <span class="op">=</span> <span class="st">"mad"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.univOutliers.html">plot.univOutliers</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">mtcars</span><span class="op">)</span>  <span class="co"># Plotting the object with 'mtcars' dataset</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot.univOutliers(object, mtcars):</span> could not find function "plot.univOutliers"</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span>  <span class="co"># Printing the outliers and methods</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: cli</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: knitr</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: mpg</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: cyl</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: disp</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: hp</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: drat</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: wt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: qsec</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers Detected for:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Row Number    Outlier Value </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------  ---------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      9             22.9      </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: vs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers Detected for:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Row Number    Outlier Value </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------  ---------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      3               1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      4               1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      6               1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      8               1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      9               1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      10              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      11              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      18              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      19              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      20              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      21              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      26              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      28              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      32              1       </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: am</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers Detected for:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Row Number    Outlier Value </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------  ---------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      1               1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      2               1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      3               1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      18              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      19              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      20              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      26              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      27              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      28              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      29              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      30              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      31              1       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      32              1       </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: gear</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers Detected for:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Row Number    Outlier Value </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------  ---------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      31              8       </span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">object</span> <span class="op">&lt;-</span> <span class="fu"><a href="univOutliers.html">univOutliers</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, method <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot.univOutliers.html">plot.univOutliers</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">mtcars</span><span class="op">)</span>  <span class="co"># Plotting the object with 'mtcars' dataset</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot.univOutliers(object, mtcars):</span> could not find function "plot.univOutliers"</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span>  <span class="co"># Printing the outliers and methods</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: mpg</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: cyl</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: disp</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: hp</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers Detected for:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Row Number    Outlier Value </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------  ---------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      31             335      </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: drat</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: wt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers Detected for:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Row Number    Outlier Value </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------  ---------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      16            5.424     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      17            5.345     </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: qsec</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers Detected for:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Row Number    Outlier Value </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------  ---------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      9             22.9      </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: vs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: am</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: gear</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers Detected for:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Row Number    Outlier Value </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------  ---------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      31              8       </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">object</span> <span class="op">&lt;-</span> <span class="fu"><a href="univOutliers.html">univOutliers</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, method <span class="op">=</span> <span class="st">"grubbs"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Data is not normally distributed. Grubbs' test may not be appropriate.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Data is not normally distributed. Grubbs' test may not be appropriate.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Data is not normally distributed. Grubbs' test may not be appropriate.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Data is not normally distributed. Grubbs' test may not be appropriate.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Data is not normally distributed. Grubbs' test may not be appropriate.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Data is not normally distributed. Grubbs' test may not be appropriate.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Data is not normally distributed. Grubbs' test may not be appropriate.</span>
+<span class="r-in"><span><span class="fu"><a href="plot.univOutliers.html">plot.univOutliers</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">mtcars</span><span class="op">)</span>  <span class="co"># Plotting the object with 'mtcars' dataset</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot.univOutliers(object, mtcars):</span> could not find function "plot.univOutliers"</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span>  <span class="co"># Printing the outliers and methods</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: mpg</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: cyl</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: disp</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: hp</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: drat</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: wt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: qsec</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: vs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: am</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: gear</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> No outliers detected.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Variable: carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outliers Detected for:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Row Number    Outlier Value </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------  ---------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      31              8       </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

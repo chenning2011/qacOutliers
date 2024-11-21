@@ -16,12 +16,16 @@ A formatted print of the results of the univariate outlier detection
 Prints identified univariate outliers using boxplot, Grubbs test, or MAD method
 }
 \examples{
-data(mtcars)
-outliers_boxplot <- univOutliers(mtcars, "mpg", method="boxplot")
-outliers_boxplot
-outliers_mad <- univOutliers(mtcars$mpg, method="mad")
-outliers_mad
-outliers_grubbs <- univOutliers(mtcars, "mpg", method="grubbs")
-outliers_grubbs
+# Example usage:
+object <- univOutliers(data = mtcars, method = "mad")
+plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
+print(object)  # Printing the outliers and methods
 
+object <- univOutliers(data = mtcars, method = "boxplot")
+plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
+print(object)  # Printing the outliers and methods
+
+object <- univOutliers(data = mtcars, method = "grubbs")
+plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
+print(object)  # Printing the outliers and methods
 }

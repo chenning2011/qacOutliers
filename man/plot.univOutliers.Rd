@@ -4,7 +4,7 @@
 \alias{plot.univOutliers}
 \title{Plotting Univariate Outlier Detection}
 \usage{
-\method{plot}{univOutliers}(data, x, method, results)
+\method{plot}{univOutliers}(outlier_results, data)
 }
 \arguments{
 \item{data}{The original data frame used for outlier detection.}
@@ -20,4 +20,7 @@ A plot object specific to the method.
 }
 \description{
 Creates visualizations for univariate outlier detection using the method-specific plot style.
+}
+\examples{
+# # Example usage:
 }

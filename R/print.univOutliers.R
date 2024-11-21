@@ -7,18 +7,18 @@
 #'@import cli
 #'@export
 #'@examples
-# # Example usage:
-# object <- univOutliers(data = mtcars, method = "mad")
-# plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
-# print(object)  # Printing the outliers and methods
-#
-# object <- univOutliers(data = mtcars, method = "boxplot")
-# plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
-# print(object)  # Printing the outliers and methods
-#
-# object <- univOutliers(data = mtcars, method = "grubbs")
-# plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
-# print(object)  # Printing the outliers and methods
+#' # Example usage:
+#' object <- univOutliers(data = mtcars, method = "mad")
+#' plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
+#' print(object)  # Printing the outliers and methods
+#'
+#' object <- univOutliers(data = mtcars, method = "boxplot")
+#' plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
+#' print(object)  # Printing the outliers and methods
+#'
+#' object <- univOutliers(data = mtcars, method = "grubbs")
+#' plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
+#' print(object)  # Printing the outliers and methods
 
 
 # Print function for univOutliers
