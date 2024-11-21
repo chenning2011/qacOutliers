@@ -10,39 +10,23 @@
 #' @import grDevices
 #' @export
 #' @examples
-#' # Generate example data
-#' set.seed(42)
-#' library(EnvStats)
-#' data1 <- data.frame(
-#'   var1 = rnorm(100, mean = 50, sd = 10),
-#'   var2 = c(rnorm(97, mean = 50, sd = 10), 150, 160, 170),
-#'   var3 = sample(1:100, 100, replace = TRUE, prob = (1:100)^2))
-#'
-#'
-#' # Boxplot Method on test data
-#' univOutliers(data1, "var1", method = "boxplot")
-#' univOutliers(data1, "var2", method = "boxplot")
-#' univOutliers(data1, method = "boxplot")
-#'
-#' # MAD Method on test data
-#' univOutliers(data1, "var1", method = "mad")
-#' univOutliers(data1, "var2", method = "mad")
-#' univOutliers(data1, method = "mad")
-#'
-#' # Grubbs' Method on test data
-#' univOutliers(data1, "var1", method = "grubbs")
-#' univOutliers(data1, "var2", method = "grubbs")
-#' univOutliers(data1, "var3", method = "grubbs")
-
-
+#' # Example usage:
+# object <- univOutliers(data = mtcars, method = "mad")
+# plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
+# print(object)  # Printing the outliers and methods
+#
+# object <- univOutliers(data = mtcars, method = "boxplot")
+# plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
+# print(object)  # Printing the outliers and methods
+#
+# object <- univOutliers(data = mtcars, method = "grubbs")
+# plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
+# print(object)  # Printing the outliers and methods
 
 
 univOutliers <- function(data, x = NULL, method = "boxplot") {
   # Identify numeric columns in the dataset
   numeric_columns <- sapply(data, is.numeric)
-
-  # Suppressing warnings
-  options(warn = -1)
 
   # If 'x' is not specified, use all numeric columns in the dataset
   if (is.null(x)) {
@@ -52,60 +36,29 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
     x <- list(x)
   }
 
+  # Initialize a list to store outlier results for each column
+  outliers_list <- list()
+
   # Loop through each numeric variable specified in 'x'
   for (column in x) {
     column_data <- na.omit(data[[column]])  # Remove NA values from the column
 
-    # Boxplot Method
+    # Detect outliers based on the specified method
     if (method == "boxplot") {
-      stats <- grDevices::boxplot.stats(column_data)
-      if (length(stats$out) == 0) {
-        cat("No outliers detected for", column, "\n")
-      } else {
-        cat("Outliers detected for", column, ":\n")
-        outlier_rows <- which(data[[column]] %in% stats$out)
-        for (i in outlier_rows) {
-          cat("Row", i, ":", data[[column]][i], "\n")
-        }
-      }
-      # Create the ggplot boxplot (optional, only for visualization)
-      p <- ggplot2::ggplot(data, aes(y = .data[[column]])) +
-        ggplot2::geom_boxplot(outlier.colour = "red", coef = 1.58) +
-        ggplot2::ggtitle(paste("Univariate Boxplot of", column)) +
-        ggplot2::theme_minimal()
-      print(p)
-    }
-
-    # MAD Method
-    else if (method == "mad") {
-      # Use the outliers_mad function to find outliers
-      res1 <- Routliers::outliers_mad(data[[column]])
-
-      # Display the outliers information
-      if (length(res1) == 0) {
-        cat("No outliers detected for", column, "\n")
-      } else {
-        cat("Outliers detected for", column, ":\n")
-
-        # Identify the row numbers and corresponding column values for outliers
-        outlier_rows <- which(data[[column]] < res1$LL_CI_MAD | data[[column]] > res1$UL_CI_MAD)
-        for (i in outlier_rows) {
-          cat("Row", i, ":", data[[column]][i], "\n")
-        }
-      }
-
-      # Plot the outliers using plot_outliers_mad
-      Routliers::plot_outliers_mad(res1, data[[column]], pos_display = FALSE)
-    }
-
-    # Grubbs' Test Method
-    else if (method == "grubbs") {
+      stats <- boxplot.stats(column_data)
+      outliers <- stats$out
+      outlier_rows <- which(column_data %in% outliers)
+      outliers_list[[column]] <- list(method = "boxplot", outliers = outliers, outlier_rows = outlier_rows)
+    } else if (method == "mad") {
+      library(Routliers)
+      res1 <- outliers_mad(column_data)
+      outlier_rows <- which(column_data < res1$LL_CI_MAD | column_data > res1$UL_CI_MAD)
+      outliers_list[[column]] <- list(method = "mad", outliers = column_data[outlier_rows], outlier_rows = outlier_rows)
+    } else if (method == "grubbs") {
       grubbs_test <- function(data, alpha = 0.05) {
-        data <- na.omit(data)  # Remove NA values
-        if (!is.numeric(data)) stop("Input data must be numeric.")
+        data <- na.omit(data)
         if (length(data) < 3) stop("Data must contain at least three points for Grubbs' test.")
 
-        # Normality check
         normality_test <- shapiro.test(data)
         if (normality_test$p.value < 0.05) {
           warning("Data is not normally distributed. Grubbs' test may not be appropriate.")
@@ -113,7 +66,6 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
 
         outliers <- c()
         current_data <- data
-
         repeat {
           mean_data <- mean(current_data)
           sd_data <- sd(current_data)
@@ -132,23 +84,18 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
           if (length(current_data) < 3) break
         }
 
-        # Identify the rows of outliers
         outlier_rows <- which(data %in% outliers)
-
         return(list(outliers = unique(outliers), outlier_rows = outlier_rows))
       }
 
       result <- grubbs_test(column_data)
-      cat("Outliers detected for", column, ":\n")
-      if (length(result$outliers) == 0) {
-        cat("No outliers detected for", column, "\n")
-      } else {
-        for (i in result$outlier_rows) {
-          cat("Row", i, ":", data[[column]][i], "\n")
-        }
-      }
+      outliers_list[[column]] <- list(method = "grubbs", outliers = result$outliers, outlier_rows = result$outlier_rows)
     } else {
       stop("Invalid method. Choose from 'boxplot', 'mad', or 'grubbs'.")
     }
   }
+
+  # Return the list of outlier results as an object
+  class(outliers_list) <- "univOutliers"
+  return(outliers_list)
 }
