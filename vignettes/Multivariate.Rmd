@@ -153,10 +153,9 @@ Here is an example of calculating Mahalanobis distances for the [mtcarsOutliers]
 
 ```{r, echo = F, message = F}
 library(Routliers)
-mtcarsOutliers_numeric <- mtcarsOutliers[-1]  # Remove non-numeric column
+mtcarsOutliers_numeric <- mtcarsOutliers[-1]
 results <- outliers_mahalanobis(as.matrix(mtcarsOutliers_numeric), alpha = 0.05)
 
-# Display Mahalanobis distances for the first 5 rows
 head(results$dist_from_center, 5)
 ```
 
@@ -172,11 +171,6 @@ Here is the threshold for the dataset using the default `alpha = 0.05`:
 alpha <- 0.05
 threshold <- qchisq(1 - alpha, df = ncol(mtcarsOutliers_st))
 threshold
-```
-
-The outliers identified are shown below:
-```{r}
-multiOutliers(mtcarsOutliers, method = "mahalanobis")
 ```
 
 ### Customizing the alpha parameter
@@ -199,7 +193,7 @@ When using the Mahalanobis method with the default `alpha = 0.05`, the function 
 - Data: The first five rows of the dataset used. 
 
 ```{r, echo = F, message = F}
-result <- multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = 0.05)
+result <- multiOutliers(mtcarsOutliers, method = "mahalanobis")
 print(result)
 ```
 
@@ -215,14 +209,66 @@ To learn more about Mahalanobis distance and how it's used in multivariate outli
 
 ## iForest 
 
-iForest stands for isolation forest. First, it randomly selects a variable, then randomly selects a value of that variable. This will work for both quantitaive and categorical; if the variable is quantitative, it will randomly pick a number in the range of the variable, and if the variable is categorical it will randomly pick a level. Then it will split the data using the value randomly selected eariler. 
+Isolation Forest (iForest) is an unsupervised machine learning algorithm designed to detect anomalies in data is implemented using the `isotree` package. It works by creating random partitions of the data and measuring how quickly each point can be isolated. Points that are isolated faster (using fewer splits) are more likely to be outliers.
 
-The iForest method repeats the above steps until all points are separately in their own node. Then, for each data point, it counts how many splits were needed to isolate it. 
+The iForest algorithm is particularly well-suited for handling high-dimensional data and works with both quantitative and categorical variables. It is robust to noise and scales efficiently for large datasets.
 
-Because the selection of variables and values is random, this process will return different results each time. Therefore, isolation trees are repeated many times and the results are averaged over all trials. More isolated points will have lower average path lengths. They are more isolated from the rest of the data's distribution, therefore they are called outliers. 
+Here is an example of the scores using the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package.
 
 ```{r}
-multiOutliers(mtcarsOutliers, method="iForest")
+library(isotree)
+data <- mtcarsOutliers[-1]
+
+isolation_forest_model <- isolation.forest(data, ntrees = 100)
+data$iso_score <- predict(isolation_forest_model, data)
+
+head(data$iso_score, 5)
+
 ```
+
+### Customizing Parameters
+The iForest method allows customization of two main parameters:
+
+ntrees: The number of trees in the isolation forest. A higher value increases precision but also computation time. Default is 100.
+
+n: The number of points to return as outliers. Default is 5.
+
+Here’s an example of how you can modify these parameters:
+```{r}
+multiOutliers(mtcarsOutliers, method = "iForest", ntrees = 200, n = 10)
+```
+
+### Example Output
+
+When using the iForest method with the default `ntrees = 100` and `n = 5` the function returns:
+
+- Method: "iForest", indicating the method used.
+- Data: The dataset name.
+- Variables: The numeric columns considered.
+- Row: Indices of rows identified as outliers.
+- Score: Isolation scores for each detected outlier.
+- Message: A summary message indicating whether outliers were detected.
+- ntrees: The number of trees in the isolation forest
+- n: The number of points to return as outliers
+
+```{r}
+result <- multiOutliers(mtcarsOutliers, method = "iForest")
+result
+```
+
+### Notes and Considerations
+
+1. Scalability: Isolation Forest is designed to handle large datasets efficiently, making it suitable for high-dimensional data. However, performance may depend on the ntrees parameter, as higher values can increase computation time.
+
+2. No Assumptions on Data Distribution: Unlike some statistical methods, iForest does not assume a specific data distribution. This makes it robust for detecting outliers in diverse datasets.
+
+3. Handles Mixed Data Types: iForest can process both numeric and categorical variables. However, ensure your data is properly encoded or formatted as required by the isotree package.
+
+4. Interpretation of Scores: Higher isolation scores indicate stronger anomalies. You may need to determine an appropriate threshold for your dataset when interpreting the results.
+
+To learn more about Isolation Forest and how it's used in multivariate outlier detection, visit these resources: 
+*  [Medium.com](https://medium.com/@limyenwee_19946/unsupervised-outlier-detection-with-isolation-forest-eab398c593b2)
+*  [Andy McDonald on YouTube](https://www.youtube.com/watch?v=O9VvmWj-JAk)
+
 
 
