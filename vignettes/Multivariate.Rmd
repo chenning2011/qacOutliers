@@ -85,7 +85,7 @@ Outliers are considered any points with a score above the calculated threshold. 
 multiOutliers(mtcarsOutliers, method="kNN")
 ```
 
-### Customizing the k parameter
+### Customizing the `k` parameter
 
 The value `k` tells the function how many points to consider as neighbors when identifying distances between each of the points. The default value, 5, finds the distance between each point the 5 points that are closest to that point. The choice of `k` significantly impacts the results, and smaller values are generally more sensitive to outliers. You can supply your own value of `k`, which may change the results of the function.
 
@@ -131,16 +131,57 @@ Here is a graphical representation of the outliers shown above.
 
 ## Local outlier factor (LoF)
 
-LoF for a point is the average density around the k-nearest neighbors of the point divided by the density around the point itself. If the  LoF score is above 1, it ts more likely to be anomalous, if it is below 1, it is less likely to be anomalous. 
+The Local Outlier Factor (LoF) method detects anomalies by comparing the density of data points in their local neighborhood. Points with significantly lower density than their neighbors are flagged as potential outliers. The dbscan package is used for this implementation, which calculates LoF scores for each data point. Scores above a certain threshold (typically > 1) are indicative of stronger outliers.
 
--describe how this works within our function
+LoF is particularly useful for datasets with clusters of varying density, as it considers the local density when assessing outlierness. It supports both numeric and categorical variables, using Gower distance for mixed data types.
+
+Here is an example of the scores using the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package.
 
 ```{r}
-multiOutliers(mtcarsOutliers, method="LoF")
+library(dbscan)
+data <- mtcarsOutliers[-1]
+
+data_scaled <- scale(data)
+lof_scores <- lof(as.matrix(data_scaled), minPts = 5)
+
+head(lof_scores, 5)
 ```
 
--how to customize results (change threshold and stuff)
--how to intrepret results
+### Customizing the `minPts` Parameter
+The LoF method allows customization of the `minPts` parameter, which is the minimum number of points in the local neighborhood. Larger values result in broader neighborhoods and may reduce sensitivity to smaller clusters. Default is 5.
+
+You can adjust these parameters to suit your dataset. Here’s an example:
+```{r}
+multiOutliers(mtcarsOutliers, method = "LoF", minPts = 10)
+```
+
+### Example Output
+When using the LoF method with the default minPts = 5, the function returns:
+
+- Method: "LoF", indicating the method used.
+- Data: The dataset name.
+- Variables: The columns considered in the analysis.
+- Row: Indices of rows identified as outliers.
+- Score: LoF scores for each detected outlier.
+- Message: A summary message indicating whether outliers were detected.
+- minPts: The parameter value used for the local neighborhood.
+
+```{r}
+result <- multiOutliers(mtcarsOutliers, method = "LoF")
+result
+```
+
+### Notes and Considerations
+1. Sensitivity to minPts: The choice of minPts significantly influences results. A value too small might result in over-sensitivity, while a value too large might overlook smaller clusters of anomalies.
+
+2. Mixed Data Types: If the dataset contains categorical variables, the method automatically switches to Gower distance for calculating pairwise dissimilarities. Ensure the data is properly encoded.
+
+3. Interpreting LoF Scores: Scores greater than 1.5 typically indicate potential outliers. Adjust the threshold based on the characteristics of your dataset.
+
+To learn more about Mahalanobis distance and how it's used in multivariate outlier detection, visit these resources: 
+*  [Medium.com](https://towardsdatascience.com/local-outlier-factor-lof-algorithm-for-outlier-identification-8efb887d9843)
+*  [DBSCAN Documentation](https://scikit-learn.org/dev/modules/generated/sklearn.cluster.DBSCAN.html)
+
 
 ## Mahalanobis 
 
@@ -172,7 +213,7 @@ threshold <- qchisq(1 - alpha, df = ncol(mtcarsOutliers_st))
 threshold
 ```
 
-### Customizing the alpha parameter
+### Customizing the `alpha` parameter
 
 The `alpha` parameter in outliers_mahalanobis determines the significance level for outlier detection. Lower values (e.g., `alpha = 0.01`) result in stricter thresholds, identifying fewer points as outliers. You can modify `alpha` as follows:
 ```{r}
