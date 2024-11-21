@@ -6,7 +6,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of qacOutliers is to help detect multivariate and univariate
+The goal of qacOutliers is to detect multivariate and univariate
 outliers using seven different methods. This package consolidates
 methods from multiple different R packages and makes them more easily
 accessible.
@@ -14,24 +14,22 @@ accessible.
 ## Installation
 
 You can install the development version of qacOutliers from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/chenning2011) with:
 
 ``` r
-# install.packages("pak")
-pak::pak("chenning2011/qacOutliers")
+# install.packages("remotes")
+remotes::install_github("https://github.com/chenning2011/qacOutliers/")
 ```
 
-## Example
+## How to use
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(qacOutliers)
-#> Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-#> 'qacOutliers'
-#> Warning: replacing previous import 'dplyr::filter' by 'stats::filter' when
-#> loading 'qacOutliers'
-#> Warning: replacing previous import 'dbscan::as.dendrogram' by
-#> 'stats::as.dendrogram' when loading 'qacOutliers'
-## basic example code
-```
+To learn more about how to use this package, what outliers are, and the
+different functions available in this package, visit the [Getting
+Started](https://chenning2011.github.io/qacOutliers/articles/qacOutliers.html),
+[Multivariate](https://chenning2011.github.io/qacOutliers/articles/Multivariate.html),
+and
+[Univariate](https://chenning2011.github.io/qacOutliers/articles/Univariate.html)
+vignettes. You can find out more about how the specific functions work
+on the
+[Documentation](https://chenning2011.github.io/qacOutliers/reference/index.html)
+page.

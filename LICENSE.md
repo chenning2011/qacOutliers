@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2024 qacOutliers authors
+Copyright (c) 2024 Caleb Henning, Tegh Singh, Larissa Xu, Angelica Crown, Ernie Little, Ral Reyes, Braeden Falzarano
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

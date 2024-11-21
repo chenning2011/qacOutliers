@@ -24,7 +24,7 @@ The goal of qacOutliers is to detect multivariate and univariate outliers using 
 
 You can install the development version of qacOutliers from [GitHub](https://github.com/chenning2011) with:
 
-``` {r}
+``` {r, message = F, results = F, warnings=F}
 # install.packages("remotes")
 remotes::install_github("https://github.com/chenning2011/qacOutliers/")
 ```

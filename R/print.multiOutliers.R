@@ -25,7 +25,7 @@
 #'results
 #'
 
-print.multiOutliers <- function(x) {
+print.multiOutliers <- function(x,...) {
   if(!inherits(x, "multiOutliers")){
     stop("This functon requires an object created by multiOutliers")
   }

@@ -4,7 +4,7 @@
 \alias{print.multiOutliers}
 \title{Printing Multivariate outlier detection}
 \usage{
-\method{print}{multiOutliers}(x)
+\method{print}{multiOutliers}(x, ...)
 }
 \arguments{
 \item{x}{the results from "multiOutliers" function}
