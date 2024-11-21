@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, warning=F, message = F}
 library(qacOutliers)
 ```
 
@@ -97,12 +97,13 @@ multiOutliers(mtcarsOutliers, method = "kNN", k = 10)
 When using the kNN method with the default `k=5`, the function returns:
 
 - Method: "kNN", indicating the method used.
-- Data: The dataset name.
+- Dataset: The dataset name.
 - Variables: The numeric columns considered for outlier detection.
 - Row: Indices of rows identified as outliers.
 - Score: Average kNN distance scores of detected outliers.
 - Message: A summary message indicating whether outliers were detected.
 - k: The number of nearest neighbors considered.
+- Data: the first five rows of the dataset used. 
 
 ```{r, echo = F, message = F}
 result <- multiOutliers(mtcarsOutliers, method = "kNN")
@@ -189,12 +190,13 @@ multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = 0.01)
 When using the Mahalanobis method with the default `alpha = 0.05`, the function returns:
 
 - Method: "mahalanobis", indicating the method used.
-- Data: The dataset name.
+- Dataset: The dataset name.
 - Variables: The numeric columns considered.
 - Row: Indices of rows identified as outliers.
 - Score: Mahalanobis distance scores of detected outliers.
 - Message: A summary message indicating whether outliers were detected.
 - Alpha: The significance level used.
+- Data: The first five rows of the dataset used. 
 
 ```{r, echo = F, message = F}
 result <- multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = 0.05)
