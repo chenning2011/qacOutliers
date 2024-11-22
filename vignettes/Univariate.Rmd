@@ -53,10 +53,9 @@ The boxplot method for univariate outlier detection identifies extreme data poin
 This method helps quickly identify potential outliers, which are plotted individually and can indicate unusual or problematic data points that may warrant further investigation. 
 
 ```{r}
-data(mtcars)
-univOutliers(mtcars, "mpg", method="boxplot")
-univOutliers(mtcars, "hp", method="boxplot")
-univOutliers(mtcars, "qsec", method="boxplot")
+object2 <- univOutliers(data = mtcars, x= "wt", method = "boxplot")
+plot.univOutliers(object2)  # Plotting the object with 'mtcars' dataset
+print(object2)  # Printing the outliers and methods
 ```
 
 The output will provide the identified outliers along with their corresponding row numbers, and a graphical representation will be generated with the outliers highlighted in red.
@@ -66,10 +65,20 @@ The output will provide the identified outliers along with their corresponding r
 The Grubbs' Test is a simple technique that iteratively identifies outliers by testing the hypothesis that the largest or smallest value is an outlier. The Grubbs’ test requires the data to be normally distributed because it relies on mean and standard deviation. 
 
 ```{r}
-data(mtcars)
-univOutliers(mtcars, "mpg", method="grubbs")
-univOutliers(mtcars, "hp", method="grubbs")
-univOutliers(mtcars, "qsec", method="grubbs")
+# TO TEST NORMAL DIST W OUTLIER FOR GRUBBS
+set.seed(42)
+normal_data <- rnorm(100, mean = 50, sd = 5)  # Normal distribution
+data_with_outlier <- c(normal_data, 70)  # Add a clear outlier (100)
+data_frame <- data.frame(values = data_with_outlier)
+object_normal_outlier <- univOutliers(data = data_frame, x = "values", method = "grubbs")
+plot.univOutliers(object_normal_outlier)  # Plotting the object with the outlier
+print(object_normal_outlier)  # Printing the outliers and methods
+```
+
+```{r}
+object3 <- univOutliers(data = mtcars, x = "carb", method = "grubbs")
+plot.univOutliers(object3)  # Plotting the object with 'mtcars' dataset
+print(object3)  # Printing the outliers and methods
 ```
 
 The output of Grubbs' test will provide the identified outliers and the corresponding row numbers. This method uses a Shapiro-Wilk test (shapiro.test) for normality. If the p-value of the normality test is less than 0.05, it issues a warning about normality because a high p-value could affect the accuracy of the Grubbs' Test.
@@ -81,10 +90,9 @@ The output of Grubbs' test will provide the identified outliers, the correspondi
 The MAD (Median Absolute Deviation) method for univariate outlier detection identifies outliers based on a robust measure of variability, the median absolute deviation. In this method, a red line represents the median of the values in the target vector. The upper CI limit is the median + 3MAD and the lower CI limit is median - 3MAD. The points outside of the confidence interval are the outliers detected by the MAD method.  
 
 ```{r}
-data(mtcars)
-univOutliers(mtcars, "mpg", method="mad")
-univOutliers(mtcars, "hp", method="mad")
-univOutliers(mtcars, "qsec", method="mad")
+object <- univOutliers(data = mtcars, x="carb", method = "mad")
+plot.univOutliers(object)  # Plotting the object with 'mtcars' dataset
+print(object)  # Printing the outliers and methods
 ```
 
 The output will provide the identified outliers along with their corresponding row numbers, and a graphical representation will be generated with the outliers highlighted in red.

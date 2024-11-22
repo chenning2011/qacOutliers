@@ -1,28 +1,27 @@
 #' @title Univariate Outlier Detection
-#' @description Provides three methods for detecting univariate outliers in a dataset.
-#' @param data A data frame containing the variable to be analyzed.
-#' @param x A character string naming the numeric variable to assess for outliers.
-#' @param method A character supplying the method used for outlier detection. Methods are boxplot, mad, and grubbs.
-#' @returns A list containing the ggplot object and boxplot statistics.
+#' @description Detects univariate outliers using boxplot, MAD, or Grubbs' test.
+#' @param data a data frame containing the variable(s) to be analyzed
+#' @param x character, specifies the column(s) to assess for outliers. If NULL, all numeric columns are used
+#' @param method character, the method used for outlier detection: "boxplot", "mad", or "grubbs" (default is "boxplot")
+#' @returns A list with detected outliers, their indices, the method used, and the original dataset
 #' @import ggplot2
 #' @import Routliers
 #' @import stats
 #' @import grDevices
 #' @export
 #' @examples
-#' # Example usage:
-# object <- univOutliers(data = mtcars, method = "mad")
-# plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
-# print(object)  # Printing the outliers and methods
-#
-# object <- univOutliers(data = mtcars, method = "boxplot")
-# plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
-# print(object)  # Printing the outliers and methods
-#
-# object <- univOutliers(data = mtcars, method = "grubbs")
-# plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
-# print(object)  # Printing the outliers and methods
-
+#' Example usage:
+#' object <- univOutliers(data = mtcars, x="carb", method = "mad")
+#' plot.univOutliers(object)  # Plotting the object with 'mtcars' dataset
+#' print(object)  # Printing the outliers and methods
+#'
+#' object2 <- univOutliers(data = mtcars, x= "wt", method = "boxplot")
+#' plot.univOutliers(object2)  # Plotting the object with 'mtcars' dataset
+#' print(object2)  # Printing the outliers and methods
+#'
+#' object3 <- univOutliers(data = mtcars, x = "carb", method = "grubbs")
+#' plot.univOutliers(object3)  # Plotting the object with 'mtcars' dataset
+#' print(object3)  # Printing the outliers and methods
 
 univOutliers <- function(data, x = NULL, method = "boxplot") {
   # Identify numeric columns in the dataset
@@ -94,6 +93,9 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
       stop("Invalid method. Choose from 'boxplot', 'mad', or 'grubbs'.")
     }
   }
+
+  # Store the original dataset in the object
+  outliers_list$dataset <- data
 
   # Return the list of outlier results as an object
   class(outliers_list) <- "univOutliers"
