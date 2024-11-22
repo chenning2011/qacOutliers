@@ -160,12 +160,13 @@ multiOutliers(mtcarsOutliers, method = "LoF", minPts = 10)
 When using the LoF method with the default minPts = 5, the function returns:
 
 - Method: "LoF", indicating the method used.
-- Data: The dataset name.
+- Dataset: The dataset name.
 - Variables: The columns considered in the analysis.
 - Row: Indices of rows identified as outliers.
 - Score: LoF scores for each detected outlier.
 - Message: A summary message indicating whether outliers were detected.
 - minPts: The parameter value used for the local neighborhood.
+- Data: First five rows of the data used.
 
 ```{r}
 result <- multiOutliers(mtcarsOutliers, method = "LoF")

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, warning = F, message = F}
 library(qacOutliers)
 ```
 
@@ -30,6 +30,8 @@ Measurement or experimental errors can occur during the data collection process.
 Detecting outliers, like many techniques in data science, is more of an art than a science. Because there are so many different reasons that outliers exist, there are many different ways to detect them. This package includes seven commonly used methods for [univariate](Univariate.html) and [multivariate](Multivariate.html) outlier detection. See the linked pages above for more information about those specific methods. 
 
 Each of these seven methods have distinct methods for identifying and calculating outliers, ranging from visualizing data to standardizing it and calculating scores for each variable to identify which observations are mathematically furthest away from the rest of the data. Although each of these methods return observations that have been classified as outliers by their respective functions, it's important to always look at the underlying data to understand why they are being picked out as outliers, if they truly are outliers, and why they might have the values that they have. 
+
+-provide information here about how to load the library and how to supress the messages that show up when loading the package
 
 ### Why should we detect outliers?
 

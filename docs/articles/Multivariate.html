@@ -64,15 +64,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/chenning2011/qacOutliers">qacOutliers</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'dplyr::combine' by 'gridExtra::combine'</span></span>
-<span><span class="co">#&gt; when loading 'qacOutliers'</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading</span></span>
-<span><span class="co">#&gt; 'qacOutliers'</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'dplyr::filter' by 'stats::filter' when</span></span>
-<span><span class="co">#&gt; loading 'qacOutliers'</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'dbscan::as.dendrogram' by</span></span>
-<span><span class="co">#&gt; 'stats::as.dendrogram' when loading 'qacOutliers'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/chenning2011/qacOutliers">qacOutliers</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="what-are-multivariate-outliers-how-do-you-detect-them">What are multivariate outliers? How do you detect them?<a class="anchor" aria-label="anchor" href="#what-are-multivariate-outliers-how-do-you-detect-them"></a>
 </h2>
@@ -162,7 +154,7 @@ which may change the results of the function.</p>
 function returns:</p>
 <ul>
 <li>Method: “kNN”, indicating the method used.</li>
-<li>Data: The dataset name.</li>
+<li>Dataset: The dataset name.</li>
 <li>Variables: The numeric columns considered for outlier
 detection.</li>
 <li>Row: Indices of rows identified as outliers.</li>
@@ -170,6 +162,7 @@ detection.</li>
 <li>Message: A summary message indicating whether outliers were
 detected.</li>
 <li>k: The number of nearest neighbors considered.</li>
+<li>Data: the first five rows of the dataset used.</li>
 </ul>
 <pre><code><span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: kNN</span></span>
@@ -262,17 +255,6 @@ of the detection.</p>
 <p>Here is the threshold for the dataset using the default
 <code>alpha = 0.05</code>:</p>
 <pre><code><span><span class="co">#&gt; [1] 18.30704</span></span></code></pre>
-<p>The outliers identified are shown below:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"mahalanobis"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Method: mahalanobis</span></span>
-<span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
-<span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span></span>
-<span><span class="co">#&gt; Row: 5 7 9 10 12 20 31 32</span></span>
-<span><span class="co">#&gt; Outlier Score: 25.11784 29.58581 27.30969 19.22256 26.99406 21.46034 27.95683 25.39721</span></span>
-<span><span class="co">#&gt; Message:  Outliers detected</span></span>
-<span><span class="co">#&gt; Option 1 : alpha = 0.1</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="customizing-the-alpha-parameter">Customizing the alpha parameter<a class="anchor" aria-label="anchor" href="#customizing-the-alpha-parameter"></a>
 </h3>
@@ -281,7 +263,7 @@ the significance level for outlier detection. Lower values (e.g.,
 <code>alpha = 0.01</code>) result in stricter thresholds, identifying
 fewer points as outliers. You can modify <code>alpha</code> as
 follows:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"mahalanobis"</span>, alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: mahalanobis</span></span>
@@ -299,22 +281,23 @@ follows:</p>
 <code>alpha = 0.05</code>, the function returns:</p>
 <ul>
 <li>Method: “mahalanobis”, indicating the method used.</li>
-<li>Data: The dataset name.</li>
+<li>Dataset: The dataset name.</li>
 <li>Variables: The numeric columns considered.</li>
 <li>Row: Indices of rows identified as outliers.</li>
 <li>Score: Mahalanobis distance scores of detected outliers.</li>
 <li>Message: A summary message indicating whether outliers were
 detected.</li>
 <li>Alpha: The significance level used.</li>
+<li>Data: The first five rows of the dataset used.</li>
 </ul>
 <pre><code><span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: mahalanobis</span></span>
 <span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
 <span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span></span>
-<span><span class="co">#&gt; Row: 5 7 9 12 20 31 32</span></span>
-<span><span class="co">#&gt; Outlier Score: 25.11784 29.58581 27.30969 26.99406 21.46034 27.95683 25.39721</span></span>
+<span><span class="co">#&gt; Row: 5 7 9 10 12 20 31 32</span></span>
+<span><span class="co">#&gt; Outlier Score: 25.11784 29.58581 27.30969 19.22256 26.99406 21.46034 27.95683 25.39721</span></span>
 <span><span class="co">#&gt; Message:  Outliers detected</span></span>
-<span><span class="co">#&gt; Option 1 : alpha = 0.05</span></span></code></pre>
+<span><span class="co">#&gt; Option 1 : alpha = 0.1</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="notes-and-considerations-1">Notes and Considerations<a class="anchor" aria-label="anchor" href="#notes-and-considerations-1"></a>
@@ -334,23 +317,67 @@ multivariate outlier detection, visit these resources: * <a href="https://www.st
 <div class="section level2">
 <h2 id="iforest">iForest<a class="anchor" aria-label="anchor" href="#iforest"></a>
 </h2>
-<p>iForest stands for isolation forest. First, it randomly selects a
-variable, then randomly selects a value of that variable. This will work
-for both quantitaive and categorical; if the variable is quantitative,
-it will randomly pick a number in the range of the variable, and if the
-variable is categorical it will randomly pick a level. Then it will
-split the data using the value randomly selected eariler.</p>
-<p>The iForest method repeats the above steps until all points are
-separately in their own node. Then, for each data point, it counts how
-many splits were needed to isolate it.</p>
-<p>Because the selection of variables and values is random, this process
-will return different results each time. Therefore, isolation trees are
-repeated many times and the results are averaged over all trials. More
-isolated points will have lower average path lengths. They are more
-isolated from the rest of the data’s distribution, therefore they are
-called outliers.</p>
+<p>Isolation Forest (iForest) is an unsupervised machine learning
+algorithm designed to detect anomalies in data is implemented using the
+<code>isotree</code> package. It works by creating random partitions of
+the data and measuring how quickly each point can be isolated. Points
+that are isolated faster (using fewer splits) are more likely to be
+outliers.</p>
+<p>The iForest algorithm is particularly well-suited for handling
+high-dimensional data and works with both quantitative and categorical
+variables. It is robust to noise and scales efficiently for large
+datasets.</p>
+<p>Here is an example of the scores using the <a href="https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html" class="external-link">mtcarsOutliers</a>
+dataset included with this package.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/david-cortes/isotree" class="external-link">isotree</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: package 'isotree' was built under R version 4.4.2</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">mtcarsOutliers</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">isolation_forest_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/isotree/man/isolation.forest.html" class="external-link">isolation.forest</a></span><span class="op">(</span><span class="va">data</span>, ntrees <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">data</span><span class="op">$</span><span class="va">iso_score</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">isolation_forest_model</span>, <span class="va">data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">iso_score</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.4249880 0.3782837 0.3807095 0.3695911 0.5066493</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="customizing-parameters">Customizing Parameters<a class="anchor" aria-label="anchor" href="#customizing-parameters"></a>
+</h3>
+<p>The iForest method allows customization of two main parameters:</p>
+<p>ntrees: The number of trees in the isolation forest. A higher value
+increases precision but also computation time. Default is 100.</p>
+<p>n: The number of points to return as outliers. Default is 5.</p>
+<p>Here’s an example of how you can modify these parameters:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"iForest"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"iForest"</span>, ntrees <span class="op">=</span> <span class="fl">200</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Method: iForest</span></span>
+<span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
+<span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb iso_score</span></span>
+<span><span class="co">#&gt; Row: Maserati Bora Merc 230 Toyota Corolla Hornet Sportabout Merc 280 Volvo 142E Honda Civic Duster 360 Ford Pantera L Merc 450SE</span></span>
+<span><span class="co">#&gt; Outlier Score: 0.5932919 0.5876694 0.5168765 0.5038969 0.4751465 0.4591736 0.4582887 0.4562152 0.4447788 0.4408235</span></span>
+<span><span class="co">#&gt; Message:  Outliers detected</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="example-output-2">Example Output<a class="anchor" aria-label="anchor" href="#example-output-2"></a>
+</h3>
+<p>When using the iForest method with the default
+<code>ntrees = 100</code> and <code>n = 5</code> the function
+returns:</p>
+<ul>
+<li>Method: “iForest”, indicating the method used.</li>
+<li>Dataset: The dataset name.</li>
+<li>Variables: The numeric columns considered.</li>
+<li>Row: Indices of rows identified as outliers.</li>
+<li>Score: Isolation scores for each detected outlier.</li>
+<li>Message: A summary message indicating whether outliers were
+detected.</li>
+<li>ntrees: The number of trees in the isolation forest</li>
+<li>n: The number of points to return as outliers</li>
+<li>Data: The first five rows of the dataset used.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"iForest"</span><span class="op">)</span></span>
+<span><span class="va">result</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: iForest</span></span>
 <span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
@@ -358,6 +385,30 @@ called outliers.</p>
 <span><span class="co">#&gt; Row: Merc 230 Maserati Bora Toyota Corolla Hornet Sportabout Volvo 142E</span></span>
 <span><span class="co">#&gt; Outlier Score: 0.5912855 0.5673572 0.5386362 0.4858491 0.4728747</span></span>
 <span><span class="co">#&gt; Message:  Outliers detected</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="notes-and-considerations-2">Notes and Considerations<a class="anchor" aria-label="anchor" href="#notes-and-considerations-2"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li><p>Scalability: Isolation Forest is designed to handle large
+datasets efficiently, making it suitable for high-dimensional data.
+However, performance may depend on the ntrees parameter, as higher
+values can increase computation time.</p></li>
+<li><p>No Assumptions on Data Distribution: Unlike some statistical
+methods, iForest does not assume a specific data distribution. This
+makes it robust for detecting outliers in diverse datasets.</p></li>
+<li><p>Handles Mixed Data Types: iForest can process both numeric and
+categorical variables. However, ensure your data is properly encoded or
+formatted as required by the isotree package.</p></li>
+<li><p>Interpretation of Scores: Higher isolation scores indicate
+stronger anomalies. You may need to determine an appropriate threshold
+for your dataset when interpreting the results.</p></li>
+</ol>
+<p>To learn more about Isolation Forest and how it’s used in
+multivariate outlier detection, visit these resources: * <a href="https://medium.com/@limyenwee_19946/unsupervised-outlier-detection-with-isolation-forest-eab398c593b2" class="external-link">Medium.com</a>
+* <a href="https://www.youtube.com/watch?v=O9VvmWj-JAk" class="external-link">Andy McDonald on
+YouTube</a></p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
