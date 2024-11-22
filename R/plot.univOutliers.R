@@ -5,13 +5,13 @@
 #' @returns A plot object specific to the outlier detection method used (boxplot, MAD, or Grubbs' test).
 #' @examples
 #' object <- univOutliers(data = mtcars, x = "carb", method = "mad")
-#' plot.univOutliers(object)
+#' #plot(object)
 #'
 #' object2 <- univOutliers(data = mtcars, x = "wt", method = "boxplot")
-#' plot.univOutliers(object2)
+#' #plot(object2)
 #'
 #' object3 <- univOutliers(data = mtcars, x = "carb", method = "grubbs")
-#' plot.univOutliers(object3)
+#' #plot(object3)
 
 
 # Plot function for 'univOutliers'

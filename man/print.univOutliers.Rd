@@ -2,30 +2,26 @@
 % Please edit documentation in R/print.univOutliers.R
 \name{print.univOutliers}
 \alias{print.univOutliers}
-\title{Printing Univariate Outlier Detection}
+\title{Printing Univariate Outlier Detection Results}
 \usage{
 \method{print}{univOutliers}(x, ...)
 }
 \arguments{
-\item{x}{the results from a univariate outlier detection function (e.g., \code{boxplot}, \code{grubbsTest}, or MAD)}
+\item{x}{The results from a univariate outlier detection function (e.g., output from \code{univOutliers}).}
 }
 \value{
-A formatted print of the results of the univariate outlier detection
+A formatted print of the outlier results, including the detected outliers, their row numbers, and the method used.
 }
 \description{
-Prints identified univariate outliers using boxplot, Grubbs test, or MAD method
+Prints identified univariate outliers using the specified method (boxplot, MAD, or Grubbs' test).
 }
 \examples{
-# Example usage:
-object <- univOutliers(data = mtcars, method = "mad")
-plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
-print(object)  # Printing the outliers and methods
+object <- univOutliers(data = mtcars, x = "carb", method = "mad")
+print(object)
 
-object <- univOutliers(data = mtcars, method = "boxplot")
-plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
-print(object)  # Printing the outliers and methods
+object2 <- univOutliers(data = mtcars, x = "wt", method = "boxplot")
+print(object2)
 
-object <- univOutliers(data = mtcars, method = "grubbs")
-plot.univOutliers(object, mtcars)  # Plotting the object with 'mtcars' dataset
-print(object)  # Printing the outliers and methods
+object3 <- univOutliers(data = mtcars, x = "carb", method = "grubbs")
+print(object3)
 }

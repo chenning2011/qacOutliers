@@ -54,7 +54,7 @@ This method helps quickly identify potential outliers, which are plotted individ
 
 ```{r}
 object2 <- univOutliers(data = mtcars, x= "wt", method = "boxplot")
-plot.univOutliers(object2)  # Plotting the object with 'mtcars' dataset
+plot(object2)  # Plotting the object with 'mtcars' dataset
 print(object2)  # Printing the outliers and methods
 ```
 
@@ -71,13 +71,13 @@ normal_data <- rnorm(100, mean = 50, sd = 5)  # Normal distribution
 data_with_outlier <- c(normal_data, 70)  # Add a clear outlier (100)
 data_frame <- data.frame(values = data_with_outlier)
 object_normal_outlier <- univOutliers(data = data_frame, x = "values", method = "grubbs")
-plot.univOutliers(object_normal_outlier)  # Plotting the object with the outlier
+#plot(object_normal_outlier)  # Plotting the object with the outlier
 print(object_normal_outlier)  # Printing the outliers and methods
 ```
 
 ```{r}
 object3 <- univOutliers(data = mtcars, x = "carb", method = "grubbs")
-plot.univOutliers(object3)  # Plotting the object with 'mtcars' dataset
+#plot(object3)  # Plotting the object with 'mtcars' dataset
 print(object3)  # Printing the outliers and methods
 ```
 
@@ -91,7 +91,7 @@ The MAD (Median Absolute Deviation) method for univariate outlier detection iden
 
 ```{r}
 object <- univOutliers(data = mtcars, x="carb", method = "mad")
-plot.univOutliers(object)  # Plotting the object with 'mtcars' dataset
+#plot(object)  # Plotting the object with 'mtcars' dataset
 print(object)  # Printing the outliers and methods
 ```
 

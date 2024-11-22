@@ -4,23 +4,24 @@
 \alias{plot.univOutliers}
 \title{Plotting Univariate Outlier Detection}
 \usage{
-\method{plot}{univOutliers}(outlier_results, data)
+\method{plot}{univOutliers}(outlier_results)
 }
 \arguments{
-\item{data}{The original data frame used for outlier detection.}
-
-\item{x}{A character string naming the numeric variable to visualize.}
-
-\item{method}{The method used for outlier detection ("boxplot", "mad", or "grubbs").}
-
-\item{results}{A list containing the results of the outlier detection.}
+\item{outlier_results}{A list containing the results from a univariate outlier detection function (e.g., \code{univOutliers}).}
 }
 \value{
-A plot object specific to the method.
+A plot object specific to the outlier detection method used (boxplot, MAD, or Grubbs' test).
 }
 \description{
-Creates visualizations for univariate outlier detection using the method-specific plot style.
+Creates visualizations for univariate outlier detection using method-specific plot styles.
 }
 \examples{
-# # Example usage:
+object <- univOutliers(data = mtcars, x = "carb", method = "mad")
+#plot(object)
+
+object2 <- univOutliers(data = mtcars, x = "wt", method = "boxplot")
+#plot(object2)
+
+object3 <- univOutliers(data = mtcars, x = "carb", method = "grubbs")
+#plot(object3)
 }

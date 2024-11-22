@@ -109,40 +109,103 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"mahalanobis"</span>, alpha<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: mahalanobis</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcarsOutliers</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb scores</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Row: 5 7 9 10 12 20 31 32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 25.11784 29.58581 27.30969 19.22256 26.99406 21.46034 27.95683 25.39721</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Message:  Outliers detected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : alpha = 0.1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   carb    scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4            4  7.247443</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag        4  3.943746</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710           1  5.886045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive       1  2.114513</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout    2 25.117839</span>
 <span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"LoF"</span>, minPts<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: LoF</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcarsOutliers</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb scores</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Row: 5 7 9 10 11 12 19 20 29 31 32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 3.146901 4.646142 3.401508 1.759811 2.00213 2.543073 1.915247 1.761172 2.28657 4.403093 1.772691</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Message:  Outliers detected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : minPts = 5</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   carb    scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4            4 1.1569889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag        4 1.0824819</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710           1 0.9169562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive       1 1.1209301</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout    2 3.1469012</span>
 <span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"kNN"</span>, k<span class="op">=</span><span class="fl">5</span>, threshold<span class="op">=</span><span class="fl">.95</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: kNN</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcarsOutliers</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb scores</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Row: 11 19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 547.8248 393.1049</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Message:  Outliers detected</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : k = 5</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mtcarsOutliers"</span>
 <span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"iForest"</span>, ntrees <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: iForest</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcarsOutliers</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb iso_score</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Row: Merc 230 Maserati Bora Toyota Corolla Merc 280 Hornet Sportabout</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Row: 5 9 10 20 31</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 0.6098171 0.5689141 0.5168466 0.4768288 0.4669088</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Message:  Outliers detected</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Option 1 : ntrees = 50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Option 2 : n = 5</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   carb    scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4            4 0.4174958</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag        4 0.3701169</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710           1 0.3681721</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive       1 0.3560603</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout    2 0.4669088</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

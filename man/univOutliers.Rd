@@ -7,18 +7,29 @@
 univOutliers(data, x = NULL, method = "boxplot")
 }
 \arguments{
-\item{data}{A data frame containing the variable to be analyzed.}
+\item{data}{a data frame containing the variable(s) to be analyzed}
 
-\item{x}{A character string naming the numeric variable to assess for outliers.}
+\item{x}{character, specifies the column(s) to assess for outliers. If NULL, all numeric columns are used}
 
-\item{method}{A character supplying the method used for outlier detection. Methods are boxplot, mad, and grubbs.}
+\item{method}{character, the method used for outlier detection: "boxplot", "mad", or "grubbs" (default is "boxplot")}
 }
 \value{
-A list containing the ggplot object and boxplot statistics.
+A list with detected outliers, their indices, the method used, and the original dataset
 }
 \description{
-Provides three methods for detecting univariate outliers in a dataset.
+Detects univariate outliers using boxplot, MAD, or Grubbs' test.
 }
 \examples{
-# Example usage:
+Example usage:
+object <- univOutliers(data = mtcars, x="carb", method = "mad")
+plot.univOutliers(object)  # Plotting the object with 'mtcars' dataset
+print(object)  # Printing the outliers and methods
+
+object2 <- univOutliers(data = mtcars, x= "wt", method = "boxplot")
+plot.univOutliers(object2)  # Plotting the object with 'mtcars' dataset
+print(object2)  # Printing the outliers and methods
+
+object3 <- univOutliers(data = mtcars, x = "carb", method = "grubbs")
+plot.univOutliers(object3)  # Plotting the object with 'mtcars' dataset
+print(object3)  # Printing the outliers and methods
 }

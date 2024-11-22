@@ -64,15 +64,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/chenning2011/qacOutliers">qacOutliers</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'dplyr::combine' by 'gridExtra::combine'</span></span>
-<span><span class="co">#&gt; when loading 'qacOutliers'</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading</span></span>
-<span><span class="co">#&gt; 'qacOutliers'</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'dplyr::filter' by 'stats::filter' when</span></span>
-<span><span class="co">#&gt; loading 'qacOutliers'</span></span>
-<span><span class="co">#&gt; Warning: replacing previous import 'dbscan::as.dendrogram' by</span></span>
-<span><span class="co">#&gt; 'stats::as.dendrogram' when loading 'qacOutliers'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/chenning2011/qacOutliers">qacOutliers</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="what-are-outliers">What are outliers?<a class="anchor" aria-label="anchor" href="#what-are-outliers"></a>
 </h3>
@@ -111,6 +103,8 @@ outliers by their respective functions, it’s important to always look at
 the underlying data to understand why they are being picked out as
 outliers, if they truly are outliers, and why they might have the values
 that they have.</p>
+<p>-provide information here about how to load the library and how to
+supress the messages that show up when loading the package</p>
 </div>
 <div class="section level3">
 <h3 id="why-should-we-detect-outliers">Why should we detect outliers?<a class="anchor" aria-label="anchor" href="#why-should-we-detect-outliers"></a>
@@ -147,13 +141,31 @@ a dataset included in this package.</p>
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"LoF"</span><span class="op">)</span></span>
 <span><span class="va">results</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: LoF</span></span>
 <span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
-<span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb scores</span></span>
 <span><span class="co">#&gt; Row: 5 7 9 10 11 12 20 31 32</span></span>
 <span><span class="co">#&gt; Outlier Score: 2.28365 2.719583 2.560179 1.530304 1.563598 1.804971 1.567824 2.950466 1.574599</span></span>
 <span><span class="co">#&gt; Message:  Outliers detected</span></span>
-<span><span class="co">#&gt; Option 1 : minPts = 10</span></span></code></pre></div>
+<span><span class="co">#&gt; Option 1 : minPts = 10</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; First Five Rows of Data Used:</span></span>
+<span><span class="co">#&gt;                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span></span>
+<span><span class="co">#&gt; Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span></span>
+<span><span class="co">#&gt; Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span></span>
+<span><span class="co">#&gt; Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span></span>
+<span><span class="co">#&gt; Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span></span>
+<span><span class="co">#&gt;                   carb    scores</span></span>
+<span><span class="co">#&gt; Mazda RX4            4 1.1227696</span></span>
+<span><span class="co">#&gt; Mazda RX4 Wag        4 1.0570364</span></span>
+<span><span class="co">#&gt; Datsun 710           1 1.0752967</span></span>
+<span><span class="co">#&gt; Hornet 4 Drive       1 0.9424642</span></span>
+<span><span class="co">#&gt; Hornet Sportabout    2 2.2836503</span></span></code></pre></div>
 <p>The LoF function detected nine outliers within this dataset. From
 this output, you can identify which rows these outliers are in, and
 extract them to inspect these observations.</p>

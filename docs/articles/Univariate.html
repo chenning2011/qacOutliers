@@ -101,36 +101,24 @@ values. 1.58 is the length of the whiskers as multiple of IQR.</p>
 plotted individually and can indicate unusual or problematic data points
 that may warrant further investigation.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mpg"</span>, method<span class="op">=</span><span class="st">"boxplot"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">object2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, x<span class="op">=</span> <span class="st">"wt"</span>, method <span class="op">=</span> <span class="st">"boxplot"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">object2</span><span class="op">)</span>  <span class="co"># Plotting the object with 'mtcars' dataset</span></span></code></pre></div>
+<p><img src="Univariate_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">object2</span><span class="op">)</span>  <span class="co"># Printing the outliers and methods</span></span>
 <span><span class="co">#&gt; Loading required package: cli</span></span>
 <span><span class="co">#&gt; Loading required package: knitr</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; Variable: mpg</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> No outliers detected.</span></span>
-<span><span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"hp"</span>, method<span class="op">=</span><span class="st">"boxplot"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; Variable: hp</span></span>
+<span><span class="co">#&gt; Variable: wt</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Outliers Detected for:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Row Number    Outlier Value </span></span>
 <span><span class="co">#&gt; ------------  ---------------</span></span>
-<span><span class="co">#&gt;      31             335</span></span>
-<span><span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"qsec"</span>, method<span class="op">=</span><span class="st">"boxplot"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: boxplot</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; Variable: qsec</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Outliers Detected for:</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  Row Number    Outlier Value </span></span>
-<span><span class="co">#&gt; ------------  ---------------</span></span>
-<span><span class="co">#&gt;      9             22.9</span></span></code></pre></div>
+<span><span class="co">#&gt;      16            5.424     </span></span>
+<span><span class="co">#&gt;      17            5.345</span></span></code></pre></div>
 <p>The output will provide the identified outliers along with their
 corresponding row numbers, and a graphical representation will be
 generated with the outliers highlighted in red.</p>
@@ -142,25 +130,41 @@ generated with the outliers highlighted in red.</p>
 outliers by testing the hypothesis that the largest or smallest value is
 an outlier. The Grubbs’ test requires the data to be normally
 distributed because it relies on mean and standard deviation.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mpg"</span>, method<span class="op">=</span><span class="st">"grubbs"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># TO TEST NORMAL DIST W OUTLIER FOR GRUBBS</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="va">normal_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">50</span>, sd <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>  <span class="co"># Normal distribution</span></span>
+<span><span class="va">data_with_outlier</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">normal_data</span>, <span class="fl">70</span><span class="op">)</span>  <span class="co"># Add a clear outlier (100)</span></span>
+<span><span class="va">data_frame</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">data_with_outlier</span><span class="op">)</span></span>
+<span><span class="va">object_normal_outlier</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data_frame</span>, x <span class="op">=</span> <span class="st">"values"</span>, method <span class="op">=</span> <span class="st">"grubbs"</span><span class="op">)</span></span>
+<span><span class="co">#plot(object_normal_outlier)  # Plotting the object with the outlier</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">object_normal_outlier</span><span class="op">)</span>  <span class="co"># Printing the outliers and methods</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; Variable: mpg</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> No outliers detected.</span></span>
-<span><span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"hp"</span>, method<span class="op">=</span><span class="st">"grubbs"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Variable: values</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Outliers Detected for:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Row Number    Outlier Value </span></span>
+<span><span class="co">#&gt; ------------  ---------------</span></span>
+<span><span class="co">#&gt;     101             70</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">object3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, x <span class="op">=</span> <span class="st">"carb"</span>, method <span class="op">=</span> <span class="st">"grubbs"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in grubbs_test(column_data): Data is not normally distributed. Grubbs'</span></span>
 <span><span class="co">#&gt; test may not be appropriate.</span></span>
+<span><span class="co">#plot(object3)  # Plotting the object with 'mtcars' dataset</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">object3</span><span class="op">)</span>  <span class="co"># Printing the outliers and methods</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; Variable: hp</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> No outliers detected.</span></span>
-<span><span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"qsec"</span>, method<span class="op">=</span><span class="st">"grubbs"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Variable: carb</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: grubbs</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; Variable: qsec</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> No outliers detected.</span></span></code></pre></div>
+<span><span class="co">#&gt; Outliers Detected for:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Row Number    Outlier Value </span></span>
+<span><span class="co">#&gt; ------------  ---------------</span></span>
+<span><span class="co">#&gt;      31              8</span></span></code></pre></div>
 <p>The output of Grubbs’ test will provide the identified outliers and
 the corresponding row numbers. This method uses a Shapiro-Wilk test
 (shapiro.test) for normality. If the p-value of the normality test is
@@ -182,29 +186,20 @@ median of the values in the target vector. The upper CI limit is the
 median + 3MAD and the lower CI limit is median - 3MAD. The points
 outside of the confidence interval are the outliers detected by the MAD
 method.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"mpg"</span>, method<span class="op">=</span><span class="st">"mad"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">object</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, x<span class="op">=</span><span class="st">"carb"</span>, method <span class="op">=</span> <span class="st">"mad"</span><span class="op">)</span></span>
+<span><span class="co">#plot(object)  # Plotting the object with 'mtcars' dataset</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">object</span><span class="op">)</span>  <span class="co"># Printing the outliers and methods</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; Variable: mpg</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> No outliers detected.</span></span>
-<span><span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"hp"</span>, method<span class="op">=</span><span class="st">"mad"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; Variable: hp</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> No outliers detected.</span></span>
-<span><span class="fu"><a href="../reference/univOutliers.html">univOutliers</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="st">"qsec"</span>, method<span class="op">=</span><span class="st">"mad"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Method Chosen: mad</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; Variable: qsec</span></span>
+<span><span class="co">#&gt; Variable: carb</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Outliers Detected for:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Row Number    Outlier Value </span></span>
 <span><span class="co">#&gt; ------------  ---------------</span></span>
-<span><span class="co">#&gt;      9             22.9</span></span></code></pre></div>
+<span><span class="co">#&gt;      31              8</span></span></code></pre></div>
 <p>The output will provide the identified outliers along with their
 corresponding row numbers, and a graphical representation will be
 generated with the outliers highlighted in red.</p>
