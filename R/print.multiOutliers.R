@@ -47,6 +47,7 @@ print.multiOutliers <- function(x,...) {
     }
   }
 
+  cat("\n")
   cli::cli_h1("Dataset Information")
   cat("\nFive Highest Outliers of Data Used:\n")
   print(head(x$Data[order(-x$Data$scores),],5))
