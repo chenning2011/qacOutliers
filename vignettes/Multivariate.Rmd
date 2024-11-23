@@ -103,7 +103,7 @@ When using the kNN method with the default `k=5`, the function returns:
 - Score: Average kNN distance scores of detected outliers.
 - Message: A summary message indicating whether outliers were detected.
 - k: The number of nearest neighbors considered.
-- Data: the first five rows of the dataset used. 
+- Data: Displays the five highest outliers in the data used. 
 
 ```{r, echo = F, message = F}
 result <- multiOutliers(mtcarsOutliers, method = "kNN")
@@ -167,7 +167,7 @@ When using the LoF method with the default minPts = 5, the function returns:
 - Score: LoF scores for each detected outlier.
 - Message: A summary message indicating whether outliers were detected.
 - minPts: The parameter value used for the local neighborhood.
-- Data: First five rows of the data used.
+- Data: Displays the five highest outliers in the data used. 
 
 ```{r}
 result <- multiOutliers(mtcarsOutliers, method = "LoF")
@@ -234,7 +234,7 @@ When using the Mahalanobis method with the default `alpha = 0.05`, the function 
 - Score: Mahalanobis distance scores of detected outliers.
 - Message: A summary message indicating whether outliers were detected.
 - Alpha: The significance level used.
-- Data: The first five rows of the dataset used. 
+- Data: Displays the five highest outliers in the data used. 
 
 ```{r, echo = F, message = F}
 result <- multiOutliers(mtcarsOutliers, method = "mahalanobis")
@@ -294,7 +294,7 @@ When using the iForest method with the default `ntrees = 100` and `n = 5` the fu
 - Message: A summary message indicating whether outliers were detected.
 - ntrees: The number of trees in the isolation forest
 - n: The number of points to return as outliers
-- Data: The first five rows of the dataset used. 
+- Data: Displays the five highest outliers in the data used.  
 
 ```{r}
 result <- multiOutliers(mtcarsOutliers, method = "iForest")
