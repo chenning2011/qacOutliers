@@ -4,28 +4,27 @@
 \alias{plot.multiOutliers}
 \title{Plotting Multivariate Outlier Detection}
 \usage{
-\method{plot}{multiOutliers}(
-  data,
-  varlist = names(data),
-  methods = c("kNN", "LoF", "mahalanobis", "iForest"),
-  minPts = 10,
-  k = 5,
-  threshold = 0.95,
-  alpha = 0.1,
-  na.rm = TRUE,
-  ...
-)
+\method{plot}{multiOutliers}(x, ...)
 }
 \arguments{
 \item{x}{the results from a multivariate outlier detection function (e.g., kNN, iForest, mahalanobis, LoF)}
 }
 \value{
-A formatted plot of the results of the multivariate outlier detection
+A formatted plot of the results of the multivariate outlier detection. Row indices are on the x-axis and ou
 }
 \description{
 Plots identified multivariate outliers using either kNN, iForest, mahalanobis, LoF
 }
 \examples{
-data(iris)
-results <- multiOutliers(iris, method="iForest")
+results <- multiOutliers(irisOutliers, method="iForest")
+plot(results)
+
+results <- multiOutliers(irisOutliers, method = "kNN")
+plot(results)
+
+results <- multiOutliers(irisOutliers, method = "LoF")
+plot(results)
+
+results <- multiOutliers(irisOutliers, method = "mahalanobis")
+plot(results)
 }

@@ -120,14 +120,26 @@ number. In this case, the threshold is the number below.</p>
 threshold. In this case, the outliers are shown below.</p>
 <pre><code><span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: kNN</span></span>
-<span><span class="co">#&gt; Dataset:</span></span>
+<span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
 <span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb scores</span></span>
 <span><span class="co">#&gt; Row: 11 19</span></span>
 <span><span class="co">#&gt; Outlier Score: 547.8248 393.1049</span></span>
 <span><span class="co">#&gt; Message:  Outliers detected</span></span>
 <span><span class="co">#&gt; Option 1 : k = 5</span></span>
-<span><span class="co">#&gt; First Five Rows of Data Used:</span></span>
-<span><span class="co">#&gt; [1] "mtcarsOutliers"</span></span></code></pre>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Five Highest Outliers of Data Used:</span></span>
+<span><span class="co">#&gt;                        mpg       cyl      disp        hp     drat    wt</span></span>
+<span><span class="co">#&gt; Merc 280C         17.80000  6.000000 -459.2495  123.0000 3.920000 3.440</span></span>
+<span><span class="co">#&gt; Honda Civic       30.40000  4.000000  783.2571   52.0000 4.930000 1.615</span></span>
+<span><span class="co">#&gt; Merc 280          44.30673  6.000000  167.6000 -238.7728 4.560312 3.440</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 18.70000 -4.137792  360.0000  446.9140 3.150000 3.440</span></span>
+<span><span class="co">#&gt; Maserati Bora     15.00000  8.000000  301.0000  335.0000 3.540000 3.570</span></span>
+<span><span class="co">#&gt;                       qsec vs am      gear carb   scores</span></span>
+<span><span class="co">#&gt; Merc 280C         18.90000  1  0 4.0000000    4 547.8248</span></span>
+<span><span class="co">#&gt; Honda Civic       18.52000  1  1 4.0000000    2 393.1049</span></span>
+<span><span class="co">#&gt; Merc 280          18.30000  1  0 4.0000000    4 318.1242</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 17.02000  0  0 3.0000000    2 189.8207</span></span>
+<span><span class="co">#&gt; Maserati Bora     33.90273  0  1 0.9829575    8 117.9942</span></span></code></pre>
 <div class="section level3">
 <h3 id="customizing-the-k-parameter">Customizing the <code>k</code> parameter<a class="anchor" aria-label="anchor" href="#customizing-the-k-parameter"></a>
 </h3>
@@ -144,7 +156,7 @@ which may change the results of the function.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: kNN</span></span>
-<span><span class="co">#&gt; Dataset:</span></span>
+<span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
 <span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb scores</span></span>
 <span><span class="co">#&gt; Row: 11 19</span></span>
 <span><span class="co">#&gt; Outlier Score: 568.7642 441.0597</span></span>
@@ -153,8 +165,19 @@ which may change the results of the function.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; First Five Rows of Data Used:</span></span>
-<span><span class="co">#&gt; [1] "mtcarsOutliers"</span></span></code></pre></div>
+<span><span class="co">#&gt; Five Highest Outliers of Data Used:</span></span>
+<span><span class="co">#&gt;                        mpg       cyl      disp        hp     drat    wt</span></span>
+<span><span class="co">#&gt; Merc 280C         17.80000  6.000000 -459.2495  123.0000 3.920000 3.440</span></span>
+<span><span class="co">#&gt; Honda Civic       30.40000  4.000000  783.2571   52.0000 4.930000 1.615</span></span>
+<span><span class="co">#&gt; Merc 280          44.30673  6.000000  167.6000 -238.7728 4.560312 3.440</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 18.70000 -4.137792  360.0000  446.9140 3.150000 3.440</span></span>
+<span><span class="co">#&gt; Maserati Bora     15.00000  8.000000  301.0000  335.0000 3.540000 3.570</span></span>
+<span><span class="co">#&gt;                       qsec vs am      gear carb   scores</span></span>
+<span><span class="co">#&gt; Merc 280C         18.90000  1  0 4.0000000    4 568.7642</span></span>
+<span><span class="co">#&gt; Honda Civic       18.52000  1  1 4.0000000    2 441.0597</span></span>
+<span><span class="co">#&gt; Merc 280          18.30000  1  0 4.0000000    4 330.3313</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 17.02000  0  0 3.0000000    2 230.4534</span></span>
+<span><span class="co">#&gt; Maserati Bora     33.90273  0  1 0.9829575    8 145.8174</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-output">Example Output<a class="anchor" aria-label="anchor" href="#example-output"></a>
@@ -171,18 +194,42 @@ detection.</li>
 <li>Message: A summary message indicating whether outliers were
 detected.</li>
 <li>k: The number of nearest neighbors considered.</li>
-<li>Data: the first five rows of the dataset used.</li>
+<li>Data: Displays the five highest outliers in the data used.</li>
 </ul>
-<pre><code><span><span class="co">#&gt; </span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"kNN"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: kNN</span></span>
-<span><span class="co">#&gt; Dataset:</span></span>
+<span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
 <span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb scores</span></span>
 <span><span class="co">#&gt; Row: 11 19</span></span>
 <span><span class="co">#&gt; Outlier Score: 547.8248 393.1049</span></span>
 <span><span class="co">#&gt; Message:  Outliers detected</span></span>
 <span><span class="co">#&gt; Option 1 : k = 5</span></span>
-<span><span class="co">#&gt; First Five Rows of Data Used:</span></span>
-<span><span class="co">#&gt; [1] "mtcarsOutliers"</span></span></code></pre>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Five Highest Outliers of Data Used:</span></span>
+<span><span class="co">#&gt;                        mpg       cyl      disp        hp     drat    wt</span></span>
+<span><span class="co">#&gt; Merc 280C         17.80000  6.000000 -459.2495  123.0000 3.920000 3.440</span></span>
+<span><span class="co">#&gt; Honda Civic       30.40000  4.000000  783.2571   52.0000 4.930000 1.615</span></span>
+<span><span class="co">#&gt; Merc 280          44.30673  6.000000  167.6000 -238.7728 4.560312 3.440</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 18.70000 -4.137792  360.0000  446.9140 3.150000 3.440</span></span>
+<span><span class="co">#&gt; Maserati Bora     15.00000  8.000000  301.0000  335.0000 3.540000 3.570</span></span>
+<span><span class="co">#&gt;                       qsec vs am      gear carb   scores</span></span>
+<span><span class="co">#&gt; Merc 280C         18.90000  1  0 4.0000000    4 547.8248</span></span>
+<span><span class="co">#&gt; Honda Civic       18.52000  1  1 4.0000000    2 393.1049</span></span>
+<span><span class="co">#&gt; Merc 280          18.30000  1  0 4.0000000    4 318.1242</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 17.02000  0  0 3.0000000    2 189.8207</span></span>
+<span><span class="co">#&gt; Maserati Bora     33.90273  0  1 0.9829575    8 117.9942</span></span></code></pre></div>
+<p>Here is an example of graphical output from this function.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required package: grid</span></span></code></pre></div>
+<p><img src="Multivariate_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="notes-and-considerations">Notes and Considerations<a class="anchor" aria-label="anchor" href="#notes-and-considerations"></a>
@@ -201,13 +248,6 @@ detection, visit these resources:</p>
 <li><a href="https://dualitytech.com/blog/anomaly-detection-k-nearest-neighbors/" class="external-link">Dualitytech.com</a></li>
 <li><a href="https://www.youtube.com/watch?v=HVXime0nQeI" class="external-link">StatQuest</a></li>
 </ul>
-</div>
-<div class="section level3">
-<h3 id="graphical-output">Graphical output<a class="anchor" aria-label="anchor" href="#graphical-output"></a>
-</h3>
-<p>Here is a graphical representation of the outliers shown above.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#add plot function when it's done</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -263,19 +303,19 @@ example:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; First Five Rows of Data Used:</span></span>
-<span><span class="co">#&gt;                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span></span>
-<span><span class="co">#&gt; Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span></span>
-<span><span class="co">#&gt; Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span></span>
-<span><span class="co">#&gt; Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span></span>
-<span><span class="co">#&gt;                   carb    scores</span></span>
-<span><span class="co">#&gt; Mazda RX4            4 1.1227696</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag        4 1.0570364</span></span>
-<span><span class="co">#&gt; Datsun 710           1 1.0752967</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive       1 0.9424642</span></span>
-<span><span class="co">#&gt; Hornet Sportabout    2 2.2836503</span></span></code></pre></div>
+<span><span class="co">#&gt; Five Highest Outliers of Data Used:</span></span>
+<span><span class="co">#&gt;                        mpg       cyl  disp      hp     drat        wt     qsec</span></span>
+<span><span class="co">#&gt; Maserati Bora     15.00000  8.000000 301.0 335.000  3.54000  3.570000 33.90273</span></span>
+<span><span class="co">#&gt; Duster 360        14.30000  8.000000 360.0 245.000 18.14468  3.570000 15.84000</span></span>
+<span><span class="co">#&gt; Merc 230          22.80000  4.000000 140.8  95.000  3.92000 -4.541341 22.90000</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 18.70000 -4.137792 360.0 446.914  3.15000  3.440000 17.02000</span></span>
+<span><span class="co">#&gt; Merc 450SE        54.17757  8.000000 275.8 180.000  3.07000  4.070000 17.40000</span></span>
+<span><span class="co">#&gt;                          vs am      gear carb   scores</span></span>
+<span><span class="co">#&gt; Maserati Bora      0.000000  1 0.9829575    8 2.950466</span></span>
+<span><span class="co">#&gt; Duster 360         0.000000  0 3.0000000    4 2.719583</span></span>
+<span><span class="co">#&gt; Merc 230          -8.556805  0 4.0000000    2 2.560179</span></span>
+<span><span class="co">#&gt; Hornet Sportabout  0.000000  0 3.0000000    2 2.283650</span></span>
+<span><span class="co">#&gt; Merc 450SE         0.000000  0 3.0000000    3 1.804971</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-output-1">Example Output<a class="anchor" aria-label="anchor" href="#example-output-1"></a>
@@ -291,7 +331,7 @@ returns:</p>
 <li>Message: A summary message indicating whether outliers were
 detected.</li>
 <li>minPts: The parameter value used for the local neighborhood.</li>
-<li>Data: First five rows of the data used.</li>
+<li>Data: Displays the five highest outliers in the data used.</li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"LoF"</span><span class="op">)</span></span>
@@ -309,19 +349,23 @@ detected.</li>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; First Five Rows of Data Used:</span></span>
-<span><span class="co">#&gt;                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span></span>
-<span><span class="co">#&gt; Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span></span>
-<span><span class="co">#&gt; Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span></span>
-<span><span class="co">#&gt; Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span></span>
-<span><span class="co">#&gt;                   carb    scores</span></span>
-<span><span class="co">#&gt; Mazda RX4            4 1.1227696</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag        4 1.0570364</span></span>
-<span><span class="co">#&gt; Datsun 710           1 1.0752967</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive       1 0.9424642</span></span>
-<span><span class="co">#&gt; Hornet Sportabout    2 2.2836503</span></span></code></pre></div>
+<span><span class="co">#&gt; Five Highest Outliers of Data Used:</span></span>
+<span><span class="co">#&gt;                        mpg       cyl  disp      hp     drat        wt     qsec</span></span>
+<span><span class="co">#&gt; Maserati Bora     15.00000  8.000000 301.0 335.000  3.54000  3.570000 33.90273</span></span>
+<span><span class="co">#&gt; Duster 360        14.30000  8.000000 360.0 245.000 18.14468  3.570000 15.84000</span></span>
+<span><span class="co">#&gt; Merc 230          22.80000  4.000000 140.8  95.000  3.92000 -4.541341 22.90000</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 18.70000 -4.137792 360.0 446.914  3.15000  3.440000 17.02000</span></span>
+<span><span class="co">#&gt; Merc 450SE        54.17757  8.000000 275.8 180.000  3.07000  4.070000 17.40000</span></span>
+<span><span class="co">#&gt;                          vs am      gear carb   scores</span></span>
+<span><span class="co">#&gt; Maserati Bora      0.000000  1 0.9829575    8 2.950466</span></span>
+<span><span class="co">#&gt; Duster 360         0.000000  0 3.0000000    4 2.719583</span></span>
+<span><span class="co">#&gt; Merc 230          -8.556805  0 4.0000000    2 2.560179</span></span>
+<span><span class="co">#&gt; Hornet Sportabout  0.000000  0 3.0000000    2 2.283650</span></span>
+<span><span class="co">#&gt; Merc 450SE         0.000000  0 3.0000000    3 1.804971</span></span></code></pre></div>
+<p>Here is an example of graphical output from this function.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Multivariate_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="notes-and-considerations-1">Notes and Considerations<a class="anchor" aria-label="anchor" href="#notes-and-considerations-1"></a>
@@ -393,7 +437,7 @@ the significance level for outlier detection. Lower values (e.g.,
 <code>alpha = 0.01</code>) result in stricter thresholds, identifying
 fewer points as outliers. You can modify <code>alpha</code> as
 follows:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"mahalanobis"</span>, alpha <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
@@ -408,19 +452,19 @@ follows:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; First Five Rows of Data Used:</span></span>
-<span><span class="co">#&gt;                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span></span>
-<span><span class="co">#&gt; Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span></span>
-<span><span class="co">#&gt; Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span></span>
-<span><span class="co">#&gt; Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span></span>
-<span><span class="co">#&gt;                   carb    scores</span></span>
-<span><span class="co">#&gt; Mazda RX4            4  7.247443</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag        4  3.943746</span></span>
-<span><span class="co">#&gt; Datsun 710           1  5.886045</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive       1  2.114513</span></span>
-<span><span class="co">#&gt; Hornet Sportabout    2 25.117839</span></span></code></pre></div>
+<span><span class="co">#&gt; Five Highest Outliers of Data Used:</span></span>
+<span><span class="co">#&gt;                    mpg cyl  disp  hp     drat        wt     qsec        vs am</span></span>
+<span><span class="co">#&gt; Duster 360    14.30000   8 360.0 245 18.14468  3.570000 15.84000  0.000000  0</span></span>
+<span><span class="co">#&gt; Maserati Bora 15.00000   8 301.0 335  3.54000  3.570000 33.90273  0.000000  1</span></span>
+<span><span class="co">#&gt; Merc 230      22.80000   4 140.8  95  3.92000 -4.541341 22.90000 -8.556805  0</span></span>
+<span><span class="co">#&gt; Merc 450SE    54.17757   8 275.8 180  3.07000  4.070000 17.40000  0.000000  0</span></span>
+<span><span class="co">#&gt; Volvo 142E    21.40000   4 121.0 109  4.11000  2.780000 18.60000  1.000000  1</span></span>
+<span><span class="co">#&gt;                    gear      carb   scores</span></span>
+<span><span class="co">#&gt; Duster 360    3.0000000   4.00000 29.58581</span></span>
+<span><span class="co">#&gt; Maserati Bora 0.9829575   8.00000 27.95683</span></span>
+<span><span class="co">#&gt; Merc 230      4.0000000   2.00000 27.30969</span></span>
+<span><span class="co">#&gt; Merc 450SE    3.0000000   3.00000 26.99406</span></span>
+<span><span class="co">#&gt; Volvo 142E    4.0000000 -12.91235 25.39721</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-output-2">Example Output<a class="anchor" aria-label="anchor" href="#example-output-2"></a>
@@ -436,9 +480,14 @@ follows:</p>
 <li>Message: A summary message indicating whether outliers were
 detected.</li>
 <li>Alpha: The significance level used.</li>
-<li>Data: The first five rows of the dataset used.</li>
+<li>Data: Displays the five highest outliers in the data used.</li>
 </ul>
-<pre><code><span><span class="co">#&gt; </span></span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"mahalanobis"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: mahalanobis</span></span>
 <span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
 <span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb scores</span></span>
@@ -446,19 +495,26 @@ detected.</li>
 <span><span class="co">#&gt; Outlier Score: 25.11784 29.58581 27.30969 19.22256 26.99406 21.46034 27.95683 25.39721</span></span>
 <span><span class="co">#&gt; Message:  Outliers detected</span></span>
 <span><span class="co">#&gt; Option 1 : alpha = 0.1</span></span>
-<span><span class="co">#&gt; First Five Rows of Data Used:</span></span>
-<span><span class="co">#&gt;                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span></span>
-<span><span class="co">#&gt; Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span></span>
-<span><span class="co">#&gt; Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span></span>
-<span><span class="co">#&gt; Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span></span>
-<span><span class="co">#&gt;                   carb    scores</span></span>
-<span><span class="co">#&gt; Mazda RX4            4  7.247443</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag        4  3.943746</span></span>
-<span><span class="co">#&gt; Datsun 710           1  5.886045</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive       1  2.114513</span></span>
-<span><span class="co">#&gt; Hornet Sportabout    2 25.117839</span></span></code></pre>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Five Highest Outliers of Data Used:</span></span>
+<span><span class="co">#&gt;                    mpg cyl  disp  hp     drat        wt     qsec        vs am</span></span>
+<span><span class="co">#&gt; Duster 360    14.30000   8 360.0 245 18.14468  3.570000 15.84000  0.000000  0</span></span>
+<span><span class="co">#&gt; Maserati Bora 15.00000   8 301.0 335  3.54000  3.570000 33.90273  0.000000  1</span></span>
+<span><span class="co">#&gt; Merc 230      22.80000   4 140.8  95  3.92000 -4.541341 22.90000 -8.556805  0</span></span>
+<span><span class="co">#&gt; Merc 450SE    54.17757   8 275.8 180  3.07000  4.070000 17.40000  0.000000  0</span></span>
+<span><span class="co">#&gt; Volvo 142E    21.40000   4 121.0 109  4.11000  2.780000 18.60000  1.000000  1</span></span>
+<span><span class="co">#&gt;                    gear      carb   scores</span></span>
+<span><span class="co">#&gt; Duster 360    3.0000000   4.00000 29.58581</span></span>
+<span><span class="co">#&gt; Maserati Bora 0.9829575   8.00000 27.95683</span></span>
+<span><span class="co">#&gt; Merc 230      4.0000000   2.00000 27.30969</span></span>
+<span><span class="co">#&gt; Merc 450SE    3.0000000   3.00000 26.99406</span></span>
+<span><span class="co">#&gt; Volvo 142E    4.0000000 -12.91235 25.39721</span></span></code></pre></div>
+<p>Here is an example of graphical output from this function.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Multivariate_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="notes-and-considerations-2">Notes and Considerations<a class="anchor" aria-label="anchor" href="#notes-and-considerations-2"></a>
@@ -493,7 +549,7 @@ variables. It is robust to noise and scales efficiently for large
 datasets.</p>
 <p>Here is an example of the scores using the <a href="https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html" class="external-link">mtcarsOutliers</a>
 dataset included with this package.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/david-cortes/isotree" class="external-link">isotree</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: package 'isotree' was built under R version 4.4.2</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">mtcarsOutliers</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
@@ -511,7 +567,7 @@ dataset included with this package.</p>
 increases precision but also computation time. Default is 100.</p>
 <p>n: The number of points to return as outliers. Default is 5.</p>
 <p>Here’s an example of how you can modify these parameters:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"iForest"</span>, ntrees <span class="op">=</span> <span class="fl">200</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
@@ -527,19 +583,19 @@ increases precision but also computation time. Default is 100.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; First Five Rows of Data Used:</span></span>
-<span><span class="co">#&gt;                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span></span>
-<span><span class="co">#&gt; Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span></span>
-<span><span class="co">#&gt; Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span></span>
-<span><span class="co">#&gt; Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span></span>
-<span><span class="co">#&gt;                   carb    scores</span></span>
-<span><span class="co">#&gt; Mazda RX4            4 0.4160052</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag        4 0.3801389</span></span>
-<span><span class="co">#&gt; Datsun 710           1 0.3816825</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive       1 0.3705484</span></span>
-<span><span class="co">#&gt; Hornet Sportabout    2 0.5038969</span></span></code></pre></div>
+<span><span class="co">#&gt; Five Highest Outliers of Data Used:</span></span>
+<span><span class="co">#&gt;                        mpg       cyl  disp        hp     drat        wt</span></span>
+<span><span class="co">#&gt; Maserati Bora     15.00000  8.000000 301.0  335.0000 3.540000  3.570000</span></span>
+<span><span class="co">#&gt; Merc 230          22.80000  4.000000 140.8   95.0000 3.920000 -4.541341</span></span>
+<span><span class="co">#&gt; Toyota Corolla    33.90000  4.000000  71.1   65.0000 4.220000  1.835000</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 18.70000 -4.137792 360.0  446.9140 3.150000  3.440000</span></span>
+<span><span class="co">#&gt; Merc 280          44.30673  6.000000 167.6 -238.7728 4.560312  3.440000</span></span>
+<span><span class="co">#&gt;                       qsec        vs am      gear      carb    scores</span></span>
+<span><span class="co">#&gt; Maserati Bora     33.90273  0.000000  1 0.9829575  8.000000 0.5932919</span></span>
+<span><span class="co">#&gt; Merc 230          22.90000 -8.556805  0 4.0000000  2.000000 0.5876694</span></span>
+<span><span class="co">#&gt; Toyota Corolla    19.90000  6.993352  1 4.0000000 -7.344032 0.5168765</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 17.02000  0.000000  0 3.0000000  2.000000 0.5038969</span></span>
+<span><span class="co">#&gt; Merc 280          18.30000  1.000000  0 4.0000000  4.000000 0.4751465</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-output-3">Example Output<a class="anchor" aria-label="anchor" href="#example-output-3"></a>
@@ -557,9 +613,9 @@ returns:</p>
 detected.</li>
 <li>ntrees: The number of trees in the isolation forest</li>
 <li>n: The number of points to return as outliers</li>
-<li>Data: The first five rows of the dataset used.</li>
+<li>Data: Displays the five highest outliers in the data used.</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"iForest"</span><span class="op">)</span></span>
 <span><span class="va">result</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -576,19 +632,23 @@ detected.</li>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; First Five Rows of Data Used:</span></span>
-<span><span class="co">#&gt;                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span></span>
-<span><span class="co">#&gt; Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span></span>
-<span><span class="co">#&gt; Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span></span>
-<span><span class="co">#&gt; Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span></span>
-<span><span class="co">#&gt;                   carb    scores</span></span>
-<span><span class="co">#&gt; Mazda RX4            4 0.4205985</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag        4 0.3802099</span></span>
-<span><span class="co">#&gt; Datsun 710           1 0.3813612</span></span>
-<span><span class="co">#&gt; Hornet 4 Drive       1 0.3653644</span></span>
-<span><span class="co">#&gt; Hornet Sportabout    2 0.4858491</span></span></code></pre></div>
+<span><span class="co">#&gt; Five Highest Outliers of Data Used:</span></span>
+<span><span class="co">#&gt;                    mpg       cyl  disp      hp drat        wt     qsec</span></span>
+<span><span class="co">#&gt; Merc 230          22.8  4.000000 140.8  95.000 3.92 -4.541341 22.90000</span></span>
+<span><span class="co">#&gt; Maserati Bora     15.0  8.000000 301.0 335.000 3.54  3.570000 33.90273</span></span>
+<span><span class="co">#&gt; Toyota Corolla    33.9  4.000000  71.1  65.000 4.22  1.835000 19.90000</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 18.7 -4.137792 360.0 446.914 3.15  3.440000 17.02000</span></span>
+<span><span class="co">#&gt; Volvo 142E        21.4  4.000000 121.0 109.000 4.11  2.780000 18.60000</span></span>
+<span><span class="co">#&gt;                          vs am      gear       carb    scores</span></span>
+<span><span class="co">#&gt; Merc 230          -8.556805  0 4.0000000   2.000000 0.5912855</span></span>
+<span><span class="co">#&gt; Maserati Bora      0.000000  1 0.9829575   8.000000 0.5673572</span></span>
+<span><span class="co">#&gt; Toyota Corolla     6.993352  1 4.0000000  -7.344032 0.5386362</span></span>
+<span><span class="co">#&gt; Hornet Sportabout  0.000000  0 3.0000000   2.000000 0.4858491</span></span>
+<span><span class="co">#&gt; Volvo 142E         1.000000  1 4.0000000 -12.912355 0.4728747</span></span></code></pre></div>
+<p>Here is an example of graphical output from this function.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Multivariate_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="notes-and-considerations-3">Notes and Considerations<a class="anchor" aria-label="anchor" href="#notes-and-considerations-3"></a>

@@ -105,10 +105,16 @@ When using the kNN method with the default `k=5`, the function returns:
 - k: The number of nearest neighbors considered.
 - Data: Displays the five highest outliers in the data used. 
 
-```{r, echo = F, message = F}
+```{r}
 result <- multiOutliers(mtcarsOutliers, method = "kNN")
 print(result)
 ```
+
+Here is an example of graphical output from this function. 
+```{r}
+plot(result)
+```
+
 
 ### Notes and Considerations
 
@@ -121,15 +127,6 @@ To learn more about kNN and how it's used in multivariate outlier detection, vis
 - [GeeksforGeeks.com](https://www.geeksforgeeks.org/k-nearest-neighbours/#)
 - [Dualitytech.com](https://dualitytech.com/blog/anomaly-detection-k-nearest-neighbors/)
 - [StatQuest](https://www.youtube.com/watch?v=HVXime0nQeI)
-
-### Graphical output
-
-Here is a graphical representation of the outliers shown above. 
-
-```{r}
-#add plot function when it's done
-```
-
 
 ## Local outlier factor (LoF)
 
@@ -172,6 +169,11 @@ When using the LoF method with the default minPts = 5, the function returns:
 ```{r}
 result <- multiOutliers(mtcarsOutliers, method = "LoF")
 result
+```
+
+Here is an example of graphical output from this function. 
+```{r}
+plot(result)
 ```
 
 ### Notes and Considerations
@@ -236,10 +238,16 @@ When using the Mahalanobis method with the default `alpha = 0.05`, the function 
 - Alpha: The significance level used.
 - Data: Displays the five highest outliers in the data used. 
 
-```{r, echo = F, message = F}
+```{r}
 result <- multiOutliers(mtcarsOutliers, method = "mahalanobis")
 print(result)
 ```
+
+Here is an example of graphical output from this function. 
+```{r}
+plot(result)
+```
+
 
 ### Notes and Considerations
 
@@ -299,6 +307,11 @@ When using the iForest method with the default `ntrees = 100` and `n = 5` the fu
 ```{r}
 result <- multiOutliers(mtcarsOutliers, method = "iForest")
 result
+```
+
+Here is an example of graphical output from this function. 
+```{r}
+plot(result)
 ```
 
 ### Notes and Considerations

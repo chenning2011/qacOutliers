@@ -78,13 +78,13 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species    scores</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     5.100000         3.5          1.4         0.2  setosa 0.3433737</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     4.900000         3.0          1.4         0.2  setosa 0.3447867</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     4.700000         3.2          1.3         0.2  setosa 0.3560464</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     6.069653         3.1          1.5         0.2  setosa 0.3809810</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     5.000000         3.6          1.4         0.2  setosa 0.3454285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Five Highest Outliers of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species    scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112    -5.041526    7.131942      5.30000    1.900000 virginica 0.6657580</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111    -2.897649    3.200000     15.39435    2.000000 virginica 0.6534289</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30      4.700000    3.200000      1.60000    5.593282    setosa 0.6319916</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134     6.300000   -5.515252      5.10000    1.500000 virginica 0.5949850</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130     7.200000    3.000000      5.80000   -1.069324 virginica 0.5916989</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#LoF</span></span></span>
 <span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">irisOutliers</span>, method <span class="op">=</span> <span class="st">"LoF"</span><span class="op">)</span></span></span>
@@ -102,13 +102,13 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species    scores</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     5.100000         3.5          1.4         0.2  setosa 0.9859144</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     4.900000         3.0          1.4         0.2  setosa 1.0197879</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     4.700000         3.2          1.3         0.2  setosa 0.9790140</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     6.069653         3.1          1.5         0.2  setosa 2.2904350</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     5.000000         3.6          1.4         0.2  setosa 1.0120799</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Five Highest Outliers of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species    scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30      4.700000    3.200000     1.600000    5.593282     setosa 18.776542</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47     13.284890    3.800000     1.600000    0.200000     setosa 10.009984</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77      6.800000    2.800000    -8.799906    1.400000 versicolor  9.120049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60      5.200000    2.700000    18.737610    1.400000 versicolor  9.042709</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112    -5.041526    7.131942     5.300000    1.900000  virginica  8.473346</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#kNN</span></span></span>
 <span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">irisOutliers</span>, method <span class="op">=</span> <span class="st">"kNN"</span><span class="op">)</span></span></span>
@@ -117,7 +117,7 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: kNN</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: irisOutliers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variables: Sepal.Length Sepal.Width Petal.Length Petal.Width scores</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Row: 27 47 60 64 77 104 111 112 134</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 5.530942 7.280213 8.092378 5.331189 10.22672 4.959793 9.058028 9.24345 7.133188</span>
@@ -126,8 +126,13 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "irisOutliers"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Five Highest Outliers of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Sepal.Length Sepal.Width Petal.Length Petal.Width    scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77      6.800000    2.800000    -8.799906         1.4 10.226716</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112    -5.041526    7.131942     5.300000         1.9  9.243450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111    -2.897649    3.200000    15.394346         2.0  9.058028</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60      5.200000    2.700000    18.737610         1.4  8.092378</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47     13.284890    3.800000     1.600000         0.2  7.280213</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#Mahalanobis</span></span></span>
 <span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">irisOutliers</span>, method <span class="op">=</span> <span class="st">"mahalanobis"</span><span class="op">)</span></span></span>
@@ -145,13 +150,13 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Sepal.Length Sepal.Width Petal.Length Petal.Width   scores</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     5.100000         3.5          1.4         0.2 1.550433</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     4.900000         3.0          1.4         0.2 1.674290</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     4.700000         3.2          1.3         0.2 1.741533</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     6.069653         3.1          1.5         0.2 1.614427</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     5.000000         3.6          1.4         0.2 1.608441</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Five Highest Outliers of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Sepal.Length Sepal.Width Petal.Length Petal.Width   scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134     6.300000   -5.515252      5.10000    1.500000 53.01116</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112    -5.041526    7.131942      5.30000    1.900000 50.29761</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111    -2.897649    3.200000     15.39435    2.000000 42.30386</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30      4.700000    3.200000      1.60000    5.593282 41.81264</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27      5.000000   10.344843      1.60000    0.400000 37.83847</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

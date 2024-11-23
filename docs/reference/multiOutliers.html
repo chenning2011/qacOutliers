@@ -122,19 +122,19 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   carb    scores</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4            4  7.247443</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag        4  3.943746</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710           1  5.886045</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive       1  2.114513</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout    2 25.117839</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Five Highest Outliers of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg cyl  disp  hp     drat        wt     qsec        vs am</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Duster 360    14.30000   8 360.0 245 18.14468  3.570000 15.84000  0.000000  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora 15.00000   8 301.0 335  3.54000  3.570000 33.90273  0.000000  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230      22.80000   4 140.8  95  3.92000 -4.541341 22.90000 -8.556805  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 450SE    54.17757   8 275.8 180  3.07000  4.070000 17.40000  0.000000  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Volvo 142E    21.40000   4 121.0 109  4.11000  2.780000 18.60000  1.000000  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    gear      carb   scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Duster 360    3.0000000   4.00000 29.58581</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora 0.9829575   8.00000 27.95683</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230      4.0000000   2.00000 27.30969</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 450SE    3.0000000   3.00000 26.99406</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Volvo 142E    4.0000000 -12.91235 25.39721</span>
 <span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"LoF"</span>, minPts<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
@@ -149,25 +149,25 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   carb    scores</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4            4 1.1569889</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag        4 1.0824819</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710           1 0.9169562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive       1 1.1209301</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout    2 3.1469012</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Five Highest Outliers of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        mpg       cyl  disp      hp     drat        wt     qsec</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Duster 360        14.30000  8.000000 360.0 245.000 18.14468  3.570000 15.84000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora     15.00000  8.000000 301.0 335.000  3.54000  3.570000 33.90273</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230          22.80000  4.000000 140.8  95.000  3.92000 -4.541341 22.90000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.70000 -4.137792 360.0 446.914  3.15000  3.440000 17.02000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 450SE        54.17757  8.000000 275.8 180.000  3.07000  4.070000 17.40000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          vs am      gear carb   scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Duster 360         0.000000  0 3.0000000    4 4.646142</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora      0.000000  1 0.9829575    8 4.403093</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230          -8.556805  0 4.0000000    2 3.401508</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout  0.000000  0 3.0000000    2 3.146901</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 450SE         0.000000  0 3.0000000    3 2.543073</span>
 <span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"kNN"</span>, k<span class="op">=</span><span class="fl">5</span>, threshold<span class="op">=</span><span class="fl">.95</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method: kNN</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dataset: mtcarsOutliers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variables: mpg cyl disp hp drat wt qsec vs am gear carb scores</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Row: 11 19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Outlier Score: 547.8248 393.1049</span>
@@ -176,8 +176,19 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mtcarsOutliers"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Five Highest Outliers of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        mpg       cyl      disp        hp     drat    wt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280C         17.80000  6.000000 -459.2495  123.0000 3.920000 3.440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Honda Civic       30.40000  4.000000  783.2571   52.0000 4.930000 1.615</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280          44.30673  6.000000  167.6000 -238.7728 4.560312 3.440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.70000 -4.137792  360.0000  446.9140 3.150000 3.440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora     15.00000  8.000000  301.0000  335.0000 3.540000 3.570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       qsec vs am      gear carb   scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280C         18.90000  1  0 4.0000000    4 547.8248</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Honda Civic       18.52000  1  1 4.0000000    2 393.1049</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280          18.30000  1  0 4.0000000    4 318.1242</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 17.02000  0  0 3.0000000    2 189.8207</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora     33.90273  0  1 0.9829575    8 117.9942</span>
 <span class="r-in"><span><span class="fu">multiOutliers</span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method<span class="op">=</span><span class="st">"iForest"</span>, ntrees <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
@@ -193,19 +204,19 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> First Five Rows of Data Used:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg       cyl disp      hp drat       wt  qsec vs am gear</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         21.0  9.959246  160 110.000 3.90 2.620000 16.46  0  1    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag     21.0  6.000000  160 110.000 3.90 2.875000 17.02  0  1    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710        22.8  4.000000  108  93.000 3.85 3.992371 18.61  1  1    4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive    21.4  6.000000  258 110.000 3.08 3.215000 19.44  1  0    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.7 -4.137792  360 446.914 3.15 3.440000 17.02  0  0    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   carb    scores</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4            4 0.4174958</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag        4 0.3701169</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710           1 0.3681721</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive       1 0.3560603</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout    2 0.4669088</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Five Highest Outliers of Data Used:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        mpg       cyl  disp        hp     drat        wt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230          22.80000  4.000000 140.8   95.0000 3.920000 -4.541341</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora     15.00000  8.000000 301.0  335.0000 3.540000  3.570000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Toyota Corolla    33.90000  4.000000  71.1   65.0000 4.220000  1.835000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280          44.30673  6.000000 167.6 -238.7728 4.560312  3.440000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.70000 -4.137792 360.0  446.9140 3.150000  3.440000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       qsec        vs am      gear      carb    scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230          22.90000 -8.556805  0 4.0000000  2.000000 0.6098171</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora     33.90273  0.000000  1 0.9829575  8.000000 0.5689141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Toyota Corolla    19.90000  6.993352  1 4.0000000 -7.344032 0.5168466</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 280          18.30000  1.000000  0 4.0000000  4.000000 0.4768288</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 17.02000  0.000000  0 3.0000000  2.000000 0.4669088</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
