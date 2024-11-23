@@ -166,7 +166,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
     # Create the result list
     results <- list(
       Method = "kNN",
-      Data = dataset_name,
+      Dataset = dataset_name,
       Variables = colnames(data),
       Row = outlier_indices,
       Score = outlier_scores,
