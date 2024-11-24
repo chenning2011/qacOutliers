@@ -52,13 +52,25 @@ The boxplot method for univariate outlier detection identifies extreme data poin
 
 This method helps quickly identify potential outliers, which are plotted individually and can indicate unusual or problematic data points that may warrant further investigation. 
 
+Here is an example of the boxplot method for univariate outliers in action using the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package. We will first assign the output of our univOutliers function to a variable named "object".
+
 ```{r}
-object2 <- univOutliers(data = mtcars, x= "wt", method = "boxplot")
-plot(object2)  # Plotting the object with 'mtcars' dataset
-print(object2)  # Printing the outliers and methods
+object <- univOutliers(mtcarsOutliers, x="disp", method = "boxplot")
 ```
 
-The output will provide the identified outliers along with their corresponding row numbers, and a graphical representation will be generated with the outliers highlighted in red.
+We will then use the plot.univOutliers function to visualize the outliers detected by the boxplot method. A graphical representation will be generated with the outliers highlighted in red.
+
+```{r}
+plot.univOutliers(object)
+```
+
+We will then use the print() function to obtain a list of all of the outliers detected by the boxplot method along with their corresponding row numbers.
+
+```{r}
+print.univOutliers(object)
+```
+
+The output will provide the identified outliers along with their corresponding row numbers.
 
 ## Grubb's Test 
 
@@ -87,13 +99,22 @@ The output of Grubbs' test will provide the identified outliers, the correspondi
 
 ## MAD 
 
-The MAD (Median Absolute Deviation) method for univariate outlier detection identifies outliers based on a robust measure of variability, the median absolute deviation. In this method, a red line represents the median of the values in the target vector. The upper CI limit is the median + 3MAD and the lower CI limit is median - 3MAD. The points outside of the confidence interval are the outliers detected by the MAD method.  
+The MAD (Median Absolute Deviation) method for univariate outlier detection identifies outliers based on a robust measure of variability, the median absolute deviation. In the visualization for this method, the red line represents the median of the values in the target vector. The upper CI limit is the median + 3MAD and the lower CI limit is median - 3MAD. The points outside of the confidence interval are the outliers detected by the MAD method.
+
+Here is an example of the MAD method for univariate outliers in action using the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package. We will first assign the output of our univOutliers fcn to a variable named "object".
 
 ```{r}
-object <- univOutliers(data = mtcars, x="carb", method = "mad")
-#plot(object)  # Plotting the object with 'mtcars' dataset
-print(object)  # Printing the outliers and methods
+object <- univOutliers(mtcarsOutliers, x="disp", method = "mad")
 ```
 
-The output will provide the identified outliers along with their corresponding row numbers, and a graphical representation will be generated with the outliers highlighted in red.
- 
+We will then use the plot.univOutliers fcn to visualize the outliers detected by the MAD method. Note that the points highlighted in red are the outliers detected by the MAD method.
+
+```{r}
+plot.univOutliers(object)
+```
+
+We will then use the print() fcn to obtain a list of all of the outliers detected by the MAD method along with their corresponding row numbers.
+
+```{r}
+print.univOutliers(object)
+```
