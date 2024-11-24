@@ -10,17 +10,18 @@
 #' @import grDevices
 #' @export
 #' @examples
-#' Example usage:
+#'
+#' #Example usage:
 #' object <- univOutliers(data = mtcars, x="carb", method = "mad")
-#' plot.univOutliers(object)  # Plotting the object with 'mtcars' dataset
+#' #plot(object)  # Plotting the object with 'mtcars' dataset
 #' print(object)  # Printing the outliers and methods
 #'
 #' object2 <- univOutliers(data = mtcars, x= "wt", method = "boxplot")
-#' plot.univOutliers(object2)  # Plotting the object with 'mtcars' dataset
+#' #plot(object2)  # Plotting the object with 'mtcars' dataset
 #' print(object2)  # Printing the outliers and methods
 #'
 #' object3 <- univOutliers(data = mtcars, x = "carb", method = "grubbs")
-#' plot.univOutliers(object3)  # Plotting the object with 'mtcars' dataset
+#' #plot(object3)  # Plotting the object with 'mtcars' dataset
 #' print(object3)  # Printing the outliers and methods
 
 univOutliers <- function(data, x = NULL, method = "boxplot") {

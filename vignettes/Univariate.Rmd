@@ -58,16 +58,16 @@ Here is an example of the boxplot method for univariate outliers in action using
 object <- univOutliers(mtcarsOutliers, x="disp", method = "boxplot")
 ```
 
-The plot.univOutliers function is used to visualize the outliers detected by the boxplot method. A graphical representation will be generated with the outliers highlighted in red.
+The plotfunction is used to visualize the outliers detected by the boxplot method. A graphical representation will be generated with the outliers highlighted in red.
 
 ```{r}
-plot.univOutliers(object)
+plot(object)
 ```
 
-The print() function is used to obtain a list of all of the outliers detected by the boxplot method along with their corresponding row numbers.
+The print function is used to obtain a list of all of the outliers detected by the boxplot method along with their corresponding row numbers.
 
 ```{r}
-print.univOutliers(object)
+print(object)
 ```
 
 
@@ -81,16 +81,16 @@ Here is an example of the MAD method for univariate outliers in action using the
 object <- univOutliers(mtcarsOutliers, x="disp", method = "mad")
 ```
 
-We will then use the plot.univOutliers fcn to visualize the outliers detected by the MAD method. Note that the points highlighted in red are the outliers detected by the MAD method.
+We will then use the plot function to visualize the outliers detected by the MAD method. Note that the points highlighted in red are the outliers detected by the MAD method.
 
 ```{r}
-plot.univOutliers(object)
+plot(object)
 ```
 
-We will then use the print() fcn to obtain a list of all of the outliers detected by the MAD method along with their corresponding row numbers.
+We will then use the print function to obtain a list of all of the outliers detected by the MAD method along with their corresponding row numbers.
 
 ```{r}
-print.univOutliers(object)
+print(object)
 ```
 
 
@@ -117,4 +117,3 @@ print(object3)  # Printing the outliers and methods
 
 The output of Grubbs' test will provide the identified outliers and the corresponding row numbers. This method uses a Shapiro-Wilk test (shapiro.test) for normality. If the p-value of the normality test is less than 0.05, it issues a warning about normality because a high p-value could affect the accuracy of the Grubbs' Test.
 
-The output of Grubbs' test will provide the identified outliers, the corresponding row numbers. This method uses a Shapiro-Wilk test (shapiro.test) for normality. If the p-value of the normality test is less than 0.05, it issues a warning about normality because a high p-value could affect the accuracy of the Grubbs' Test.
