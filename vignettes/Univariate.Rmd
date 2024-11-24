@@ -58,19 +58,41 @@ Here is an example of the boxplot method for univariate outliers in action using
 object <- univOutliers(mtcarsOutliers, x="disp", method = "boxplot")
 ```
 
-We will then use the plot.univOutliers function to visualize the outliers detected by the boxplot method. A graphical representation will be generated with the outliers highlighted in red.
+The plot.univOutliers function is used to visualize the outliers detected by the boxplot method. A graphical representation will be generated with the outliers highlighted in red.
 
 ```{r}
 plot.univOutliers(object)
 ```
 
-We will then use the print() function to obtain a list of all of the outliers detected by the boxplot method along with their corresponding row numbers.
+The print() function is used to obtain a list of all of the outliers detected by the boxplot method along with their corresponding row numbers.
 
 ```{r}
 print.univOutliers(object)
 ```
 
-The output will provide the identified outliers along with their corresponding row numbers.
+
+## MAD 
+
+The MAD (Median Absolute Deviation) method for univariate outlier detection identifies outliers based on a robust measure of variability, the median absolute deviation. In the visualization for this method, the red line represents the median of the values in the target vector. The upper CI limit is the median + 3MAD and the lower CI limit is median - 3MAD. The points outside of the confidence interval are the outliers detected by the MAD method.
+
+Here is an example of the MAD method for univariate outliers in action using the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package. We will first assign the output of our univOutliers fcn to a variable named "object".
+
+```{r}
+object <- univOutliers(mtcarsOutliers, x="disp", method = "mad")
+```
+
+We will then use the plot.univOutliers fcn to visualize the outliers detected by the MAD method. Note that the points highlighted in red are the outliers detected by the MAD method.
+
+```{r}
+plot.univOutliers(object)
+```
+
+We will then use the print() fcn to obtain a list of all of the outliers detected by the MAD method along with their corresponding row numbers.
+
+```{r}
+print.univOutliers(object)
+```
+
 
 ## Grubb's Test 
 
@@ -96,25 +118,3 @@ print(object3)  # Printing the outliers and methods
 The output of Grubbs' test will provide the identified outliers and the corresponding row numbers. This method uses a Shapiro-Wilk test (shapiro.test) for normality. If the p-value of the normality test is less than 0.05, it issues a warning about normality because a high p-value could affect the accuracy of the Grubbs' Test.
 
 The output of Grubbs' test will provide the identified outliers, the corresponding row numbers. This method uses a Shapiro-Wilk test (shapiro.test) for normality. If the p-value of the normality test is less than 0.05, it issues a warning about normality because a high p-value could affect the accuracy of the Grubbs' Test.
-
-## MAD 
-
-The MAD (Median Absolute Deviation) method for univariate outlier detection identifies outliers based on a robust measure of variability, the median absolute deviation. In the visualization for this method, the red line represents the median of the values in the target vector. The upper CI limit is the median + 3MAD and the lower CI limit is median - 3MAD. The points outside of the confidence interval are the outliers detected by the MAD method.
-
-Here is an example of the MAD method for univariate outliers in action using the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package. We will first assign the output of our univOutliers fcn to a variable named "object".
-
-```{r}
-object <- univOutliers(mtcarsOutliers, x="disp", method = "mad")
-```
-
-We will then use the plot.univOutliers fcn to visualize the outliers detected by the MAD method. Note that the points highlighted in red are the outliers detected by the MAD method.
-
-```{r}
-plot.univOutliers(object)
-```
-
-We will then use the print() fcn to obtain a list of all of the outliers detected by the MAD method along with their corresponding row numbers.
-
-```{r}
-print.univOutliers(object)
-```
