@@ -52,6 +52,10 @@ plot.multiOutliers <- function(x, ...) {
                   x = "Row Index", y = "Outlier Score") +
     ggplot2::theme_minimal()
 
+  if(x$Method == "LoF"){
+    plot <- plot + geom_hline(yintercept = 1.5, linetype = "dashed", alpha = 0.8)
+  }
+
   text_grob <- grid::textGrob("Values above points are row numbers", gp = gpar(col = "black", fontsize = 15, fill = "lightblue"))
 
   # Use grid.arrange to combine the plot and the text outside it
