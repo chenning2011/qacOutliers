@@ -3,6 +3,10 @@
 #' @export
 #' @param outlier_results A list containing the results from a univariate outlier detection function (e.g., `univOutliers`).
 #' @returns A plot object specific to the outlier detection method used (boxplot, MAD, or Grubbs' test).
+#' @import ggplot2
+#' @import Routliers
+#' @import stats
+#' @import grDevices
 #' @examples
 #' object <- univOutliers(data = mtcars, x = "carb", method = "mad")
 #' #plot(object)

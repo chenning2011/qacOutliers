@@ -22,15 +22,12 @@ Detects univariate outliers using boxplot, MAD, or Grubbs' test.
 \examples{
 
 #Example usage:
-object <- univOutliers(data = mtcars, x="carb", method = "mad")
-#plot(object)  # Plotting the object with 'mtcars' dataset
+object <- univOutliers(data = mtcarsOutliers, x="carb", method = "mad")
 print(object)  # Printing the outliers and methods
 
-object2 <- univOutliers(data = mtcars, x= "wt", method = "boxplot")
-#plot(object2)  # Plotting the object with 'mtcars' dataset
+object2 <- univOutliers(data = mtcarsOutliers, x= "wt", method = "boxplot")
 print(object2)  # Printing the outliers and methods
 
-object3 <- univOutliers(data = mtcars, x = "carb", method = "grubbs")
-#plot(object3)  # Plotting the object with 'mtcars' dataset
+object3 <- univOutliers(data = grubbsOutlier, method = "grubbs")
 print(object3)  # Printing the outliers and methods
 }
