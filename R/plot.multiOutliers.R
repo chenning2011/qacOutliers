@@ -20,6 +20,8 @@
 #'
 #'results <- multiOutliers(irisOutliers, method = "mahalanobis")
 #'plot(results)
+#'
+#'plot(multiOutliers(irisOutliers, method = "mahalanobis"))
 
 plot.multiOutliers <- function(x, ...) {
 
@@ -56,7 +58,7 @@ plot.multiOutliers <- function(x, ...) {
     plot <- plot + geom_hline(yintercept = 1.5, linetype = "dashed", alpha = 0.8)
   }
 
-  text_grob <- grid::textGrob("Values above points are row numbers", gp = gpar(col = "black", fontsize = 15, fill = "lightblue"))
+  text_grob <- grid::textGrob("Values below points are row numbers", gp = gpar(col = "black", fontsize = 15, fill = "lightblue"))
 
   # Use grid.arrange to combine the plot and the text outside it
   plot_w_text<- gridExtra::grid.arrange(
