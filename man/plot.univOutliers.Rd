@@ -16,12 +16,12 @@ A plot object specific to the outlier detection method used (boxplot, MAD, or Gr
 Creates visualizations for univariate outlier detection using method-specific plot styles.
 }
 \examples{
-object <- univOutliers(data = mtcars, x = "carb", method = "mad")
-#plot(object)
+object <- univOutliers(data = mtcarsOutliers, x = "carb", method = "mad")
+plot(object)
 
-object2 <- univOutliers(data = mtcars, x = "wt", method = "boxplot")
-#plot(object2)
+object2 <- univOutliers(data = mtcarsOutliers, x = "wt", method = "boxplot")
+plot(object2)
 
-object3 <- univOutliers(data = mtcars, x = "carb", method = "grubbs")
-#plot(object3)
+object3 <- univOutliers(data = mtcarsOutliers, x = "carb", method = "grubbs")
+plot(object3)
 }

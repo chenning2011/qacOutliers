@@ -98,20 +98,20 @@ print(object)
 
 The Grubbs' Test is a simple technique that iteratively identifies outliers by testing the hypothesis that the largest or smallest value is an outlier. The Grubbs’ test requires the data to be normally distributed because it relies on mean and standard deviation. 
 
+Here is an example of the Grubbs method for univariate outliers using a randomly generated normally distributed dataset, with a clear outlier. We will first assign the output of our univOutliers fcn to a variable named “object_normal_outlier”. We will then plot the object using a qq plot and print the results. 
+
 ```{r}
 # TO TEST NORMAL DIST W OUTLIER FOR GRUBBS
-set.seed(42)
-normal_data <- rnorm(100, mean = 50, sd = 5)  # Normal distribution
-data_with_outlier <- c(normal_data, 70)  # Add a clear outlier (100)
-data_frame <- data.frame(values = data_with_outlier)
-object_normal_outlier <- univOutliers(data = data_frame, x = "values", method = "grubbs")
-#plot(object_normal_outlier)  # Plotting the object with the outlier
+object_normal_outlier <- univOutliers(data = grubbsOutlier, x = "values", method = "grubbs")
+plot(object_normal_outlier)  # Plotting the object with the outlier
 print(object_normal_outlier)  # Printing the outliers and methods
 ```
 
+Here is an example of the Grubbs method for univariate outliers using the mtcarsOutliers dataset included with this package. We will first assign the output of our univOutliers fcn to a variable named “object3”. We will then plot the object using a qq plot and print the results. 
+
 ```{r}
 object3 <- univOutliers(data = mtcars, x = "carb", method = "grubbs")
-#plot(object3)  # Plotting the object with 'mtcars' dataset
+plot(object3)  # Plotting the object with 'mtcars' dataset
 print(object3)  # Printing the outliers and methods
 ```
 

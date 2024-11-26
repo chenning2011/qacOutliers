@@ -3,6 +3,8 @@
 
 # qacOutliers
 
+<img src="outlier.png" alt="General Scatter Plot with Outlier Highlighted" width="200"/>
+
 <!-- badges: start -->
 <!-- badges: end -->
 

@@ -27,4 +27,6 @@ plot(results)
 
 results <- multiOutliers(irisOutliers, method = "mahalanobis")
 plot(results)
+
+plot(multiOutliers(irisOutliers, method = "mahalanobis"))
 }

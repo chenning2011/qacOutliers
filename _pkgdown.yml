@@ -3,7 +3,7 @@ url: https://github.com/chenning2011/qacOutliers
 template:
   params:
   bootstrap: 5
-  bootswatch: flatly
+  bootswatch: cerulean
 reference:
   - title: Main Functions
     desc: ~

@@ -15,18 +15,18 @@ knitr::opts_chunk$set(
 
 # qacOutliers
 
+<img src="outlier.png" alt="General Scatter Plot with Outlier Highlighted" width="200"/>
+
 <!-- badges: start -->
 <!-- badges: end -->
 
 The goal of qacOutliers is to detect multivariate and univariate outliers using seven different methods. This package consolidates methods from multiple different R packages and makes them more easily accessible. 
 
-<img src="Outliers_image.webp" alt="General Scatter Plot with Outlier Highlighted" width="200"/>
-
 ## Installation
 
 You can install the development version of qacOutliers from [GitHub](https://github.com/chenning2011) with:
 
-``` {r, message = F, results = F, warnings=F}
+``` {r, message = F, results = F, warning=F}
 # install.packages("remotes")
 remotes::install_github("https://github.com/chenning2011/qacOutliers/")
 ```
