@@ -49,7 +49,7 @@ ggplot()+
   theme_minimal()
 ```
 
-All of the red dots are multivariate outliers. The point labelled 1 on the graph is a clear example of a multivariate outlier. This person has their PhD for 22 years, a normal value for that variable, and makes `$62,884`, which is also a normal value for salary. However, when combining these two features, a person who has had 22 years since their PhD and makes only `$62,884` is making much less than other professors within their experience range. 
+All of the red dots are multivariate outliers. The point labelled `1` on the graph is a clear example of a multivariate outlier. This person has their PhD for `22` years, a normal value for that variable, and makes `$62,884`, which is also a normal value for salary. However, when combining these two features, a person who has had `22` years since their PhD and makes only `$62,884` is making much less than other professors within their experience range. 
 
 The outliers in this graph were detected using the LoF method, and more detail about that method can be provided below. This package specifically focuses on four different methods for finding multivariate outliers: kNN, LoF, mahalanobis distance, and iForest. 
 
@@ -96,14 +96,14 @@ multiOutliers(mtcarsOutliers, method = "kNN", k = 10)
 ### Example Output
 When using the kNN method with the default `k=5`, the function returns:
 
-- Method: "kNN", indicating the method used.
-- Dataset: The dataset name.
-- Variables: The numeric columns considered for outlier detection.
-- Row: Indices of rows identified as outliers.
-- Score: Average kNN distance scores of detected outliers.
-- Message: A summary message indicating whether outliers were detected.
-- k: The number of nearest neighbors considered.
-- Data: Displays the five highest outliers in the data used. 
+- `Method`: "kNN", indicating the method used.
+- `Dataset`: The dataset name.
+- `Variables`: The numeric columns considered for outlier detection.
+- `Row`: Indices of rows identified as outliers.
+- `Score`: Average kNN distance scores of detected outliers.
+- `Message`: A summary message indicating whether outliers were detected.
+- `k`: The number of nearest neighbors considered.
+- `Data`: Displays the five highest outliers in the data used. 
 
 ```{r}
 result <- multiOutliers(mtcarsOutliers, method = "kNN")
@@ -125,14 +125,14 @@ plot(result)
 To learn more about kNN and how it's used in multivariate outlier detection, visit these resources: 
 
 - [GeeksforGeeks.com](https://www.geeksforgeeks.org/k-nearest-neighbours/#)
-- [Dualitytech.com](https://dualitytech.com/blog/anomaly-detection-k-nearest-neighbors/)
+- [Dualitytech.com](https://dualitytech.com/blog/anomaly-detection-k-nearest-neighbors/) 
 - [StatQuest](https://www.youtube.com/watch?v=HVXime0nQeI)
 
 ## Local outlier factor (LoF)
 
-The Local Outlier Factor (LoF) method detects anomalies by comparing the density of data points in their local neighborhood. Points with significantly lower density than their neighbors are flagged as potential outliers. The dbscan package is used for this implementation, which calculates LoF scores for each data point. Scores above a certain threshold (typically > 1) are indicative of stronger outliers.
+The Local Outlier Factor (LoF) method detects anomalies by comparing the density of data points in their local neighborhood. Points with significantly lower density than their neighbors are flagged as potential outliers. The [dbscan](https://cran.r-project.org/web/packages/dbscan/readme/README.html) package is used for this implementation, which calculates LoF scores for each data point. Scores above a certain threshold (typically > 1) are indicative of stronger outliers.
 
-LoF is particularly useful for datasets with clusters of varying density, as it considers the local density when assessing outlierness. It supports both numeric and categorical variables, using Gower distance for mixed data types.
+LoF is particularly useful for datasets with clusters of varying density, as it considers the local density when assessing outlier scores. It supports both numeric and categorical variables, using Gower distance for mixed data types. This LoF method uses the [cluster](https://cran.r-project.org/web/packages/cluster/index.html) package's daisy (Dissimilarity Matrix Calculation) function to calculate the Gower distance when necessary.
 
 Here is an example of the scores using the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package.
 
@@ -147,7 +147,7 @@ head(lof_scores, 5)
 ```
 
 ### Customizing the `minPts` Parameter
-The LoF method allows customization of the `minPts` parameter, which is the minimum number of points in the local neighborhood. Larger values result in broader neighborhoods and may reduce sensitivity to smaller clusters. Default is 5.
+The LoF method allows customization of the `minPts` parameter, which is the minimum number of points in the local neighborhood. Larger values result in broader neighborhoods and may reduce sensitivity to smaller clusters. `minPts` defaults to 5 if not specified.
 
 You can adjust these parameters to suit your dataset. Here’s an example:
 ```{r}
@@ -155,16 +155,16 @@ multiOutliers(mtcarsOutliers, method = "LoF", minPts = 10)
 ```
 
 ### Example Output
-When using the LoF method with the default minPts = 5, the function returns:
+When using the LoF method with the default `minPts = 5`, the function returns:
 
-- Method: "LoF", indicating the method used.
-- Dataset: The dataset name.
-- Variables: The columns considered in the analysis.
-- Row: Indices of rows identified as outliers.
-- Score: LoF scores for each detected outlier.
-- Message: A summary message indicating whether outliers were detected.
-- minPts: The parameter value used for the local neighborhood.
-- Data: Displays the five highest outliers in the data used. 
+- `Method`: "LoF", indicating the method used.
+- `Dataset`: The dataset name.
+- `Variables`: The columns considered in the analysis.
+- `Row`: Indices of rows identified as outliers.
+- `Score`: LoF scores for each detected outlier.
+- `Message`: A summary message indicating whether outliers were detected.
+- `minPts`: The parameter value used for the local neighborhood.
+- `Data`: Displays the five highest outliers in the data used. 
 
 ```{r}
 result <- multiOutliers(mtcarsOutliers, method = "LoF")
@@ -177,15 +177,16 @@ plot(result)
 ```
 
 ### Notes and Considerations
-1. Sensitivity to minPts: The choice of minPts significantly influences results. A value too small might result in over-sensitivity, while a value too large might overlook smaller clusters of anomalies.
+1. Sensitivity to minPts: The choice of `minPts` significantly influences results. A value too small might result in over-sensitivity, while a value too large might overlook smaller clusters of anomalies.
 
 2. Mixed Data Types: If the dataset contains categorical variables, the method automatically switches to Gower distance for calculating pairwise dissimilarities. Ensure the data is properly encoded.
 
 3. Interpreting LoF Scores: Scores greater than 1.5 typically indicate potential outliers. Adjust the threshold based on the characteristics of your dataset.
 
-To learn more about Mahalanobis distance and how it's used in multivariate outlier detection, visit these resources: 
+To learn more about LoF & Gower distance and how it's used in multivariate outlier detection, visit these resources: 
 
-- [Medium.com](https://towardsdatascience.com/local-outlier-factor-lof-algorithm-for-outlier-identification-8efb887d9843)
+- [Medium.com](https://towardsdatascience.com/local-outlier-factor-lof-algorithm-for-outlier-identification-8efb887d9843) LoF Explained
+- [Gower Distance](https://medium.com/analytics-vidhya/gowers-distance-899f9c4bd553) Gower Distance Explained
 - [DBSCAN Documentation](https://scikit-learn.org/dev/modules/generated/sklearn.cluster.DBSCAN.html)
 
 
@@ -229,14 +230,14 @@ multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = 0.01)
 ### Example Output
 When using the Mahalanobis method with the default `alpha = 0.05`, the function returns:
 
-- Method: "mahalanobis", indicating the method used.
-- Dataset: The dataset name.
-- Variables: The numeric columns considered.
-- Row: Indices of rows identified as outliers.
-- Score: Mahalanobis distance scores of detected outliers.
-- Message: A summary message indicating whether outliers were detected.
-- Alpha: The significance level used.
-- Data: Displays the five highest outliers in the data used. 
+- `Method`: "mahalanobis", indicating the method used.
+- `Dataset`: The dataset name.
+- `Variables`: The numeric columns considered.
+- `Row`: Indices of rows identified as outliers.
+- `Score`: Mahalanobis distance scores of detected outliers.
+- `Message`: A summary message indicating whether outliers were detected.
+- `Alpha`: The significance level used.
+- `Data`: Displays the five highest outliers in the data used. 
 
 ```{r}
 result <- multiOutliers(mtcarsOutliers, method = "mahalanobis")
@@ -257,12 +258,12 @@ plot(result)
 
 To learn more about Mahalanobis distance and how it's used in multivariate outlier detection, visit these resources: 
 
-- [Statisticshowto.com](https://www.statisticshowto.com/mahalanobis-distance/)
+- [Statisticshowto.com](https://www.statisticshowto.com/mahalanobis-distance/) Mahalanobis Distance Explained
 - [Builtin.com](https://builtin.com/data-science/mahalanobis-distance)
 
 ## iForest 
 
-Isolation Forest (iForest) is an unsupervised machine learning algorithm designed to detect anomalies in data is implemented using the `isotree` package. It works by creating random partitions of the data and measuring how quickly each point can be isolated. Points that are isolated faster (using fewer splits) are more likely to be outliers.
+Isolation Forest (iForest) is an unsupervised machine learning algorithm designed to detect anomalies in data is implemented using the [isotree](https://cran.r-project.org/web/packages/isotree/index.html) package. It works by creating random partitions of the data and measuring how quickly each point can be isolated. Points that are isolated faster (using fewer splits) are more likely to be outliers.
 
 The iForest algorithm is particularly well-suited for handling high-dimensional data and works with both quantitative and categorical variables. It is robust to noise and scales efficiently for large datasets.
 
@@ -281,9 +282,9 @@ head(data$iso_score, 5)
 ### Customizing Parameters
 The iForest method allows customization of two main parameters:
 
-ntrees: The number of trees in the isolation forest. A higher value increases precision but also computation time. Default is 100.
+`ntrees`: The number of trees in the isolation forest. A higher value increases precision but also computation time. Default is 100.
 
-n: The number of points to return as outliers. Default is 5.
+`n`: The number of points to return as outliers. Default is 5.
 
 Here’s an example of how you can modify these parameters:
 ```{r}
@@ -294,15 +295,15 @@ multiOutliers(mtcarsOutliers, method = "iForest", ntrees = 200, n = 10)
 
 When using the iForest method with the default `ntrees = 100` and `n = 5` the function returns:
 
-- Method: "iForest", indicating the method used.
-- Dataset: The dataset name.
-- Variables: The numeric columns considered.
-- Row: Indices of rows identified as outliers.
-- Score: Isolation scores for each detected outlier.
-- Message: A summary message indicating whether outliers were detected.
-- ntrees: The number of trees in the isolation forest
-- n: The number of points to return as outliers
-- Data: Displays the five highest outliers in the data used.  
+- `Method`: "iForest", indicating the method used.
+- `Dataset`: The dataset name.
+- `Variables`: The numeric columns considered.
+- `Row`: Indices of rows identified as outliers.
+- `Score`: Isolation scores for each detected outlier.
+- `Message`: A summary message indicating whether outliers were detected.
+- `ntrees`: The number of trees in the isolation forest
+- `n`: The number of points to return as outliers
+- `Data`: Displays the five highest outliers in the data used.  
 
 ```{r}
 result <- multiOutliers(mtcarsOutliers, method = "iForest")
@@ -320,13 +321,13 @@ plot(result)
 
 2. No Assumptions on Data Distribution: Unlike some statistical methods, iForest does not assume a specific data distribution. This makes it robust for detecting outliers in diverse datasets.
 
-3. Handles Mixed Data Types: iForest can process both numeric and categorical variables. However, ensure your data is properly encoded or formatted as required by the isotree package.
+3. Handles Mixed Data Types: iForest can process both numeric and categorical variables. However, ensure your data is properly encoded or formatted as required by the [isotree](https://cran.r-project.org/web/packages/isotree/index.html) package.
 
 4. Interpretation of Scores: Higher isolation scores indicate stronger anomalies. You may need to determine an appropriate threshold for your dataset when interpreting the results.
 
 To learn more about Isolation Forest and how it's used in multivariate outlier detection, visit these resources: 
 
-- [Medium.com](https://medium.com/@limyenwee_19946/unsupervised-outlier-detection-with-isolation-forest-eab398c593b2)
+- [Medium.com](https://medium.com/@limyenwee_19946/unsupervised-outlier-detection-with-isolation-forest-eab398c593b2) iForest Explained
 - [Andy McDonald on YouTube](https://www.youtube.com/watch?v=O9VvmWj-JAk)
 
 
