@@ -213,9 +213,9 @@ results$outliers_pos
 
 Outliers are identified by comparing the Mahalanobis distance of each point to a threshold derived from the chi-squared distribution. Points with distances greater than the critical value at a specified significance level (`alpha`) are flagged as outliers. The default `alpha` is 0.05, which corresponds to a 95% confidence level. You can customize this value to adjust the sensitivity of the detection.
 
-Here is the threshold for the dataset using the default `alpha = 0.05`:
+Here is the threshold for the dataset using the default `alpha = 0.1`:
 ```{r, echo = F, message = F}
-alpha <- 0.05
+alpha <- 0.1
 threshold <- qchisq(1 - alpha, df = ncol(mtcarsOutliers_st))
 threshold
 ```
@@ -228,7 +228,7 @@ multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = 0.01)
 ```
 
 ### Example Output
-When using the Mahalanobis method with the default `alpha = 0.05`, the function returns:
+When using the Mahalanobis method with the default `alpha = 0.1`, the function returns:
 
 - `Method`: "mahalanobis", indicating the method used.
 - `Dataset`: The dataset name.

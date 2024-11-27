@@ -49,7 +49,7 @@ print.multiOutliers <- function(x,...) {
 
   cat("\n")
   cli::cli_h1("Dataset Information")
-  cat("\nFive Highest Outliers of Data Used:\n")
+  cat("\nFive Largest Outliers Within the Provided Dataset:\n")
   print(head(x$Data[order(-x$Data$scores),],5))
 
   return(invisible(x))
