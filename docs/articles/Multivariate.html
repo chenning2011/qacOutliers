@@ -74,13 +74,14 @@ of multivariate outliers. The data for this graph is taken from the <a href="htt
 dataset from the <a href="https://cran.r-project.org/web/packages/carData/index.html" class="external-link">carData</a>
 package.</p>
 <p><img src="Multivariate_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<p>All of the red dots are multivariate outliers. The point labelled 1
-on the graph is a clear example of a multivariate outlier. This person
-has their PhD for 22 years, a normal value for that variable, and makes
-<code>$62,884</code>, which is also a normal value for salary. However,
-when combining these two features, a person who has had 22 years since
-their PhD and makes only <code>$62,884</code> is making much less than
-other professors within their experience range.</p>
+<p>All of the red dots are multivariate outliers. The point labelled
+<code>1</code> on the graph is a clear example of a multivariate
+outlier. This person has their PhD for <code>22</code> years, a normal
+value for that variable, and makes <code>$62,884</code>, which is also a
+normal value for salary. However, when combining these two features, a
+person who has had <code>22</code> years since their PhD and makes only
+<code>$62,884</code> is making much less than other professors within
+their experience range.</p>
 <p>The outliers in this graph were detected using the LoF method, and
 more detail about that method can be provided below. This package
 specifically focuses on four different methods for finding multivariate
@@ -185,16 +186,26 @@ which may change the results of the function.</p>
 <p>When using the kNN method with the default <code>k=5</code>, the
 function returns:</p>
 <ul>
-<li>Method: “kNN”, indicating the method used.</li>
-<li>Dataset: The dataset name.</li>
-<li>Variables: The numeric columns considered for outlier
+<li>
+<code>Method</code>: “kNN”, indicating the method used.</li>
+<li>
+<code>Dataset</code>: The dataset name.</li>
+<li>
+<code>Variables</code>: The numeric columns considered for outlier
 detection.</li>
-<li>Row: Indices of rows identified as outliers.</li>
-<li>Score: Average kNN distance scores of detected outliers.</li>
-<li>Message: A summary message indicating whether outliers were
-detected.</li>
-<li>k: The number of nearest neighbors considered.</li>
-<li>Data: Displays the five highest outliers in the data used.</li>
+<li>
+<code>Row</code>: Indices of rows identified as outliers.</li>
+<li>
+<code>Score</code>: Average kNN distance scores of detected
+outliers.</li>
+<li>
+<code>Message</code>: A summary message indicating whether outliers
+were detected.</li>
+<li>
+<code>k</code>: The number of nearest neighbors considered.</li>
+<li>
+<code>Data</code>: Displays the five highest outliers in the data
+used.</li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"kNN"</span><span class="op">)</span></span>
@@ -256,13 +267,16 @@ detection, visit these resources:</p>
 <p>The Local Outlier Factor (LoF) method detects anomalies by comparing
 the density of data points in their local neighborhood. Points with
 significantly lower density than their neighbors are flagged as
-potential outliers. The dbscan package is used for this implementation,
-which calculates LoF scores for each data point. Scores above a certain
-threshold (typically &gt; 1) are indicative of stronger outliers.</p>
+potential outliers. The <a href="https://cran.r-project.org/web/packages/dbscan/readme/README.html" class="external-link">dbscan</a>
+package is used for this implementation, which calculates LoF scores for
+each data point. Scores above a certain threshold (typically &gt; 1) are
+indicative of stronger outliers.</p>
 <p>LoF is particularly useful for datasets with clusters of varying
-density, as it considers the local density when assessing outlierness.
-It supports both numeric and categorical variables, using Gower distance
-for mixed data types.</p>
+density, as it considers the local density when assessing outlier
+scores. It supports both numeric and categorical variables, using Gower
+distance for mixed data types. This LoF method uses the <a href="https://cran.r-project.org/web/packages/cluster/index.html" class="external-link">cluster</a>
+package’s daisy (Dissimilarity Matrix Calculation) function to calculate
+the Gower distance when necessary.</p>
 <p>Here is an example of the scores using the <a href="https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html" class="external-link">mtcarsOutliers</a>
 dataset included with this package.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -285,7 +299,8 @@ dataset included with this package.</p>
 <p>The LoF method allows customization of the <code>minPts</code>
 parameter, which is the minimum number of points in the local
 neighborhood. Larger values result in broader neighborhoods and may
-reduce sensitivity to smaller clusters. Default is 5.</p>
+reduce sensitivity to smaller clusters. <code>minPts</code> defaults to
+5 if not specified.</p>
 <p>You can adjust these parameters to suit your dataset. Here’s an
 example:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -320,18 +335,28 @@ example:</p>
 <div class="section level3">
 <h3 id="example-output-1">Example Output<a class="anchor" aria-label="anchor" href="#example-output-1"></a>
 </h3>
-<p>When using the LoF method with the default minPts = 5, the function
-returns:</p>
+<p>When using the LoF method with the default <code>minPts = 5</code>,
+the function returns:</p>
 <ul>
-<li>Method: “LoF”, indicating the method used.</li>
-<li>Dataset: The dataset name.</li>
-<li>Variables: The columns considered in the analysis.</li>
-<li>Row: Indices of rows identified as outliers.</li>
-<li>Score: LoF scores for each detected outlier.</li>
-<li>Message: A summary message indicating whether outliers were
-detected.</li>
-<li>minPts: The parameter value used for the local neighborhood.</li>
-<li>Data: Displays the five highest outliers in the data used.</li>
+<li>
+<code>Method</code>: “LoF”, indicating the method used.</li>
+<li>
+<code>Dataset</code>: The dataset name.</li>
+<li>
+<code>Variables</code>: The columns considered in the analysis.</li>
+<li>
+<code>Row</code>: Indices of rows identified as outliers.</li>
+<li>
+<code>Score</code>: LoF scores for each detected outlier.</li>
+<li>
+<code>Message</code>: A summary message indicating whether outliers
+were detected.</li>
+<li>
+<code>minPts</code>: The parameter value used for the local
+neighborhood.</li>
+<li>
+<code>Data</code>: Displays the five highest outliers in the data
+used.</li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"LoF"</span><span class="op">)</span></span>
@@ -371,10 +396,10 @@ detected.</li>
 <h3 id="notes-and-considerations-1">Notes and Considerations<a class="anchor" aria-label="anchor" href="#notes-and-considerations-1"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li><p>Sensitivity to minPts: The choice of minPts significantly
-influences results. A value too small might result in over-sensitivity,
-while a value too large might overlook smaller clusters of
-anomalies.</p></li>
+<li><p>Sensitivity to minPts: The choice of <code>minPts</code>
+significantly influences results. A value too small might result in
+over-sensitivity, while a value too large might overlook smaller
+clusters of anomalies.</p></li>
 <li><p>Mixed Data Types: If the dataset contains categorical variables,
 the method automatically switches to Gower distance for calculating
 pairwise dissimilarities. Ensure the data is properly encoded.</p></li>
@@ -382,10 +407,15 @@ pairwise dissimilarities. Ensure the data is properly encoded.</p></li>
 indicate potential outliers. Adjust the threshold based on the
 characteristics of your dataset.</p></li>
 </ol>
-<p>To learn more about Mahalanobis distance and how it’s used in
+<p>To learn more about LoF &amp; Gower distance and how it’s used in
 multivariate outlier detection, visit these resources:</p>
 <ul>
-<li><a href="https://towardsdatascience.com/local-outlier-factor-lof-algorithm-for-outlier-identification-8efb887d9843" class="external-link">Medium.com</a></li>
+<li>
+<a href="https://towardsdatascience.com/local-outlier-factor-lof-algorithm-for-outlier-identification-8efb887d9843" class="external-link">Medium.com</a>
+LoF Explained</li>
+<li>
+<a href="https://medium.com/analytics-vidhya/gowers-distance-899f9c4bd553" class="external-link">Gower
+Distance</a> Gower Distance Explained</li>
 <li><a href="https://scikit-learn.org/dev/modules/generated/sklearn.cluster.DBSCAN.html" class="external-link">DBSCAN
 Documentation</a></li>
 </ul>
@@ -472,15 +502,25 @@ follows:</p>
 <p>When using the Mahalanobis method with the default
 <code>alpha = 0.05</code>, the function returns:</p>
 <ul>
-<li>Method: “mahalanobis”, indicating the method used.</li>
-<li>Dataset: The dataset name.</li>
-<li>Variables: The numeric columns considered.</li>
-<li>Row: Indices of rows identified as outliers.</li>
-<li>Score: Mahalanobis distance scores of detected outliers.</li>
-<li>Message: A summary message indicating whether outliers were
-detected.</li>
-<li>Alpha: The significance level used.</li>
-<li>Data: Displays the five highest outliers in the data used.</li>
+<li>
+<code>Method</code>: “mahalanobis”, indicating the method used.</li>
+<li>
+<code>Dataset</code>: The dataset name.</li>
+<li>
+<code>Variables</code>: The numeric columns considered.</li>
+<li>
+<code>Row</code>: Indices of rows identified as outliers.</li>
+<li>
+<code>Score</code>: Mahalanobis distance scores of detected
+outliers.</li>
+<li>
+<code>Message</code>: A summary message indicating whether outliers
+were detected.</li>
+<li>
+<code>Alpha</code>: The significance level used.</li>
+<li>
+<code>Data</code>: Displays the five highest outliers in the data
+used.</li>
 </ul>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"mahalanobis"</span><span class="op">)</span></span>
@@ -529,7 +569,9 @@ presence of extreme outliers may affect the results.</p></li>
 <p>To learn more about Mahalanobis distance and how it’s used in
 multivariate outlier detection, visit these resources:</p>
 <ul>
-<li><a href="https://www.statisticshowto.com/mahalanobis-distance/" class="external-link">Statisticshowto.com</a></li>
+<li>
+<a href="https://www.statisticshowto.com/mahalanobis-distance/" class="external-link">Statisticshowto.com</a>
+Mahalanobis Distance Explained</li>
 <li><a href="https://builtin.com/data-science/mahalanobis-distance" class="external-link">Builtin.com</a></li>
 </ul>
 </div>
@@ -539,10 +581,10 @@ multivariate outlier detection, visit these resources:</p>
 </h2>
 <p>Isolation Forest (iForest) is an unsupervised machine learning
 algorithm designed to detect anomalies in data is implemented using the
-<code>isotree</code> package. It works by creating random partitions of
-the data and measuring how quickly each point can be isolated. Points
-that are isolated faster (using fewer splits) are more likely to be
-outliers.</p>
+<a href="https://cran.r-project.org/web/packages/isotree/index.html" class="external-link">isotree</a>
+package. It works by creating random partitions of the data and
+measuring how quickly each point can be isolated. Points that are
+isolated faster (using fewer splits) are more likely to be outliers.</p>
 <p>The iForest algorithm is particularly well-suited for handling
 high-dimensional data and works with both quantitative and categorical
 variables. It is robust to noise and scales efficiently for large
@@ -563,9 +605,11 @@ dataset included with this package.</p>
 <h3 id="customizing-parameters">Customizing Parameters<a class="anchor" aria-label="anchor" href="#customizing-parameters"></a>
 </h3>
 <p>The iForest method allows customization of two main parameters:</p>
-<p>ntrees: The number of trees in the isolation forest. A higher value
-increases precision but also computation time. Default is 100.</p>
-<p>n: The number of points to return as outliers. Default is 5.</p>
+<p><code>ntrees</code>: The number of trees in the isolation forest. A
+higher value increases precision but also computation time. Default is
+100.</p>
+<p><code>n</code>: The number of points to return as outliers. Default
+is 5.</p>
 <p>Here’s an example of how you can modify these parameters:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"iForest"</span>, ntrees <span class="op">=</span> <span class="fl">200</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
@@ -604,16 +648,27 @@ increases precision but also computation time. Default is 100.</p>
 <code>ntrees = 100</code> and <code>n = 5</code> the function
 returns:</p>
 <ul>
-<li>Method: “iForest”, indicating the method used.</li>
-<li>Dataset: The dataset name.</li>
-<li>Variables: The numeric columns considered.</li>
-<li>Row: Indices of rows identified as outliers.</li>
-<li>Score: Isolation scores for each detected outlier.</li>
-<li>Message: A summary message indicating whether outliers were
-detected.</li>
-<li>ntrees: The number of trees in the isolation forest</li>
-<li>n: The number of points to return as outliers</li>
-<li>Data: Displays the five highest outliers in the data used.</li>
+<li>
+<code>Method</code>: “iForest”, indicating the method used.</li>
+<li>
+<code>Dataset</code>: The dataset name.</li>
+<li>
+<code>Variables</code>: The numeric columns considered.</li>
+<li>
+<code>Row</code>: Indices of rows identified as outliers.</li>
+<li>
+<code>Score</code>: Isolation scores for each detected outlier.</li>
+<li>
+<code>Message</code>: A summary message indicating whether outliers
+were detected.</li>
+<li>
+<code>ntrees</code>: The number of trees in the isolation
+forest</li>
+<li>
+<code>n</code>: The number of points to return as outliers</li>
+<li>
+<code>Data</code>: Displays the five highest outliers in the data
+used.</li>
 </ul>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"iForest"</span><span class="op">)</span></span>
@@ -663,7 +718,8 @@ methods, iForest does not assume a specific data distribution. This
 makes it robust for detecting outliers in diverse datasets.</p></li>
 <li><p>Handles Mixed Data Types: iForest can process both numeric and
 categorical variables. However, ensure your data is properly encoded or
-formatted as required by the isotree package.</p></li>
+formatted as required by the <a href="https://cran.r-project.org/web/packages/isotree/index.html" class="external-link">isotree</a>
+package.</p></li>
 <li><p>Interpretation of Scores: Higher isolation scores indicate
 stronger anomalies. You may need to determine an appropriate threshold
 for your dataset when interpreting the results.</p></li>
@@ -671,7 +727,9 @@ for your dataset when interpreting the results.</p></li>
 <p>To learn more about Isolation Forest and how it’s used in
 multivariate outlier detection, visit these resources:</p>
 <ul>
-<li><a href="https://medium.com/@limyenwee_19946/unsupervised-outlier-detection-with-isolation-forest-eab398c593b2" class="external-link">Medium.com</a></li>
+<li>
+<a href="https://medium.com/@limyenwee_19946/unsupervised-outlier-detection-with-isolation-forest-eab398c593b2" class="external-link">Medium.com</a>
+iForest Explained</li>
 <li><a href="https://www.youtube.com/watch?v=O9VvmWj-JAk" class="external-link">Andy McDonald
 on YouTube</a></li>
 </ul>
