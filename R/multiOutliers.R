@@ -2,15 +2,15 @@
 #'@description Identifies multivariate outliers using four different methods.
 #'@export
 #'@param data a data frame
-#'@param varlist a list of numeric variables
-#'@param method character, supplies the method to be used for outlier detection. Methods are LoF, kNN, mahalanobis, and iForest
+#'@param varlist a list of variables. The variables can be factor or numeric. Categorical variables are dropped when using the mahalanobis and kNN methods.
+#'@param method character, supplies the method to be used for outlier detection. Methods are LoF, kNN, mahalanobis, and iForest.
 #'@param minPts (optional) numeric, minimum points used for LoF outlier detection. Default value is 5
 #'@param k (optional) a k value used for the kNN method of outlier detection. Default value is 5
 #'@param threshold (optional) the threshold used for kNN outlier detection. Default value is 0.95
 #'@param alpha (optional) the alpha used for mahalanobis distance outlier detection. Default value is 0.1
 #'@param ntrees (optional) the number of trees used in iForest outlier detection. Default value is 100
 #'@param n (optional) the number of points to take as outliers in iForest outlier detection. Default value is 5
-#'@param na.rm (optional) logical, specifies whether to remove NA values. Defaults to TRUE
+#'@param na.rm (optional) logical, specifies whether to remove NA values. Defaults to TRUE. If the value is TRUE, removes missing data through listwise deletion.
 #'@returns method used, dataset used, variables used for outliers detected, indices of any detected outliers, scores for the outliers, and values for optional parameters
 #'@import ggplot2
 #'@import Routliers
@@ -62,7 +62,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       lof_scores <- dbscan::lof(data_stand, minPts = minPts)
 
       #identify outliers based on the threshold
-      outlier_indices <- which(lof_scores > 1.5)
+      outlier_indices <- which(lof_scores > 1)
       outlier_scores <- lof_scores[outlier_indices]
 
       #adding score column into the dataset
@@ -77,8 +77,8 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
       # Apply the LoF method from the dbscan package
       lof_scores <- dbscan::lof(as.matrix(data_stand), minPts = minPts)
 
-      # Identify outliers based on a threshold (LoF score > 1.5 for stronger outliers)
-      outlier_indices <- which(lof_scores > 1.5)
+      # Identify outliers based on a threshold (LoF score > 1 for stronger outliers)
+      outlier_indices <- which(lof_scores > 1)
       outlier_scores <- lof_scores[outlier_indices]
 
       #adding score column into the dataset

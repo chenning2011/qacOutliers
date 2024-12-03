@@ -8,10 +8,10 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of qacOutliers is to detect multivariate and univariate
-outliers using seven different methods. This package consolidates
-methods from multiple different R packages and makes them more easily
-accessible.
+The goal of qacOutliers is to detect univariate and multivariate
+outliers for a variety of methods. This package consolidates methods
+from a range of R packages and makes them more easily accessible.
+Additionally, original methods for visualizing the results are provided.
 
 ## Installation
 

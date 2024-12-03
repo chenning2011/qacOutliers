@@ -55,7 +55,7 @@ plot.multiOutliers <- function(x, ...) {
     ggplot2::theme_minimal()
 
   if(x$Method == "LoF"){
-    plot <- plot + geom_hline(yintercept = 1.5, linetype = "dashed", alpha = 0.8)
+    plot <- plot + geom_hline(yintercept = 1, linetype = "dashed", alpha = 0.8)
   }
 
   text_grob <- grid::textGrob("Values below points are row numbers", gp = gpar(col = "black", fontsize = 15, fill = "lightblue"))

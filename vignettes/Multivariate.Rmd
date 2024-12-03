@@ -65,14 +65,14 @@ knn_distances <- FNN::knn.dist(mtcarsOutliers_st, k=5)
 head(knn_distances, 5)
 ```
 
-After each of these distances are calculated, the average for each row is calculated. Here are the average scores for the 5 rows shown above. This step is why it's important to standardize the data before finding the distances. 
+After each of these distances are calculated, the mean for each row is calculated. Here are the mean scores for the 5 rows shown above. This step is why it's important to standardize the data before finding the distances. 
 
 ```{r, echo = F, message = F, warning = F}
 avg_knn_distances <- rowMeans(knn_distances)
 head(avg_knn_distances, 5)
 ```
 
-In this function, the next step involves creating a threshold for declaring a point an outlier. To calculate this threshold, the function takes the average of each row (after that row's average has been calculated), and adds 2 times the standard deviation of each row to that number. In this case, the threshold is the number below. 
+In this function, the next step involves creating a threshold for declaring a point an outlier. To calculate this threshold, the function takes the mean of each row (after that row's mean has been calculated), and adds 2 times the standard deviation of each row to that number. In this case, the threshold is the number below. 
 
 ```{r, echo = F, message = F, warning = F}
 threshold <- mean(avg_knn_distances) + 2 * sd(avg_knn_distances)
@@ -100,7 +100,7 @@ When using the kNN method with the default `k=5`, the function returns:
 - `Dataset`: The dataset name.
 - `Variables`: The numeric columns considered for outlier detection.
 - `Row`: Indices of rows identified as outliers.
-- `Score`: Average kNN distance scores of detected outliers.
+- `Score`: Mean kNN distance scores of detected outliers.
 - `Message`: A summary message indicating whether outliers were detected.
 - `k`: The number of nearest neighbors considered.
 - `Data`: Displays the five highest outliers in the data used. 
@@ -137,11 +137,10 @@ LoF is particularly useful for datasets with clusters of varying density, as it 
 Here is an example of the scores using the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package.
 
 ```{r}
-library(dbscan)
 data <- mtcarsOutliers[-1]
 
 data_scaled <- scale(data)
-lof_scores <- lof(as.matrix(data_scaled), minPts = 5)
+lof_scores <- dbscan::lof(as.matrix(data_scaled), minPts = 5)
 
 head(lof_scores, 5)
 ```
@@ -211,7 +210,9 @@ The outliers are identified by the function and their indices are returned:
 results$outliers_pos
 ```
 
-Outliers are identified by comparing the Mahalanobis distance of each point to a threshold derived from the chi-squared distribution. Points with distances greater than the critical value at a specified significance level (`alpha`) are flagged as outliers. The default `alpha` is 0.05, which corresponds to a 95% confidence level. You can customize this value to adjust the sensitivity of the detection.
+Outliers are identified by comparing the Mahalanobis distance of each point to a threshold derived from the chi-squared distribution. Points with distances greater than the critical value at a specified significance level (`alpha`) are flagged as outliers. The default `alpha` is 0.1, which corresponds to a 95% confidence level. You can customize this value to adjust the sensitivity of the detection.
+
+REWORD VIGNETTES TO JUST HAVE SURFACE LEVEL DETAILS, THEN LINK TO A SOURCE THAT HAS MORE INFORMATION ON THIS STUFF
 
 Here is the threshold for the dataset using the default `alpha = 0.1`:
 ```{r, echo = F, message = F}

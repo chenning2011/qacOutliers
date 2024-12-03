@@ -28,10 +28,10 @@ navbar:
     - text: "Vignettes"
       icon: fas fa-book
       menu:
-      -  text: Multivariate Outliers
-         href: articles/Multivariate.html
       -  text: Univariate Outliers
          href: articles/Univariate.html
+      -  text: Multivariate Outliers
+         href: articles/Multivariate.html
     - icon: fa-file-code-o
       text: "Documentation"
       href: reference/index.html
