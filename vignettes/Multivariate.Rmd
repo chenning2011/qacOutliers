@@ -45,7 +45,6 @@ ggplot()+
   geom_point(data = subset, aes(x=yrs.since.phd, y = salary), color = "red")+
   geom_label(data = point, aes(x=yrs.since.phd, y=salary), label = rownames(point))+
   labs(title = "Years since PhD and salary (USD)", x = "Years since PhD", y = "Salary (USD)")+
-  scale_y_continuous(labels = scales::dollar)+
   theme_minimal()
 ```
 

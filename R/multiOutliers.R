@@ -19,6 +19,7 @@
 #'@import dbscan
 #'@import isotree
 #'@import FNN
+#'@importFrom ("utils", "head")
 #'
 #'@examples
 #'multiOutliers(mtcarsOutliers, method="mahalanobis", alpha=0.1)

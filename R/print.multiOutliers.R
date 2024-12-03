@@ -8,6 +8,7 @@
 #'@import Routliers
 #'@import dplyr
 #'@import cli
+#'@importFrom ("utils", "head")
 #'@examples
 #'#iForest
 #'results <- multiOutliers(irisOutliers, method = "iForest")
