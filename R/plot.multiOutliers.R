@@ -2,6 +2,7 @@
 #'@description Plots identified multivariate outliers using either kNN, iForest, mahalanobis, LoF
 #'@export
 #'@param x the results from a multivariate outlier detection function (e.g., kNN, iForest, mahalanobis, LoF)
+#'@param ... not used
 #'@returns A formatted plot of the results of the multivariate outlier detection. Row indices are on the x-axis and ou
 #'@import ggplot2
 #'@import dplyr
@@ -28,10 +29,6 @@ plot.multiOutliers <- function(x, ...) {
   if(!inherits(x, "multiOutliers")){
     stop("This functon requires an object created by multiOutliers")
   }
-
-  require(ggplot2)
-  require(grid)
-
   outlier_indices <- x$Row
 
   plot_data <- data.frame(

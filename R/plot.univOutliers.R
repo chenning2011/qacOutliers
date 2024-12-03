@@ -1,7 +1,8 @@
 #' @title Plotting Univariate Outlier Detection
 #' @description Creates visualizations for univariate outlier detection using method-specific plot styles.
 #' @export
-#' @param outlier_results A list containing the results from a univariate outlier detection function (e.g., `univOutliers`).
+#' @param x A list containing the results from a univariate outlier detection function (e.g., `univOutliers`).
+#' @param ... any additional arguments.
 #' @returns A plot object specific to the outlier detection method used (boxplot, MAD, or Grubbs' test).
 #' @import ggplot2
 #' @import Routliers
@@ -17,18 +18,17 @@
 #' object3 <- univOutliers(data = mtcarsOutliers, x = "carb", method = "grubbs")
 #' plot(object3)
 
-plot.univOutliers <- function(outlier_results) {
-  if (!inherits(outlier_results, "univOutliers")) {
+plot.univOutliers <- function(x, ...) {
+  if (!inherits(x, "univOutliers")) {
     stop("Input must be of class 'univOutliers'.")
   }
-  require(ggplot2)
 
-  data <- outlier_results$dataset
+  data <- x$dataset
 
-  for (column in names(outlier_results)) {
+  for (column in names(x)) {
     if (column == "dataset") next
 
-    result <- outlier_results[[column]]
+    result <- x[[column]]
     method <- result$method
     outliers <- result$outliers
     outlier_rows <- result$outlier_rows

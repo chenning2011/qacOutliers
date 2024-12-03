@@ -47,8 +47,7 @@ univOutliers <- function(data, x = NULL, method = "boxplot") {
       outlier_rows <- which(column_data %in% outliers)
       outliers_list[[column]] <- list(method = "boxplot", outliers = outliers, outlier_rows = outlier_rows)
     } else if (method == "mad") {
-      library(Routliers)
-      res1 <- outliers_mad(column_data)
+      res1 <- Routliers::outliers_mad(column_data)
       outlier_rows <- which(column_data < res1$LL_CI_MAD | column_data > res1$UL_CI_MAD)
       outliers_list[[column]] <- list(method = "mad", outliers = column_data[outlier_rows], outlier_rows = outlier_rows)
     } else if (method == "grubbs") {

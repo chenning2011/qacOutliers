@@ -2,6 +2,7 @@
 #'@description Prints identified multivariate outliers
 #'@export
 #'@param x the results from "multiOutliers" function
+#'@param ... not used
 #'@returns A formatted print of the results of the "multiOutliers" function
 #'@import ggplot2
 #'@import Routliers

@@ -2,6 +2,7 @@
 #' @description Prints identified univariate outliers using the specified method (boxplot, MAD, or Grubbs' test).
 #' @export
 #' @param x The results from a univariate outlier detection function (e.g., output from `univOutliers`).
+#' @param ... not used
 #' @returns A formatted print of the outlier results, including the detected outliers, their row numbers, and the method used.
 #' @import ggplot2
 #' @import dplyr
@@ -18,10 +19,6 @@
 #' print(object3)
 
 print.univOutliers <- function(x, ...) {
-  # Load required libraries
-  require(cli)
-  require(knitr)
-
   # Loop through each column's results
   for (column in names(x)) {
     # Skip if the entry is not a numeric column from the dataset

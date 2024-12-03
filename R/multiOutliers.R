@@ -28,7 +28,7 @@
 
 
 #add in see also and link to other functions that we build our functions off of
-multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 5, threshold = 0.95, alpha = 0.1, ntrees = 100, n=5,na.rm = TRUE, ...) {
+multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 5, threshold = 0.95, alpha = 0.1, ntrees = 100, n=5,na.rm = TRUE) {
   # Get the dataset name
   dataset_name <- deparse(substitute(data))
 
