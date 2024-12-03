@@ -23,13 +23,13 @@
 #'
 #'@examples
 #'multiOutliers(mtcarsOutliers, method="mahalanobis", alpha=0.1)
-#'multiOutliers(mtcarsOutliers, method="LoF", minPts=5)
-#'multiOutliers(mtcarsOutliers, method="kNN", k=5, threshold=.95)
-#'multiOutliers(mtcarsOutliers, method="iForest", ntrees = 50)
+#'multiOutliers(mtcarsOutliers, method="lof", minPts=5)
+#'multiOutliers(mtcarsOutliers, method="knn", k=5, threshold=.95)
+#'multiOutliers(mtcarsOutliers, method="iforest", ntrees = 50)
 
 
 #add in see also and link to other functions that we build our functions off of
-multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 5, threshold = 0.95, alpha = 0.1, ntrees = 100, n=5,na.rm = TRUE) {
+multiOutliers <- function(data, varlist = names(data), method = "lof", minPts = 10, k = 5, threshold = 0.95, alpha = 0.1, ntrees = 100, n=5,na.rm = TRUE) {
   # Get the dataset name
   dataset_name <- deparse(substitute(data))
 
@@ -37,10 +37,10 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
   if(na.rm) data <- na.omit(data[,varlist])
 
   # Standardize method argument
-  method <- match.arg(method, c("kNN", "LoF", "mahalanobis", "iForest"))
+  method <- match.arg(method, c("knn", "lof", "mahalanobis", "iforest"))
 
   # LoF method
-  if (method == "LoF") {
+  if (method == "lof") {
     # Check if data is a matrix or data frame and convert if necessary
     if (!is.matrix(data) && !is.data.frame(data)) {
       stop("Data should be a matrix or data frame.")
@@ -140,7 +140,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
 
 
   # kNN method
-  if (method == "kNN") {
+  if (method == "knn") {
     if (!is.data.frame(data) && !is.matrix(data)) {
       stop("Data must be a data frame or matrix.")
     }
@@ -181,7 +181,7 @@ multiOutliers <- function(data, varlist = names(data), method, minPts = 10, k = 
   }
 
   # Isolation Forest (iForest) method
-  if (method == "iForest") {
+  if (method == "iforest") {
     if (!is.matrix(data) && !is.data.frame(data)) {
       stop("Data should be a matrix or data frame.")
     }

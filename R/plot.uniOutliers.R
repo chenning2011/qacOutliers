@@ -9,16 +9,16 @@
 #' @import stats
 #' @import grDevices
 #' @examples
-#' object <- univOutliers(data = mtcarsOutliers, x = "carb", method = "mad")
+#' object <- uniOutliers(data = mtcarsOutliers, x = "carb", method = "mad")
 #' plot(object)
 #'
-#' object2 <- univOutliers(data = mtcarsOutliers, x = "wt", method = "boxplot")
+#' object2 <- uniOutliers(data = mtcarsOutliers, x = "wt", method = "boxplot")
 #' plot(object2)
 #'
-#' object3 <- univOutliers(data = mtcarsOutliers, x = "carb", method = "grubbs")
+#' object3 <- uniOutliers(data = mtcarsOutliers, x = "carb", method = "grubbs")
 #' plot(object3)
 
-plot.univOutliers <- function(x, ...) {
+plot.uniOutliers <- function(x, ...) {
   if (!inherits(x, "univOutliers")) {
     stop("Input must be of class 'univOutliers'.")
   }

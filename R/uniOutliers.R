@@ -12,18 +12,21 @@
 #' @examples
 #'
 #' #Example usage:
-#' object <- univOutliers(data = mtcarsOutliers, x="carb", method = "mad")
+#' object <- uniOutliers(data = mtcarsOutliers, x="carb", method = "mad")
 #' print(object)  # Printing the outliers and methods
 #'
-#' object2 <- univOutliers(data = mtcarsOutliers, x= "wt", method = "boxplot")
+#' object2 <- uniOutliers(data = mtcarsOutliers, x= "wt", method = "boxplot")
 #' print(object2)  # Printing the outliers and methods
 #'
-#' object3 <- univOutliers(data = grubbsOutlier, method = "grubbs")
+#' object3 <- uniOutliers(data = grubbsOutlier, method = "grubbs")
 #' print(object3)  # Printing the outliers and methods
 
 uniOutliers <- function(data, x = NULL, method = "boxplot") {
   # Identify numeric columns in the dataset
   numeric_columns <- sapply(data, is.numeric)
+
+  # Standardize method argument
+  method <- match.arg(method, c("boxplot", "mad", "grubbs"))
 
   # If 'x' is not specified, use all numeric columns in the dataset
   if (is.null(x)) {
