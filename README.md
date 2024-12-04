@@ -28,9 +28,9 @@ remotes::install_github("https://github.com/chenning2011/qacOutliers/")
 To learn more about how to use this package, what outliers are, and the
 different functions available in this package, visit the [Getting
 Started](https://chenning2011.github.io/qacOutliers/articles/qacOutliers.html),
-[Multivariate](https://chenning2011.github.io/qacOutliers/articles/Multivariate.html),
+[Univariate](https://chenning2011.github.io/qacOutliers/articles/Univariate.html),
 and
-[Univariate](https://chenning2011.github.io/qacOutliers/articles/Univariate.html)
+[Multivariate](https://chenning2011.github.io/qacOutliers/articles/Multivariate.html)
 vignettes. You can find out more about how the specific functions work
 on the
 [Documentation](https://chenning2011.github.io/qacOutliers/reference/index.html)
