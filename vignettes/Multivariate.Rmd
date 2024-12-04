@@ -20,68 +20,42 @@ library(qacOutliers)
 
 ## What are multivariate outliers? How do you detect them? 
 
-A multivariate outlier is an outlier that can only be detected by looking at two variables in combination. The graph below shows examples of multivariate outliers. The data for this graph is taken from the [Salaries](https://rdrr.io/cran/carData/man/Salaries.html) dataset from the [carData](https://cran.r-project.org/web/packages/carData/index.html) package.
+A multivariate outlier is an outlier that can only be detected by looking at two or more variables in combination. The graph below shows examples of multivariate outliers using the `iris` dataset included with base R.
 
 ```{r, echo = F, message = F, warning = F}
-library(carData)
-data(Salaries, package="carData")
 #getting the outliers
-results <- multiOutliers(Salaries, method = "LoF")
+results <- multiOutliers(iris, method = "lof")
 row <- as.numeric(results$Row)
 
 library(dplyr)
-#getting just a subset for red points
-subset <- Salaries %>% 
-  slice(row)
-
 #getting the one point for labelling
-point <- Salaries %>% 
-  filter(yrs.since.phd > 20 & yrs.since.phd < 30 & salary < 70000)
+point <-  iris %>% 
+  filter(Sepal.Length < 5 & Petal.Width > 1.5)
 
 #graphing
 library(ggplot2)
 ggplot()+
-  geom_point(data = Salaries, aes(x=yrs.since.phd, y=salary))+
-  geom_point(data = subset, aes(x=yrs.since.phd, y = salary), color = "red")+
-  geom_label(data = point, aes(x=yrs.since.phd, y=salary), label = rownames(point))+
-  labs(title = "Years since PhD and salary (USD)", x = "Years since PhD", y = "Salary (USD)")+
+  geom_point(data = iris, aes(x=Sepal.Length, y=Petal.Width))+
+  geom_point(data = point, aes(x=Sepal.Length, y=Petal.Width), color = "red")+
+  geom_label(data = point, aes(x=Sepal.Length, y=Petal.Width), label = rownames(point), vjust = -0.7)+
+  labs(title = "Sepal Length and Petal Width", x = "Sepal Length (in)", y = "Petal Width (in)")+
   theme_minimal()
 ```
 
-All of the red dots are multivariate outliers. The point labelled `1` on the graph is a clear example of a multivariate outlier. This person has their PhD for `22` years, a normal value for that variable, and makes `$62,884`, which is also a normal value for salary. However, when combining these two features, a person who has had `22` years since their PhD and makes only `$62,884` is making much less than other professors within their experience range. 
+The red point labelled `1` on the graph is a clear example of a multivariate outlier. This flower has a Sepal Length of 4.9 inches, and a Petal Width of 1.7 inches, both of which seem like normal values for Sepal Length and Petal Width. However, flowers with a Sepal Length of around 5 inches normally have much smaller Petal Widths, as shown on the graph above. While there are other outliers in this dataset, only this outlier has been colored red to draw extra attention to it. 
 
-The outliers in this graph were detected using the LoF method, and more detail about that method can be provided below. This package specifically focuses on four different methods for finding multivariate outliers: kNN, LoF, mahalanobis distance, and iForest. 
+The outlier in this graph was detected using the LoF method, and more detail about that method can be provided below. This package specifically focuses on four different methods for finding multivariate outliers: kNN, LoF, mahalanobis distance, and iForest. 
 
 ## kNN
 
 kNN calculates the distances between a data point and its k-nearest neighbors and assigns an outlier score based on that distance. The principle that guides kNN is that outliers lay far away from their neighbours, so each of the distances is interpreted within that context. Because some variables in the data may have much larger ranges that others (ex. a variable has a range from 1-10 and another has a range of -10000 to 10000), the data is standardized before calculating the distances. 
 
-Here is an example of the distances for the first 5 rows in [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html), a dataset included with this package. 
+After each of these distances is calculated, the mean for each row is calculated. The next step involves creating a threshold for declaring a point an outlier. To calculate this threshold, the function takes the mean of each row (after that row's mean has been calculated), and adds 2 times the standard deviation of each row to that number. Outliers are considered any points with a score above the calculated threshold. Because this method relies on numeric variables, all categorical variables are removed. 
+
+Here is an example of the final output from the `multiOutliers` function using the kNN method.
 
 ```{r, echo = F, message = F, warning = F}
-mtcarsOutliers_st <- scale(mtcarsOutliers[-1])
-knn_distances <- FNN::knn.dist(mtcarsOutliers_st, k=5)
-head(knn_distances, 5)
-```
-
-After each of these distances are calculated, the mean for each row is calculated. Here are the mean scores for the 5 rows shown above. This step is why it's important to standardize the data before finding the distances. 
-
-```{r, echo = F, message = F, warning = F}
-avg_knn_distances <- rowMeans(knn_distances)
-head(avg_knn_distances, 5)
-```
-
-In this function, the next step involves creating a threshold for declaring a point an outlier. To calculate this threshold, the function takes the mean of each row (after that row's mean has been calculated), and adds 2 times the standard deviation of each row to that number. In this case, the threshold is the number below. 
-
-```{r, echo = F, message = F, warning = F}
-threshold <- mean(avg_knn_distances) + 2 * sd(avg_knn_distances)
-threshold
-```
-
-Outliers are considered any points with a score above the calculated threshold. In this case, the outliers are shown below. 
-
-```{r, echo = F, message = F, warning = F}
-multiOutliers(mtcarsOutliers, method="kNN")
+multiOutliers(mtcarsOutliers, method="knn")
 ```
 
 ### Customizing the `k` parameter
@@ -89,7 +63,7 @@ multiOutliers(mtcarsOutliers, method="kNN")
 The value `k` tells the function how many points to consider as neighbors when identifying distances between each of the points. The default value, 5, finds the distance between each point the 5 points that are closest to that point. The choice of `k` significantly impacts the results, and smaller values are generally more sensitive to outliers. You can supply your own value of `k`, which may change the results of the function.
 
 ```{r}
-multiOutliers(mtcarsOutliers, method = "kNN", k = 10)
+multiOutliers(mtcarsOutliers, method = "knn", k = 10)
 ```
 
 ### Example Output
@@ -105,7 +79,7 @@ When using the kNN method with the default `k=5`, the function returns:
 - `Data`: Displays the five highest outliers in the data used. 
 
 ```{r}
-result <- multiOutliers(mtcarsOutliers, method = "kNN")
+result <- multiOutliers(mtcarsOutliers, method = "knn")
 print(result)
 ```
 
@@ -133,23 +107,12 @@ The Local Outlier Factor (LoF) method detects anomalies by comparing the density
 
 LoF is particularly useful for datasets with clusters of varying density, as it considers the local density when assessing outlier scores. It supports both numeric and categorical variables, using Gower distance for mixed data types. This LoF method uses the [cluster](https://cran.r-project.org/web/packages/cluster/index.html) package's daisy (Dissimilarity Matrix Calculation) function to calculate the Gower distance when necessary.
 
-Here is an example of the scores using the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package.
-
-```{r}
-data <- mtcarsOutliers[-1]
-
-data_scaled <- scale(data)
-lof_scores <- dbscan::lof(as.matrix(data_scaled), minPts = 5)
-
-head(lof_scores, 5)
-```
-
 ### Customizing the `minPts` Parameter
 The LoF method allows customization of the `minPts` parameter, which is the minimum number of points in the local neighborhood. Larger values result in broader neighborhoods and may reduce sensitivity to smaller clusters. `minPts` defaults to 5 if not specified.
 
 You can adjust these parameters to suit your dataset. Here’s an example:
 ```{r}
-multiOutliers(mtcarsOutliers, method = "LoF", minPts = 10)
+multiOutliers(mtcarsOutliers, method = "lof", minPts = 10)
 ```
 
 ### Example Output
@@ -165,7 +128,7 @@ When using the LoF method with the default `minPts = 5`, the function returns:
 - `Data`: Displays the five highest outliers in the data used. 
 
 ```{r}
-result <- multiOutliers(mtcarsOutliers, method = "LoF")
+result <- multiOutliers(mtcarsOutliers, method = "lof")
 result
 ```
 
@@ -177,7 +140,7 @@ plot(result)
 ### Notes and Considerations
 1. Sensitivity to minPts: The choice of `minPts` significantly influences results. A value too small might result in over-sensitivity, while a value too large might overlook smaller clusters of anomalies.
 
-2. Mixed Data Types: If the dataset contains categorical variables, the method automatically switches to Gower distance for calculating pairwise dissimilarities. Ensure the data is properly encoded.
+2. Mixed Data Types: If the dataset contains categorical variables, the method automatically switches from Euclidean to Gower distances for calculating pairwise dissimilarities. Ensure the data is properly encoded.
 
 3. Interpreting LoF Scores: Scores greater than 1.5 typically indicate potential outliers. Adjust the threshold based on the characteristics of your dataset.
 
@@ -192,41 +155,16 @@ To learn more about LoF & Gower distance and how it's used in multivariate outli
 
 The Mahalanobis distance measures the distance of a point from the center of a multivariate distribution while accounting for the correlation between variables. This method identifies outliers by calculating how far each point is from the data's multivariate mean, considering the covariance matrix of the data. This approach is particularly useful when variables are highly correlated or have different scales.
 
-Before using the Mahalanobis distance, the function automatically selects numeric columns from the dataset. Non-numeric variables are excluded, ensuring compatibility with the method. The distances are then calculated using the [outliers_mahalanobis](https://www.rdocumentation.org/packages/Routliers/versions/0.0.0.3/topics/outliers_mahalanobis) function from the [Routliers](https://cran.r-project.org/web/packages/Routliers/index.html) package.
-
-Here is an example of calculating Mahalanobis distances for the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package:
-
-```{r, echo = F, message = F}
-library(Routliers)
-mtcarsOutliers_numeric <- mtcarsOutliers[-1]
-results <- outliers_mahalanobis(as.matrix(mtcarsOutliers_numeric), alpha = 0.05)
-
-head(results$dist_from_center, 5)
-```
-
-The outliers are identified by the function and their indices are returned:
-```{r, echo = F, message = F}
-results$outliers_pos
-```
-
-Outliers are identified by comparing the Mahalanobis distance of each point to a threshold derived from the chi-squared distribution. Points with distances greater than the critical value at a specified significance level (`alpha`) are flagged as outliers. The default `alpha` is 0.1, which corresponds to a 95% confidence level. You can customize this value to adjust the sensitivity of the detection.
-
-REWORD VIGNETTES TO JUST HAVE SURFACE LEVEL DETAILS, THEN LINK TO A SOURCE THAT HAS MORE INFORMATION ON THIS STUFF
-
-Here is the threshold for the dataset using the default `alpha = 0.1`:
-```{r, echo = F, message = F}
-alpha <- 0.1
-threshold <- qchisq(1 - alpha, df = ncol(mtcarsOutliers_st))
-threshold
-```
+Before using the Mahalanobis distance, the function automatically selects numeric columns from the dataset. Non-numeric variables are excluded, ensuring compatibility with the method. The distances are then calculated using the [outliers_mahalanobis](https://www.rdocumentation.org/packages/Routliers/versions/0.0.0.3/topics/outliers_mahalanobis) function from the [Routliers](https://cran.r-project.org/web/packages/Routliers/index.html) package. The Mahalanobis distances that are returned by the function represent the distance from the point to the center of the distribution. 
 
 ### Customizing the `alpha` parameter
 
-The `alpha` parameter in outliers_mahalanobis determines the significance level for outlier detection. Lower values (e.g., `alpha = 0.01`) result in stricter thresholds, identifying fewer points as outliers. You can modify `alpha` as follows:
+The `alpha` parameter determines the significance level for outlier detection. The default `alpha` value is 0.1, which corresponds to a 95% confidence level. The function calculates the chi-squared distribution for these points, and removes those with distances outside of the 95% confidence interval range. 
+
+Lower values (e.g., `alpha = 0.01`) result in stricter thresholds, identifying fewer points as outliers while higher values are less strict, identifying more observations as outliers. The function will return the five observations with the largest outliers regardless of the value of alpha. You can modify `alpha` as follows:
 ```{r}
 multiOutliers(mtcarsOutliers, method = "mahalanobis", alpha = 0.01)
 ```
-
 ### Example Output
 When using the Mahalanobis method with the default `alpha = 0.1`, the function returns:
 
@@ -263,21 +201,9 @@ To learn more about Mahalanobis distance and how it's used in multivariate outli
 
 ## iForest 
 
-Isolation Forest (iForest) is an unsupervised machine learning algorithm designed to detect anomalies in data is implemented using the [isotree](https://cran.r-project.org/web/packages/isotree/index.html) package. It works by creating random partitions of the data and measuring how quickly each point can be isolated. Points that are isolated faster (using fewer splits) are more likely to be outliers.
+Isolation Forest (iForest) is an unsupervised machine learning algorithm designed to detect anomalies in data and is implemented through functions in the  [isotree](https://cran.r-project.org/web/packages/isotree/index.html) package. It works by creating random partitions of the data and measuring how quickly each point can be isolated. Points that are isolated faster (using fewer splits) are more likely to be outliers.
 
 The iForest algorithm is particularly well-suited for handling high-dimensional data and works with both quantitative and categorical variables. It is robust to noise and scales efficiently for large datasets.
-
-Here is an example of the scores using the [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html) dataset included with this package.
-
-```{r}
-library(isotree)
-data <- mtcarsOutliers[-1]
-
-isolation_forest_model <- isolation.forest(data, ntrees = 100)
-data$iso_score <- predict(isolation_forest_model, data)
-
-head(data$iso_score, 5)
-```
 
 ### Customizing Parameters
 The iForest method allows customization of two main parameters:
@@ -288,7 +214,7 @@ The iForest method allows customization of two main parameters:
 
 Here’s an example of how you can modify these parameters:
 ```{r}
-multiOutliers(mtcarsOutliers, method = "iForest", ntrees = 200, n = 10)
+multiOutliers(mtcarsOutliers, method = "iforest", ntrees = 200, n = 10)
 ```
 
 ### Example Output
@@ -306,7 +232,7 @@ When using the iForest method with the default `ntrees = 100` and `n = 5` the fu
 - `Data`: Displays the five highest outliers in the data used.  
 
 ```{r}
-result <- multiOutliers(mtcarsOutliers, method = "iForest")
+result <- multiOutliers(mtcarsOutliers, method = "iforest")
 result
 ```
 

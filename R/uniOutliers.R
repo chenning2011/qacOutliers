@@ -12,7 +12,7 @@
 #' @examples
 #'
 #' #Example usage:
-#' object <- uniOutliers(data = mtcarsOutliers, x="carb", method = "mad")
+#' object <- uniOutliers(data = mtcarsOutliers, x="wt", method = "mad")
 #' print(object)  # Printing the outliers and methods
 #'
 #' object2 <- uniOutliers(data = mtcarsOutliers, x= "wt", method = "boxplot")
@@ -34,6 +34,13 @@ uniOutliers <- function(data, x = NULL, method = "boxplot") {
   } else {
     if (!x %in% names(data)) stop(paste("The specified column", x, "does not exist in the data frame."))
     x <- list(x)
+  }
+
+  #error messaging if any of the variables are non-numeric
+  for (var in x){
+    if(!is.numeric(data[[var]])){
+      stop((paste(var, "is non-numeric. Please provide only numeric variables.")))
+    }
   }
 
   # Initialize a list to store outlier results for each column
@@ -60,7 +67,7 @@ uniOutliers <- function(data, x = NULL, method = "boxplot") {
 
         normality_test <- shapiro.test(data)
         if (normality_test$p.value < 0.05) {
-          warning("Data is not normally distributed. Grubbs' test may not be appropriate.")
+          warning(paste0("Data is not normally distributed for ", column,". Grubbs' test may not be appropriate."), call.=F)
         }
 
         outliers <- c()
@@ -89,8 +96,6 @@ uniOutliers <- function(data, x = NULL, method = "boxplot") {
 
       result <- grubbs_test(column_data)
       outliers_list[[column]] <- list(method = "grubbs", outliers = result$outliers, outlier_rows = result$outlier_rows)
-    } else {
-      stop("Invalid method. Choose from 'boxplot', 'mad', or 'grubbs'.")
     }
   }
 
@@ -98,6 +103,6 @@ uniOutliers <- function(data, x = NULL, method = "boxplot") {
   outliers_list$dataset <- data
 
   # Return the list of outlier results as an object
-  class(outliers_list) <- "univOutliers"
+  class(outliers_list) <- "uniOutliers"
   return(outliers_list)
 }

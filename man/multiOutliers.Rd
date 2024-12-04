@@ -7,23 +7,22 @@
 multiOutliers(
   data,
   varlist = names(data),
-  method,
+  method = "lof",
   minPts = 10,
   k = 5,
   threshold = 0.95,
   alpha = 0.1,
   ntrees = 100,
   n = 5,
-  na.rm = TRUE,
-  ...
+  na.rm = TRUE
 )
 }
 \arguments{
 \item{data}{a data frame}
 
-\item{varlist}{a list of numeric variables}
+\item{varlist}{a list of variables. The variables can be factor or numeric. Categorical variables are dropped when using the mahalanobis and kNN methods.}
 
-\item{method}{character, supplies the method to be used for outlier detection. Methods are LoF, kNN, mahalanobis, and iForest}
+\item{method}{character, supplies the method to be used for outlier detection. Methods are LoF, kNN, mahalanobis, and iForest.}
 
 \item{minPts}{(optional) numeric, minimum points used for LoF outlier detection. Default value is 5}
 
@@ -37,7 +36,7 @@ multiOutliers(
 
 \item{n}{(optional) the number of points to take as outliers in iForest outlier detection. Default value is 5}
 
-\item{na.rm}{(optional) logical, specifies whether to remove NA values. Defaults to TRUE}
+\item{na.rm}{(optional) logical, specifies whether to remove NA values. Defaults to TRUE. If the value is TRUE, removes missing data through listwise deletion.}
 }
 \value{
 method used, dataset used, variables used for outliers detected, indices of any detected outliers, scores for the outliers, and values for optional parameters
@@ -47,7 +46,7 @@ Identifies multivariate outliers using four different methods.
 }
 \examples{
 multiOutliers(mtcarsOutliers, method="mahalanobis", alpha=0.1)
-multiOutliers(mtcarsOutliers, method="LoF", minPts=5)
-multiOutliers(mtcarsOutliers, method="kNN", k=5, threshold=.95)
-multiOutliers(mtcarsOutliers, method="iForest", ntrees = 50)
+multiOutliers(mtcarsOutliers, method="lof", minPts=5)
+multiOutliers(mtcarsOutliers, method="knn", k=5, threshold=.95)
+multiOutliers(mtcarsOutliers, method="iforest", ntrees = 50)
 }

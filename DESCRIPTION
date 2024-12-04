@@ -27,13 +27,14 @@ Imports:
     knitr,
     outliers,
     Routliers,
-    stats
+    stats,
+    utils
 RoxygenNote: 7.3.2
 Suggests: 
     rmarkdown
 VignetteBuilder: knitr
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5)
 LazyData: true
 URL: https://github.com/chenning2011/qacOutliers
 BugReports: https://github.com/chenning2011/qacOutliers/issues

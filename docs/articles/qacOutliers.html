@@ -110,7 +110,7 @@ that they have.</p>
 <p>Because there are so many reasons for there to be outliers in a
 dataset, it’s always important to take a moment to understand if there
 are any potential outliers within your data. Any techniques that utilize
-averages are heavily effected by the presence of outliers, so it’s extra
+means are heavily affected by the presence of outliers, so it’s extra
 important to look for outliers before taking the mean of any variables
 in a dataset.</p>
 <p>Additionally, as outliers can be generated through measurement
@@ -123,8 +123,8 @@ points where mistakes may have been made.</p>
 <div class="section level3">
 <h3 id="what-should-you-do-with-outliers-once-you-detect-them">What should you do with outliers once you detect them?<a class="anchor" aria-label="anchor" href="#what-should-you-do-with-outliers-once-you-detect-them"></a>
 </h3>
-<p>This depends on a lot of factors, including the cause of the outlier
-(if known), the magnitude of the outlier, and whether you believe the
+<p>This depends on many factors, including the cause of the outlier (if
+known), the magnitude of the outlier, and whether you believe the
 detected outliers are truly outliers. Because there are so many reasons
 that outliers exist, and because some detected outliers may not really
 be outliers, this package allows you to decide how you want to
@@ -136,34 +136,34 @@ multivariate outliers detected with the <a href="Multivariate.html#local-outlier
 <a href="https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html" class="external-link">mtcarsOutliers</a>,
 a dataset included in this package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"LoF"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/multiOutliers.html">multiOutliers</a></span><span class="op">(</span><span class="va">mtcarsOutliers</span>, method <span class="op">=</span> <span class="st">"lof"</span><span class="op">)</span></span>
 <span><span class="va">results</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Method: LoF</span></span>
 <span><span class="co">#&gt; Dataset: mtcarsOutliers</span></span>
-<span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb scores</span></span>
-<span><span class="co">#&gt; Row: 1 2 3 5 7 8 9 10 11 12 13 14 18 19 20 21 22 23 25 26 27 28 29 30 31 32</span></span>
-<span><span class="co">#&gt; Outlier Score: 1.12277 1.057036 1.075297 2.28365 2.719583 1.085286 2.560179 1.530304 1.563598 1.804971 1.019279 1.051425 1.0969 1.429579 1.567824 1.087417 1.016576 1.011297 1.000645 1.034007 1.046958 1.057222 1.355997 1.098003 2.950466 1.574599</span></span>
+<span><span class="co">#&gt; Variables: mpg cyl disp hp drat wt qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Row: 1 2 3 4 6 7 10 11 15 16 17 20 24 26 27 29 30 31 32</span></span>
+<span><span class="co">#&gt; Outlier Score: 1.234384 1.109279 1.052523 1.434807 1.590262 1.031151 1.000967 1.002118 1.004441 1.2053 1.015402 1.013044 1.088952 1.002205 1.043699 1.419062 1.752452 1.94842 1.017775</span></span>
 <span><span class="co">#&gt; Message:  Outliers detected</span></span>
 <span><span class="co">#&gt; Option 1 : minPts = 10</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Dataset Information</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Five Largest Outliers Within the Provided Dataset:</span></span>
-<span><span class="co">#&gt;                        mpg       cyl  disp      hp     drat        wt     qsec</span></span>
-<span><span class="co">#&gt; Maserati Bora     15.00000  8.000000 301.0 335.000  3.54000  3.570000 33.90273</span></span>
-<span><span class="co">#&gt; Duster 360        14.30000  8.000000 360.0 245.000 18.14468  3.570000 15.84000</span></span>
-<span><span class="co">#&gt; Merc 230          22.80000  4.000000 140.8  95.000  3.92000 -4.541341 22.90000</span></span>
-<span><span class="co">#&gt; Hornet Sportabout 18.70000 -4.137792 360.0 446.914  3.15000  3.440000 17.02000</span></span>
-<span><span class="co">#&gt; Merc 450SE        54.17757  8.000000 275.8 180.000  3.07000  4.070000 17.40000</span></span>
-<span><span class="co">#&gt;                          vs am      gear carb   scores</span></span>
-<span><span class="co">#&gt; Maserati Bora      0.000000  1 0.9829575    8 2.950466</span></span>
-<span><span class="co">#&gt; Duster 360         0.000000  0 3.0000000    4 2.719583</span></span>
-<span><span class="co">#&gt; Merc 230          -8.556805  0 4.0000000    2 2.560179</span></span>
-<span><span class="co">#&gt; Hornet Sportabout  0.000000  0 3.0000000    2 2.283650</span></span>
-<span><span class="co">#&gt; Merc 450SE         0.000000  0 3.0000000    3 1.804971</span></span></code></pre></div>
+<span><span class="co">#&gt;                     mpg cyl disp  hp      drat    wt  qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Maserati Bora  15.00000   8  301 335  3.540000 3.570 14.60  0  1    5    8</span></span>
+<span><span class="co">#&gt; Ferrari Dino   19.70000   6  145 175 -5.146597 2.770 15.50  0  1    5    6</span></span>
+<span><span class="co">#&gt; Valiant        18.10000   6  225 105  2.760000 3.460 20.22  1  0    3    1</span></span>
+<span><span class="co">#&gt; Hornet 4 Drive 54.27716   6  258 110  3.080000 3.215 19.44  1  0    3    1</span></span>
+<span><span class="co">#&gt; Ford Pantera L 15.80000   8  351 264  4.220000 3.170 14.50  0  1    5    4</span></span>
+<span><span class="co">#&gt;                  scores</span></span>
+<span><span class="co">#&gt; Maserati Bora  1.948420</span></span>
+<span><span class="co">#&gt; Ferrari Dino   1.752452</span></span>
+<span><span class="co">#&gt; Valiant        1.590262</span></span>
+<span><span class="co">#&gt; Hornet 4 Drive 1.434807</span></span>
+<span><span class="co">#&gt; Ford Pantera L 1.419062</span></span></code></pre></div>
 <p>The LoF function detected nine outliers within this dataset. From
 this output, you can identify which rows these outliers are in, and
 extract them to inspect these observations.</p>
@@ -171,60 +171,46 @@ extract them to inspect these observations.</p>
 <code class="sourceCode R"><span><span class="va">index</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">Row</span></span>
 <span><span class="va">subset</span> <span class="op">&lt;-</span> <span class="va">mtcarsOutliers</span><span class="op">[</span><span class="va">index</span>,<span class="op">]</span></span>
 <span><span class="va">subset</span></span>
-<span><span class="co">#&gt;                        mpg       cyl      disp        hp      drat        wt</span></span>
-<span><span class="co">#&gt; Mazda RX4         21.00000  9.959246  160.0000  110.0000  3.900000  2.620000</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag     21.00000  6.000000  160.0000  110.0000  3.900000  2.875000</span></span>
-<span><span class="co">#&gt; Datsun 710        22.80000  4.000000  108.0000   93.0000  3.850000  3.992371</span></span>
-<span><span class="co">#&gt; Hornet Sportabout 18.70000 -4.137792  360.0000  446.9140  3.150000  3.440000</span></span>
-<span><span class="co">#&gt; Duster 360        14.30000  8.000000  360.0000  245.0000 18.144679  3.570000</span></span>
-<span><span class="co">#&gt; Merc 240D         24.40000  4.000000  146.7000   62.0000  3.690000  3.190000</span></span>
-<span><span class="co">#&gt; Merc 230          22.80000  4.000000  140.8000   95.0000  3.920000 -4.541341</span></span>
-<span><span class="co">#&gt; Merc 280          44.30673  6.000000  167.6000 -238.7728  4.560312  3.440000</span></span>
-<span><span class="co">#&gt; Merc 280C         17.80000  6.000000 -459.2495  123.0000  3.920000  3.440000</span></span>
-<span><span class="co">#&gt; Merc 450SE        54.17757  8.000000  275.8000  180.0000  3.070000  4.070000</span></span>
-<span><span class="co">#&gt; Merc 450SL        17.30000  8.000000  275.8000  180.0000  3.070000  3.730000</span></span>
-<span><span class="co">#&gt; Merc 450SLC       15.20000  8.000000  275.8000  180.0000  3.070000  3.780000</span></span>
-<span><span class="co">#&gt; Fiat 128          32.40000  4.000000   78.7000   66.0000  4.080000  2.200000</span></span>
-<span><span class="co">#&gt; Honda Civic       30.40000  4.000000  783.2571   52.0000  4.930000  1.615000</span></span>
-<span><span class="co">#&gt; Toyota Corolla    33.90000  4.000000   71.1000   65.0000  4.220000  1.835000</span></span>
-<span><span class="co">#&gt; Toyota Corona     21.50000  4.000000  120.1000   97.0000  3.700000  2.465000</span></span>
-<span><span class="co">#&gt; Dodge Challenger  15.50000  8.000000  318.0000  150.0000  2.760000  3.520000</span></span>
-<span><span class="co">#&gt; AMC Javelin       15.20000  8.000000  304.0000  150.0000  3.150000  3.435000</span></span>
-<span><span class="co">#&gt; Pontiac Firebird  19.20000  8.000000  400.0000  175.0000  3.080000  3.845000</span></span>
-<span><span class="co">#&gt; Fiat X1-9         27.30000  4.000000   79.0000   66.0000  4.080000  1.935000</span></span>
-<span><span class="co">#&gt; Porsche 914-2     26.00000  4.000000  120.3000   91.0000  4.430000  2.140000</span></span>
-<span><span class="co">#&gt; Lotus Europa      30.40000  4.000000   95.1000  113.0000  3.770000  1.513000</span></span>
-<span><span class="co">#&gt; Ford Pantera L    15.80000  8.000000  351.0000  264.0000  4.220000  3.170000</span></span>
-<span><span class="co">#&gt; Ferrari Dino      19.70000  6.000000  145.0000  175.0000  3.620000  2.770000</span></span>
-<span><span class="co">#&gt; Maserati Bora     15.00000  8.000000  301.0000  335.0000  3.540000  3.570000</span></span>
-<span><span class="co">#&gt; Volvo 142E        21.40000  4.000000  121.0000  109.0000  4.110000  2.780000</span></span>
-<span><span class="co">#&gt;                       qsec        vs         am      gear       carb</span></span>
-<span><span class="co">#&gt; Mazda RX4         16.46000  0.000000  1.0000000 4.0000000   4.000000</span></span>
-<span><span class="co">#&gt; Mazda RX4 Wag     17.02000  0.000000  1.0000000 4.0000000   4.000000</span></span>
-<span><span class="co">#&gt; Datsun 710        18.61000  1.000000  1.0000000 4.0000000   1.000000</span></span>
-<span><span class="co">#&gt; Hornet Sportabout 17.02000  0.000000  0.0000000 3.0000000   2.000000</span></span>
-<span><span class="co">#&gt; Duster 360        15.84000  0.000000  0.0000000 3.0000000   4.000000</span></span>
-<span><span class="co">#&gt; Merc 240D         20.00000  1.000000  0.0000000 4.0000000   2.000000</span></span>
-<span><span class="co">#&gt; Merc 230          22.90000 -8.556805  0.0000000 4.0000000   2.000000</span></span>
-<span><span class="co">#&gt; Merc 280          18.30000  1.000000  0.0000000 4.0000000   4.000000</span></span>
-<span><span class="co">#&gt; Merc 280C         18.90000  1.000000  0.0000000 4.0000000   4.000000</span></span>
-<span><span class="co">#&gt; Merc 450SE        17.40000  0.000000  0.0000000 3.0000000   3.000000</span></span>
-<span><span class="co">#&gt; Merc 450SL        17.60000  0.000000  0.0000000 3.0000000   3.000000</span></span>
-<span><span class="co">#&gt; Merc 450SLC       18.00000  0.000000  0.0000000 3.0000000   3.000000</span></span>
-<span><span class="co">#&gt; Fiat 128          19.47000  1.000000  1.0000000 2.8949534   1.000000</span></span>
-<span><span class="co">#&gt; Honda Civic       18.52000  1.000000  1.0000000 4.0000000   2.000000</span></span>
-<span><span class="co">#&gt; Toyota Corolla    19.90000  6.993352  1.0000000 4.0000000  -7.344032</span></span>
-<span><span class="co">#&gt; Toyota Corona     20.01000  1.000000  0.0000000 3.0000000   1.000000</span></span>
-<span><span class="co">#&gt; Dodge Challenger  16.87000  0.000000  0.0000000 3.0000000   2.000000</span></span>
-<span><span class="co">#&gt; AMC Javelin       19.31453  0.000000  0.0000000 3.0000000   2.000000</span></span>
-<span><span class="co">#&gt; Pontiac Firebird  17.05000  0.000000  0.6773351 3.0000000   2.000000</span></span>
-<span><span class="co">#&gt; Fiat X1-9         18.90000  1.000000  1.0000000 4.0000000   1.000000</span></span>
-<span><span class="co">#&gt; Porsche 914-2     16.70000  0.000000  1.0000000 5.0000000   2.000000</span></span>
-<span><span class="co">#&gt; Lotus Europa      16.90000  1.000000  1.0000000 5.0000000   2.000000</span></span>
-<span><span class="co">#&gt; Ford Pantera L    14.50000  0.000000 -0.1273497 5.0000000   4.000000</span></span>
-<span><span class="co">#&gt; Ferrari Dino      15.50000  0.000000  1.0000000 5.0000000   6.000000</span></span>
-<span><span class="co">#&gt; Maserati Bora     33.90273  0.000000  1.0000000 0.9829575   8.000000</span></span>
-<span><span class="co">#&gt; Volvo 142E        18.60000  1.000000  1.0000000 4.0000000 -12.912355</span></span></code></pre></div>
+<span><span class="co">#&gt;                          mpg cyl      disp        hp      drat       wt</span></span>
+<span><span class="co">#&gt; Mazda RX4           21.00000   6  782.5020  110.0000  3.900000  2.62000</span></span>
+<span><span class="co">#&gt; Mazda RX4 Wag       52.22202   6  160.0000  110.0000  3.555697  2.87500</span></span>
+<span><span class="co">#&gt; Datsun 710          22.80000   4 -468.2171   93.0000  3.850000 13.16772</span></span>
+<span><span class="co">#&gt; Hornet 4 Drive      54.27716   6  258.0000  110.0000  3.080000  3.21500</span></span>
+<span><span class="co">#&gt; Valiant             18.10000   6  225.0000  105.0000  2.760000  3.46000</span></span>
+<span><span class="co">#&gt; Duster 360          14.30000   8  360.0000  245.0000  3.210000  3.57000</span></span>
+<span><span class="co">#&gt; Merc 280            19.20000   6  167.6000  123.0000  3.920000  3.44000</span></span>
+<span><span class="co">#&gt; Merc 280C           17.80000   6  167.6000  123.0000  3.920000  3.44000</span></span>
+<span><span class="co">#&gt; Cadillac Fleetwood  10.40000   8  472.0000  205.0000  2.930000  5.25000</span></span>
+<span><span class="co">#&gt; Lincoln Continental 10.40000   8  460.0000 -232.3693  3.000000  5.42400</span></span>
+<span><span class="co">#&gt; Chrysler Imperial   14.70000   8  440.0000  230.0000  3.230000  5.34500</span></span>
+<span><span class="co">#&gt; Toyota Corolla      33.90000   4   71.1000   65.0000  4.220000 10.24470</span></span>
+<span><span class="co">#&gt; Camaro Z28          13.30000   8  350.0000  245.0000  3.730000  3.84000</span></span>
+<span><span class="co">#&gt; Fiat X1-9           27.30000   4   79.0000   66.0000  4.080000  1.93500</span></span>
+<span><span class="co">#&gt; Porsche 914-2       26.00000   4  120.3000   91.0000  4.430000  2.14000</span></span>
+<span><span class="co">#&gt; Ford Pantera L      15.80000   8  351.0000  264.0000  4.220000  3.17000</span></span>
+<span><span class="co">#&gt; Ferrari Dino        19.70000   6  145.0000  175.0000 -5.146597  2.77000</span></span>
+<span><span class="co">#&gt; Maserati Bora       15.00000   8  301.0000  335.0000  3.540000  3.57000</span></span>
+<span><span class="co">#&gt; Volvo 142E          21.40000   4  121.0000  109.0000  4.110000  2.78000</span></span>
+<span><span class="co">#&gt;                         qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Mazda RX4           16.46000  0  1    4    4</span></span>
+<span><span class="co">#&gt; Mazda RX4 Wag       17.02000  0  1    4    4</span></span>
+<span><span class="co">#&gt; Datsun 710          18.61000  1  1    4    1</span></span>
+<span><span class="co">#&gt; Hornet 4 Drive      19.44000  1  0    3    1</span></span>
+<span><span class="co">#&gt; Valiant             20.22000  1  0    3    1</span></span>
+<span><span class="co">#&gt; Duster 360          15.84000  0  0    3    4</span></span>
+<span><span class="co">#&gt; Merc 280            18.30000  1  0    4    4</span></span>
+<span><span class="co">#&gt; Merc 280C           18.90000  1  0    4    4</span></span>
+<span><span class="co">#&gt; Cadillac Fleetwood  17.98000  0  0    3    4</span></span>
+<span><span class="co">#&gt; Lincoln Continental 17.82000  0  0    3    4</span></span>
+<span><span class="co">#&gt; Chrysler Imperial   17.42000  0  0    3    4</span></span>
+<span><span class="co">#&gt; Toyota Corolla      19.90000  1  1    4    1</span></span>
+<span><span class="co">#&gt; Camaro Z28          27.92358  0  0    3    4</span></span>
+<span><span class="co">#&gt; Fiat X1-9           18.90000  1  1    4    1</span></span>
+<span><span class="co">#&gt; Porsche 914-2       16.70000  0  1    5    2</span></span>
+<span><span class="co">#&gt; Ford Pantera L      14.50000  0  1    5    4</span></span>
+<span><span class="co">#&gt; Ferrari Dino        15.50000  0  1    5    6</span></span>
+<span><span class="co">#&gt; Maserati Bora       14.60000  0  1    5    8</span></span>
+<span><span class="co">#&gt; Volvo 142E          18.60000  1  1    4    2</span></span></code></pre></div>
 <p>Looking at this dataset, we can easily see that a lot of the detected
 outliers are likely true outliers. All of these values should be
 positive, so any negative values are likely the result of measurement
@@ -235,6 +221,47 @@ be, which will require a closer look at the distributions of values for
 those variables. Once you have better understood the underlying data,
 you can decide whether to remove these values from your data before
 conducting further analysis.</p>
+<p>Here is an example of how to remove the observations from your
+dataset. This example also shows you how to add the score value from the
+multiOutliers function as a variable in your dataset.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#adding the scores from the multiOutliers function </span></span>
+<span><span class="va">mtcarsOutliers</span><span class="op">$</span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">Data</span><span class="op">$</span><span class="va">scores</span></span>
+<span></span>
+<span><span class="co">#identfying all rows with outliers</span></span>
+<span><span class="va">index</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">Row</span></span>
+<span></span>
+<span><span class="co">#creating a new dataset with no outliers</span></span>
+<span><span class="va">noOutliers</span> <span class="op">&lt;-</span> <span class="va">mtcarsOutliers</span><span class="op">[</span><span class="op">-</span><span class="va">index</span>,<span class="op">]</span></span>
+<span><span class="va">noOutliers</span></span>
+<span><span class="co">#&gt;                    mpg cyl  disp        hp drat    wt      qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 18.7   8 360.0  175.0000 3.15 3.440 17.020000  0  0    3    2</span></span>
+<span><span class="co">#&gt; Merc 240D         24.4   4 146.7   62.0000 3.69 3.190 20.000000  1  0    4    2</span></span>
+<span><span class="co">#&gt; Merc 230          22.8   4 140.8   95.0000 3.92 3.150  3.655936  1  0    4    2</span></span>
+<span><span class="co">#&gt; Merc 450SE        16.4   8 275.8  180.0000 3.07 4.070 17.400000  0  0    3    3</span></span>
+<span><span class="co">#&gt; Merc 450SL        17.3   8 275.8  180.0000 3.07 3.730 17.600000  0  0    3    3</span></span>
+<span><span class="co">#&gt; Merc 450SLC       15.2   8 275.8  180.0000 3.07 3.780 18.000000  0  0    3    3</span></span>
+<span><span class="co">#&gt; Fiat 128          32.4   4  78.7   66.0000 4.08 2.200 19.470000  1  1    4    1</span></span>
+<span><span class="co">#&gt; Honda Civic       30.4   4  75.7 -240.5539 4.93 1.615 18.520000  1  1    4    2</span></span>
+<span><span class="co">#&gt; Toyota Corona     21.5   4 120.1   97.0000 3.70 2.465 20.010000  1  0    3    1</span></span>
+<span><span class="co">#&gt; Dodge Challenger  15.5   8 318.0  150.0000 2.76 3.520 16.870000  0  0    3    2</span></span>
+<span><span class="co">#&gt; AMC Javelin       15.2   8 304.0  150.0000 3.15 3.435 17.300000  0  0    3    2</span></span>
+<span><span class="co">#&gt; Pontiac Firebird  19.2   8 400.0  175.0000 3.08 3.845 17.050000  0  0    3    2</span></span>
+<span><span class="co">#&gt; Lotus Europa      30.4   4  95.1  113.0000 3.77 1.513 16.900000  1  1    5    2</span></span>
+<span><span class="co">#&gt;                     results</span></span>
+<span><span class="co">#&gt; Hornet Sportabout 0.9744176</span></span>
+<span><span class="co">#&gt; Merc 240D         0.9703185</span></span>
+<span><span class="co">#&gt; Merc 230          0.9503363</span></span>
+<span><span class="co">#&gt; Merc 450SE        0.9800422</span></span>
+<span><span class="co">#&gt; Merc 450SL        0.9766975</span></span>
+<span><span class="co">#&gt; Merc 450SLC       0.9820844</span></span>
+<span><span class="co">#&gt; Fiat 128          0.9976800</span></span>
+<span><span class="co">#&gt; Honda Civic       0.9855085</span></span>
+<span><span class="co">#&gt; Toyota Corona     0.9887988</span></span>
+<span><span class="co">#&gt; Dodge Challenger  0.9778405</span></span>
+<span><span class="co">#&gt; AMC Javelin       0.9744176</span></span>
+<span><span class="co">#&gt; Pontiac Firebird  0.9795969</span></span>
+<span><span class="co">#&gt; Lotus Europa      0.9623460</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

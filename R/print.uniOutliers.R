@@ -9,13 +9,13 @@
 #' @import cli
 #' @import knitr
 #' @examples
-#' object <- uniOutliers(data = mtcars, x = "carb", method = "mad")
+#' object <- uniOutliers(data = mtcars, x = "wt", method = "mad")
 #' print(object)
 #'
 #' object2 <- uniOutliers(data = mtcars, x = "wt", method = "boxplot")
 #' print(object2)
 #'
-#' object3 <- uniOutliers(data = mtcars, x = "carb", method = "grubbs")
+#' object3 <- uniOutliers(data = mtcars, x = "wt", method = "grubbs")
 #' print(object3)
 
 print.uniOutliers <- function(x, ...) {

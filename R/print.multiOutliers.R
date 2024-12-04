@@ -1,4 +1,4 @@
-#'@title Printing Multivariate outlier detection
+#'@title Printing Multivariate Outlier Detection
 #'@description Prints identified multivariate outliers
 #'@export
 #'@param x the results from "multiOutliers" function
@@ -8,18 +8,18 @@
 #'@import Routliers
 #'@import dplyr
 #'@import cli
-#'@importFrom ("utils", "head")
+#'@importFrom utils head
 #'@examples
 #'#iForest
-#'results <- multiOutliers(irisOutliers, method = "iForest")
+#'results <- multiOutliers(irisOutliers, method = "iforest")
 #'results
 #'
 #'#LoF
-#'results <- multiOutliers(irisOutliers, method = "LoF")
+#'results <- multiOutliers(irisOutliers, method = "lof")
 #'results
 #'
 #'#kNN
-#'results <- multiOutliers(irisOutliers, method = "kNN")
+#'results <- multiOutliers(irisOutliers, method = "knn")
 #'results
 #'
 #'#Mahalanobis

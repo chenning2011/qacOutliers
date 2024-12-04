@@ -8,11 +8,11 @@ reference:
   - title: Main Functions
     desc: ~
     contents:
+      - '`uniOutliers`'
       - '`multiOutliers`'
-      - '`univOutliers`'
+      - '`print.uniOutliers`'
       - '`print.multiOutliers`'
-      - '`print.univOutliers`'
-      - '`plot.univOutliers`'
+      - '`plot.uniOutliers`'
       - '`plot.multiOutliers`'
   - title: Datasets
     desc: ~

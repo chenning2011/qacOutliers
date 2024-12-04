@@ -10,13 +10,13 @@
 #'@import grid
 #'@import ggrepel
 #'@examples
-#'results <- multiOutliers(irisOutliers, method="iForest")
+#'results <- multiOutliers(irisOutliers, method="iforest")
 #'plot(results)
 #'
-#'results <- multiOutliers(irisOutliers, method = "kNN")
+#'results <- multiOutliers(irisOutliers, method = "knn")
 #'plot(results)
 #'
-#'results <- multiOutliers(irisOutliers, method = "LoF")
+#'results <- multiOutliers(irisOutliers, method = "lof")
 #'plot(results)
 #'
 #'results <- multiOutliers(irisOutliers, method = "mahalanobis")
@@ -38,7 +38,7 @@ plot.multiOutliers <- function(x, ...) {
   )
 
   plot <- ggplot2::ggplot(plot_data, ggplot2::aes(x = Row, y = Value)) +
-    ggplot2::geom_point(aes(color = Outlier), size = 3, alpha=.7) +
+    ggplot2::geom_point(ggplot2::aes(color = Outlier), size = 3, alpha=.7) +
     ggrepel::geom_text_repel(
       data = plot_data[plot_data$Outlier == "Outlier",],
       aes(label = Row),
@@ -52,7 +52,8 @@ plot.multiOutliers <- function(x, ...) {
     ggplot2::theme_minimal()
 
   if(x$Method == "LoF"){
-    plot <- plot + geom_hline(yintercept = 1, linetype = "dashed", alpha = 0.8)
+    plot <- plot + geom_hline(yintercept = 1, linetype = "dashed", alpha = 0.8)+
+      labs(caption = "Dotted line shows where LoF scores equal 1. All observations above 1 are considered outliers.")
   }
 
   text_grob <- grid::textGrob("Values below points are row numbers", gp = gpar(col = "black", fontsize = 15, fill = "lightblue"))

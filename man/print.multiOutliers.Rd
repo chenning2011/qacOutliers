@@ -2,12 +2,14 @@
 % Please edit documentation in R/print.multiOutliers.R
 \name{print.multiOutliers}
 \alias{print.multiOutliers}
-\title{Printing Multivariate outlier detection}
+\title{Printing Multivariate Outlier Detection}
 \usage{
 \method{print}{multiOutliers}(x, ...)
 }
 \arguments{
 \item{x}{the results from "multiOutliers" function}
+
+\item{...}{not used}
 }
 \value{
 A formatted print of the results of the "multiOutliers" function
@@ -17,15 +19,15 @@ Prints identified multivariate outliers
 }
 \examples{
 #iForest
-results <- multiOutliers(irisOutliers, method = "iForest")
+results <- multiOutliers(irisOutliers, method = "iforest")
 results
 
 #LoF
-results <- multiOutliers(irisOutliers, method = "LoF")
+results <- multiOutliers(irisOutliers, method = "lof")
 results
 
 #kNN
-results <- multiOutliers(irisOutliers, method = "kNN")
+results <- multiOutliers(irisOutliers, method = "knn")
 results
 
 #Mahalanobis

@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{the results from a multivariate outlier detection function (e.g., kNN, iForest, mahalanobis, LoF)}
+
+\item{...}{not used}
 }
 \value{
 A formatted plot of the results of the multivariate outlier detection. Row indices are on the x-axis and ou
@@ -16,13 +18,13 @@ A formatted plot of the results of the multivariate outlier detection. Row indic
 Plots identified multivariate outliers using either kNN, iForest, mahalanobis, LoF
 }
 \examples{
-results <- multiOutliers(irisOutliers, method="iForest")
+results <- multiOutliers(irisOutliers, method="iforest")
 plot(results)
 
-results <- multiOutliers(irisOutliers, method = "kNN")
+results <- multiOutliers(irisOutliers, method = "knn")
 plot(results)
 
-results <- multiOutliers(irisOutliers, method = "LoF")
+results <- multiOutliers(irisOutliers, method = "lof")
 plot(results)
 
 results <- multiOutliers(irisOutliers, method = "mahalanobis")

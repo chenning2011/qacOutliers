@@ -33,18 +33,18 @@ Each of these seven methods have distinct methods for identifying and calculatin
 
 ### Why should we detect outliers?
 
-Because there are so many reasons for there to be outliers in a dataset, it's always important to take a moment to understand if there are any potential outliers within your data. Any techniques that utilize averages are heavily effected by the presence of outliers, so it's extra important to look for outliers before taking the mean of any variables in a dataset. 
+Because there are so many reasons for there to be outliers in a dataset, it's always important to take a moment to understand if there are any potential outliers within your data. Any techniques that utilize means are heavily affected by the presence of outliers, so it's extra important to look for outliers before taking the mean of any variables in a dataset. 
 
 Additionally, as outliers can be generated through measurement errors, they provide context into any issues that may arise during data collection. These findings are especially helpful when you are collecting your own data. If you are aware of any issues with data collection within your datasets, these techniques will help you identify points where mistakes may have been made. 
 
 ### What should you do with outliers once you detect them? 
 
-This depends on a lot of factors, including the cause of the outlier (if known), the magnitude of the outlier, and whether you believe the detected outliers are truly outliers. Because there are so many reasons that outliers exist, and because some detected outliers may not really be outliers, this package allows you to decide how you want to proceed. 
+This depends on many factors, including the cause of the outlier (if known), the magnitude of the outlier, and whether you believe the detected outliers are truly outliers. Because there are so many reasons that outliers exist, and because some detected outliers may not really be outliers, this package allows you to decide how you want to proceed. 
 
 Once you run one of these functions, you can extract the row numbers of detected outliers and carefully inspect your data to decide what you want to do with the detected outliers. Here is an example of multivariate outliers detected with the [LoF](Multivariate.html#local-outlier-factor-lof) method, using [mtcarsOutliers](https://chenning2011.github.io/qacOutliers/reference/mtcarsOutliers.html), a dataset included in this package. 
 
 ```{r}
-results <- multiOutliers(mtcarsOutliers, method = "LoF")
+results <- multiOutliers(mtcarsOutliers, method = "lof")
 results
 ```
 
@@ -57,4 +57,21 @@ subset
 ```
 
 Looking at this dataset, we can easily see that a lot of the detected outliers are likely true outliers. All of these values should be positive, so any negative values are likely the result of measurement error and can be removed (which takes out the Hornet Sportabout, the Merc 280C, the Merc 280, the Merc 230, the Toyota Corrolla, and the Volvo 142E). Some of the other values look much larger than they should be, which will require a closer look at the distributions of values for those variables. Once you have better understood the underlying data, you can decide whether to remove these values from your data before conducting further analysis. 
+
+Here is an example of how to remove the observations from your dataset. This example also shows you how to add the score value from the multiOutliers function as a variable in your dataset. 
+
+```{r}
+#adding the scores from the multiOutliers function 
+mtcarsOutliers$results <- results$Data$scores
+
+#identfying all rows with outliers
+index <- results$Row
+
+#creating a new dataset with no outliers
+noOutliers <- mtcarsOutliers[-index,]
+noOutliers
+```
+
+
+
 

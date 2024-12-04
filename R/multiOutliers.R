@@ -18,8 +18,9 @@
 #'@import dplyr
 #'@import dbscan
 #'@import isotree
+#'@import cluster
 #'@import FNN
-#'@importFrom ("utils", "head")
+#'@importFrom utils head
 #'
 #'@examples
 #'multiOutliers(mtcarsOutliers, method="mahalanobis", alpha=0.1)
@@ -86,11 +87,14 @@ multiOutliers <- function(data, varlist = names(data), method = "lof", minPts = 
       data$scores <- lof_scores
     }
 
+    #making new dataset without scores just for printing reasons
+    varnamesset <- select(data, -scores)
+
     #list of results
     results <- list(
       Method = "LoF",
       Dataset = dataset_name,
-      Variables = colnames(data),
+      Variables = colnames(varnamesset),
       Row = outlier_indices,
       Score = outlier_scores,
       Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected",
@@ -121,11 +125,14 @@ multiOutliers <- function(data, varlist = names(data), method = "lof", minPts = 
     #adding scores back into dataset
     data$scores <- results$dist_from_center
 
+    #making new dataset without scores just for printing reasons
+    varnamesset <- select(data, -scores)
+
     #prepare the result list
     output <- list(
       Method = "mahalanobis",
       Dataset = dataset_name,          # Store the dataset name
-      Variables = colnames(data),  # Store column names of numeric data
+      Variables = colnames(varnamesset),  # Store column names of numeric data
       Row = index,        # Row numbers of detected outliers
       Score = outlier_scores,       # Mahalanobis scores of the detected outliers
       Message = if (length(index) == 0) "No outliers detected" else "Outliers detected",
@@ -164,11 +171,14 @@ multiOutliers <- function(data, varlist = names(data), method = "lof", minPts = 
     #adding the scores back into the dataset
     data$scores <- avg_knn_distances
 
+    #making new dataset without scores just for printing reasons
+    varnamesset <- select(data, -scores)
+
     # Create the result list
     results <- list(
       Method = "kNN",
       Dataset = dataset_name,
-      Variables = colnames(data),
+      Variables = colnames(varnamesset),
       Row = outlier_indices,
       Score = outlier_scores,
       Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected",
@@ -199,11 +209,14 @@ multiOutliers <- function(data, varlist = names(data), method = "lof", minPts = 
     outlier_indices <- which(rownames(data) %in% rownames(subset))
     outlier_scores <- subset$scores
 
+    #making new dataset without scores just for printing reasons
+    varnamesset <- select(data, -scores)
+
     #results
     output <- list(
       Method = "iForest",
       Dataset = dataset_name,
-      Variables = colnames(data),
+      Variables = colnames(varnamesset),
       Row = outlier_indices,
       Score = outlier_scores,
       Message = if (length(outlier_indices) == 0) "No outliers detected" else "Outliers detected",
